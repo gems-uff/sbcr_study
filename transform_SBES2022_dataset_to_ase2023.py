@@ -68,7 +68,7 @@ def remove_empty_lines(lines):
 if __name__ == "__main__":
     columns = ['all_raw_base', 'all_raw_a', 'all_raw_b', 'all_raw_res', 'chunk_id']
     new_data = []
-    data = pd.read_json('data/dataset.json')
+    data = pd.read_json('data/sbes2022_data.json')
     for index, row in data.iterrows():
         new_solution = get_clean_solution(row['solution'], row['before_context'], row['after_context'])
         if new_solution != None:
