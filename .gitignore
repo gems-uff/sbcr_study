@@ -5,3 +5,4 @@ mergeGen/GIT_MERGE_FILES
 mergeGen/OUTPUT
 mergeGen/PROCESSED
 mergeGen/RESULTS
+*/__pycache__
