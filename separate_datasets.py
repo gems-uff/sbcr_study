@@ -2,11 +2,12 @@ import pandas as pd
 import os
 import json
 
+RANDOM_SEED = 27082024
 dataset1_path = 'data/dataset1_complete.json'
 dataset2_path = 'data/dataset2_complete.json'
 
 def split_data(df, train_ratio=0.8, val_ratio=0.1, test_ratio=0.1):
-    df = df.sample(frac=1).reset_index(drop=True)
+    df = df.sample(frac=1, random_state=RANDOM_SEED)
     
     train_end = int(len(df) * train_ratio)
     val_end = train_end + int(len(df) * val_ratio)
