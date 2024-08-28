@@ -1,2 +1,7 @@
 data
 .ipynb_checkpoints
+mergeGen/MODELS
+mergeGen/GIT_MERGE_FILES
+mergeGen/OUTPUT
+mergeGen/PROCESSED
+mergeGen/RESULTS
