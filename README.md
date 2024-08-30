@@ -24,5 +24,8 @@ This script will pre-process the data from the two datasets, which is required b
 
 4. 
 ```sh
-$ python run_mergegen.py dataset1 train
+python run_mergegen.py dataset1 train
+python run_mergegen.py dataset1 test
+python run_mergegen.py dataset2 train
+python run_mergegen.py dataset2 test
 ```

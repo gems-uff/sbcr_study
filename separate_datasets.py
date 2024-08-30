@@ -1,6 +1,5 @@
 import pandas as pd
 import os
-import json
 
 RANDOM_SEED = 27082024
 dataset1_path = 'data/dataset1_complete.json'

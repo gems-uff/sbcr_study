@@ -17,7 +17,10 @@ from tqdm import tqdm
 space_token = 'Ġ'
 dataset_name = str(sys.argv[1])
 stage = str(sys.argv[2])
-
+if len(sys.argv) > 3:
+    model_name = str(sys.argv[3])
+else:
+    model_name = dataset_name
 
 model_type = 'Salesforce/codet5-small'
 tokenizer = RobertaTokenizer.from_pretrained(model_type)
@@ -132,8 +135,8 @@ def train(accelerator, model, train_loader, optimizer, epoch, best_acc, dev_load
         exactly_match_ratio = exactly_match_num / len(dev_loader.dataset)
         f.write('epoch: {} exactly match:{} is better: {}\n'.format(epoch, exactly_match_num / len(dev_loader.dataset), exactly_match_ratio > best_acc))
         f.flush()
-        if not os.path.exists(f'OUTPUT/{dataset_name}/DEV_OUTPUT'):
-            os.makedirs(f'OUTPUT/{dataset_name}/DEV_OUTPUT')
+        if not os.path.exists(f'OUTPUT/{dataset_name}/model_{model_name}/DEV_OUTPUT'):
+            os.makedirs(f'OUTPUT/{dataset_name}/model_{model_name}/DEV_OUTPUT')
         if not os.path.exists(f'MODELS/{dataset_name}'):
             os.makedirs(f'MODELS/{dataset_name}')
         flag_bigger = exactly_match_ratio > best_acc
@@ -142,7 +145,7 @@ def train(accelerator, model, train_loader, optimizer, epoch, best_acc, dev_load
             best_acc = exactly_match_ratio
             torch.save(model.state_dict(),f'MODELS/{dataset_name}/best_model.pt')
             for k in range(len(total_dev_output)):
-                p = open(f'OUTPUT/{dataset_name}/DEV_OUTPUT/%s'%(k),'w')
+                p = open(f'OUTPUT/{dataset_name}/model_{model_name}/DEV_OUTPUT/%s'%(k),'w')
                 p.write(total_dev_output[k])
                 p.close()
 
@@ -187,7 +190,10 @@ def see_results(inputs, outputs, targets):
 
 
 def dev(model, val_loader, epoch, dataset_name, dev_type='train'):
-    all_index = json.load(open(f'all_index_{dataset_name}'))
+    aux_files_path = f'AUX_FILES/{dataset_name}'
+    if not os.path.exists(aux_files_path):
+        os.makedirs(aux_files_path, exist_ok=True)
+    all_index = json.load(open(f'{aux_files_path}/all_index_{dataset_name}'))
     valid_index = all_index['valid']
     
     model.eval()
@@ -239,7 +245,7 @@ def dev(model, val_loader, epoch, dataset_name, dev_type='train'):
 
     if dev_type == 'dev':
         # -----------------see succeed/fail data-----------------
-        output_path = f'OUTPUT/{dataset_name}/DEV_OUTPUT'
+        output_path = f'OUTPUT/{dataset_name}/model_{model_name}/DEV_OUTPUT'
         if not os.path.exists('%s/SUCCEED'%output_path):
             os.makedirs('%s/SUCCEED'%output_path)
             os.makedirs('%s/FAIL'%output_path)
@@ -264,7 +270,10 @@ def dev(model, val_loader, epoch, dataset_name, dev_type='train'):
 
 
 def test_beam(model, test_loader, dataset_name):
-    all_index = json.load(open(f'all_index_{dataset_name}'))
+    aux_files_path = f'AUX_FILES/{dataset_name}'
+    if not os.path.exists(aux_files_path):
+        os.makedirs(aux_files_path, exist_ok=True)
+    all_index = json.load(open(f'{aux_files_path}/all_index_{dataset_name}'))
     test_index = all_index['test']
     model.eval()
     total_test_output = []
@@ -295,11 +304,11 @@ def test_beam(model, test_loader, dataset_name):
             output = torch.cat([output, torch.zeros(len(output), args.max_resolve_length - len(output[0])).long().cuda()], dim=-1)
 
             label = batch[1]
-            print(batch[1].shape)
+            # print(batch[1].shape)
             label = torch.cat([label, torch.zeros(len(label), 1).long().cuda(batch[0].device)], dim=-1)
             label = label[:,1:]
-            print(output.shape)
-            print(label.shape)
+            # print(output.shape)
+            # print(label.shape)
             assert output.shape == label.shape
 
 
@@ -328,7 +337,7 @@ def test_beam(model, test_loader, dataset_name):
 
 
     # -----------------see succeed/fail data-----------------
-    output_path = f'OUTPUT/{dataset_name}/test_OUTPUT'
+    output_path = f'OUTPUT/{dataset_name}/model_{model_name}/test_OUTPUT'
     if not os.path.exists('%s/SUCCEED'%output_path):
         os.makedirs('%s/SUCCEED'%output_path)
         os.makedirs('%s/FAIL'%output_path)
@@ -350,8 +359,10 @@ def test_beam(model, test_loader, dataset_name):
 
 
 def main_train(dataset_name):
-    
-    open('train_state', 'w').write(str(1))
+    aux_files_path = f'AUX_FILES/{dataset_name}'
+    if not os.path.exists(aux_files_path):
+        os.makedirs(aux_files_path, exist_ok=True)
+    open(f'{aux_files_path}/train_state', 'w').write(str(1))
     if accelerator.is_main_process:
         train_set = Dataset(args, tokenizer, 'train', dataset_name)
         dev_set = Dataset(args, tokenizer, 'valid', dataset_name)
@@ -375,19 +386,19 @@ def main_train(dataset_name):
             best_acc = exactly_match_num / len(dev_loader.dataset)
         else:
             best_acc = -1
-        open('best_acc', 'w').write(str(best_acc))
+        open(f'{aux_files_path}/best_acc', 'w').write(str(best_acc))
     accelerator.wait_for_everyone()
-    best_acc = float(open('best_acc', 'r').read())
+    best_acc = float(open(f'{aux_files_path}/best_acc', 'r').read())
     print(best_acc)
 
-    f = open(f'OUTPUT/{dataset_name}/train_process','a')
+    f = open(f'OUTPUT/{dataset_name}/model_{model_name}/train_process','a')
     
     small_num = 0
     try_num = 0
     max_try_num = 3
     max_small_num = 6
     for epoch in range(args.epoches):
-        if int(open('train_state').read()) == 0:
+        if int(open(f'{aux_files_path}/train_state').read()) == 0:
             break
         best_acc, flag_bigger = train(accelerator, model, train_loader, optimizer, epoch, best_acc, dev_loader, f, dataset_name)
         if accelerator.is_main_process:
@@ -402,7 +413,7 @@ def main_train(dataset_name):
                     for g in optimizer.param_groups:
                         g['lr'] = g['lr'] * 0.5
                 if try_num == max_try_num:
-                    open('train_state', 'w').write(str(0))
+                    open(f'{aux_files_path}/train_state', 'w').write(str(0))
         accelerator.wait_for_everyone()
     accelerator.wait_for_everyone()
     end_time = time.time()
@@ -421,9 +432,9 @@ def main_dev(dataset_name):
     
     exactly_match_num, exactly_match_ids, total_dev_output = dev(model, dev_loader, -1, dataset_name,dev_type='dev')
 
-    json.dump(total_dev_output, open(f'OUTPUT/{dataset_name}/total_gen_output_dev.json', 'w'))
+    json.dump(total_dev_output, open(f'OUTPUT/{dataset_name}/model_{model_name}/total_gen_output_dev.json', 'w'))
 
-    with open(f'OUTPUT/{dataset_name}/dev_process', 'w') as f:
+    with open(f'OUTPUT/{dataset_name}/model_{model_name}/dev_process', 'w') as f:
         f.write('exactly match: %f\n'%(exactly_match_num / len(dev_loader.dataset)))
     
         
@@ -434,23 +445,23 @@ def main_test(dataset_name):
     test_set = Dataset(args, tokenizer, 'test', dataset_name)
     test_loader = DataLoader(dataset=test_set, batch_size=args.batch_size)
     model = MergeT5(args)
-    model.load_state_dict(torch.load(f"MODELS/{dataset_name}/best_model.pt"))
+    model.load_state_dict(torch.load(f"MODELS/{model_name}/best_model.pt"))
     if use_cuda:
         # model = nn.DataParallel(model, device_ids = device_ids)
         model = model.cuda(device_ids[0])
-    f =  open(f'OUTPUT/{dataset_name}/test_process', 'w')
+    f =  open(f'OUTPUT/{dataset_name}/model_{model_name}/test_process', 'w')
     dev_exactly_match_num, _, _ = dev(model, dev_loader, -1, dataset_name)
-    f.write(f'amount of data: {len(dev_loader.dataset)}')
+    f.write(f'amount of data: {len(dev_loader.dataset)}\n')
     f.write('dev_exactly_match: %f\n'%(dev_exactly_match_num / len(dev_loader.dataset)))
     f.flush()
     exactly_match_num, exactly_match_ids, total_test_output = test_beam(model, test_loader, dataset_name)
     f.write('test_exactly_match: %f\n'%(exactly_match_num / len(test_loader.dataset)))
     f.flush()
-    json.dump(total_test_output, open(f'OUTPUT/{dataset_name}/total_gen_output_test_beam.json', 'w'))
-    if not os.path.exists(f'RESULTS/{dataset_name}'):
-        os.makedirs(f'RESULTS/{dataset_name}', exist_ok=True)
+    json.dump(total_test_output, open(f'OUTPUT/{dataset_name}/model_{model_name}/total_gen_output_test_beam.json', 'w'))
+    if not os.path.exists(f'RESULTS/{dataset_name}/model_{model_name}'):
+        os.makedirs(f'RESULTS/{dataset_name}/model_{model_name}', exist_ok=True)
                   
-    json.dump(exactly_match_ids, open(f'RESULTS/{dataset_name}/test_gen_exactly_match_ids', 'w'))
+    json.dump(exactly_match_ids, open(f'RESULTS/{dataset_name}/model_{model_name}/test_gen_exactly_match_ids', 'w'))
 
     
         
@@ -460,8 +471,8 @@ def main_test(dataset_name):
 if __name__ == '__main__':
     
     seed_everything(0)
-    if not os.path.exists(f'OUTPUT/{dataset_name}'):
-        os.makedirs(f'OUTPUT/{dataset_name}', exist_ok=True)
+    if not os.path.exists(f'OUTPUT/{dataset_name}/model_{model_name}'):
+        os.makedirs(f'OUTPUT/{dataset_name}/model_{model_name}', exist_ok=True)
     if stage == 'train':
         main_train(dataset_name)
     elif stage == 'dev':

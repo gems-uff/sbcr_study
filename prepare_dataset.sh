@@ -43,4 +43,6 @@ python3 transform_SBES2022_dataset_to_ase2023.py
 
 python3 separate_dataset.py
 
+python3 filter_FSE_dataset.py
+
 echo "All tasks completed."

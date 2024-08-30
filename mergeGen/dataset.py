@@ -8,6 +8,7 @@ import math
 import pandas as pd
 from transformers import RobertaTokenizer
 
+RANDOM_SEED = 27082024
 model_type = 'Salesforce/codet5-small'
 tokenizer = RobertaTokenizer.from_pretrained(model_type)
 class dotdict(dict):
@@ -66,6 +67,7 @@ class Dataset(data.Dataset):
         val_ratio = 0.1
         test_ratio = 0.1
         df = pd.DataFrame(all_raw_a)
+        df = df.sample(frac=1, random_state=RANDOM_SEED)
         train_end = int(len(df) * train_ratio)
         val_end = train_end + int(len(df) * val_ratio)
 
@@ -74,8 +76,12 @@ class Dataset(data.Dataset):
         valid_index = list(df.iloc[train_end:val_end].index)
         test_index = list(df.iloc[val_end:].index)
 
+        aux_files_path = f'AUX_FILES/{dataset_name}'
+        if not os.path.exists(aux_files_path):
+            os.makedirs(aux_files_path, exist_ok=True)
+
         all_index = {'train':train_index, 'valid': valid_index, 'test': test_index}
-        json.dump(all_index, open(f'all_index_{dataset_name}','w'))
+        json.dump(all_index, open(f'{aux_files_path}/all_index_{dataset_name}','w'))
         
         train_batches = []
         valid_batches = []
