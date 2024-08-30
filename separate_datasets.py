@@ -2,8 +2,11 @@ import pandas as pd
 import os
 
 RANDOM_SEED = 27082024
+dataset_parts = ['training', 'validation', 'testing']
 dataset1_path = 'data/dataset1_complete.json'
 dataset2_path = 'data/dataset2_complete.json'
+dataset2_subs = ['Java', 'CSharp', 'JavaScript', 'TypeScript']
+
 
 def split_data(df, train_ratio=0.8, val_ratio=0.1, test_ratio=0.1):
     df = df.sample(frac=1, random_state=RANDOM_SEED)

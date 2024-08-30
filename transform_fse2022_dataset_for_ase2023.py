@@ -7,10 +7,11 @@ all_raw_a = []
 all_raw_b = []
 all_raw_res = []
 chunks_data = []
+chunks_data_language = []
 
 def extract_info_from_json(file_path, file_name):
     # global all_raw_base, all_raw_a, all_raw_b, all_raw_res
-    global chunks_data
+    global chunks_data, chunks_data_language
     with open(file_path, 'r') as file:
         data = json.load(file)
         merge_id = file_name.split('_')[0]
@@ -19,31 +20,28 @@ def extract_info_from_json(file_path, file_name):
         for chunk in conflicting_chunks:
             if chunk.get('res_region', '') != None:
                 chunks_data.append([chunk.get('base_contents', ''), chunk.get('a_contents', ''),chunk.get('b_contents', ''),  chunk.get('res_region', ''), merge_id, chunk_number])
+                chunks_data_language.append([chunk.get('base_contents', ''), chunk.get('a_contents', ''),chunk.get('b_contents', ''),  chunk.get('res_region', ''), merge_id, chunk_number])
             chunk_number+=1
-            # all_raw_a.append(chunk.get('a_contents', ''))
-            # all_raw_b.append(chunk.get('b_contents', ''))
-            # all_raw_base.append(chunk.get('base_contents', ''))
-            # all_raw_res.append(chunk.get('res_region', ''))
             
             
 def list_json_files(folder_path):
+    global chunks_data_language
+    chunks_data_language = []
     total_files = 1
     for root, dirs, files in os.walk(folder_path):
         for file in files:
             if file.endswith('.json'):
                 file_path = os.path.join(root, file)
+                language = root.split('/')[-1]
                 print("Processing:", file_path, file)
                 extract_info_from_json(file_path, file)
                 total_files+=1
+    write_result_file(f'dataset2_{language}_complete.json', chunks_data_language)
 
-def write_result_file():
-    with open('data/dataset2_complete.json', 'w') as file:
-        file.write("{")
-        file.write(f'\t "all_raw_base": {all_raw_base},')
-        file.write(f'\t "all_raw_a": {all_raw_a},')
-        file.write(f'\t "all_raw_b": {all_raw_b},')
-        file.write(f'\t "all_raw_res": {all_raw_res}')
-        file.write("}")
+def write_result_file(file_name, data):
+    json_data = pd.DataFrame(data, columns=columns).to_dict(orient="list")
+    with open(f"data/{file_name}", "w") as json_file:
+        json.dump(json_data, json_file, indent=4)
 
 if __name__ == "__main__":
     columns = ['all_raw_base', 'all_raw_a', 'all_raw_b', 'all_raw_res', 'merge_id', 'chunk_number']
@@ -55,7 +53,4 @@ if __name__ == "__main__":
     list_json_files(folder_path_csharp)
     list_json_files(folder_path_javascript)
     list_json_files(folder_path_typescript)
-    # write_result_file()
-    json_data = pd.DataFrame(chunks_data, columns=columns).to_dict(orient="list")
-    with open("data/dataset2_complete.json", "w") as json_file:
-        json.dump(json_data, json_file, indent=4)
+    write_result_file('dataset2_complete.json', chunks_data)

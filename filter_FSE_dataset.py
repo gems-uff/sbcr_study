@@ -104,21 +104,10 @@ def normalize_lines(lines):
         normalized_lines.append(normalize_line(line))
     return normalized_lines
 
-if __name__ == "__main__":
-    folder_path = "data/fse2022/automated-analysis-data/Java"
-    df = list_json_files(folder_path)
-    folder_path = "data/fse2022/automated-analysis-data/CSharp"
-    df2 = list_json_files(folder_path)
-    folder_path = "data/fse2022/automated-analysis-data/JavaScript"
-    df3 = list_json_files(folder_path)
-    folder_path = "data/fse2022/automated-analysis-data/TypeScript"
-    df4 = list_json_files(folder_path)
-    df = pd.concat([df, df2, df3, df4])
-    df['chunk_id'] = df['mergeId'].astype(str) + '-' + df['chunk_index_merge'].astype(str)
-    count = 1
+def get_combination_chunks(dataset):
     data = []
-
-    for index, row in df.iterrows():
+    count = 1
+    for index, row in dataset.iterrows():
         v1 = row['v1']
         v2 = row['v2']
         resolution = row['resolution']
@@ -131,6 +120,36 @@ if __name__ == "__main__":
     df_combination = df_combination.merge(df, on='chunk_id', how='left')
     df_dataset = df_combination[['chunk_id', 'v1', 'v2', 'resolution', 'base']]
     df_dataset.rename(columns={'v1': 'all_raw_a', 'v2': 'all_raw_b', 'resolution': 'all_raw_res', 'base': 'all_raw_base'}, inplace=True)
-    json_data = df_dataset.to_dict(orient="list")
-    with open("data/dataset2_combination_complete.json", "w") as json_file:
+    return df_dataset
+
+def save_dataset_to_json(dataset, file_name):
+    json_data = dataset.to_dict(orient="list")
+    with open(f"data/{file_name}", "w") as json_file:
         json.dump(json_data, json_file, indent=4)
+
+if __name__ == "__main__":
+    folder_path = "data/fse2022/automated-analysis-data/Java"
+    df1 = list_json_files(folder_path)
+    folder_path = "data/fse2022/automated-analysis-data/CSharp"
+    df2 = list_json_files(folder_path)
+    folder_path = "data/fse2022/automated-analysis-data/JavaScript"
+    df3 = list_json_files(folder_path)
+    folder_path = "data/fse2022/automated-analysis-data/TypeScript"
+    df4 = list_json_files(folder_path)
+    df = pd.concat([df1, df2, df3, df4])
+    df['chunk_id'] = df['mergeId'].astype(str) + '-' + df['chunk_index_merge'].astype(str)
+
+    df_combination = get_combination_chunks(df)
+    save_dataset_to_json(df_combination, 'dataset2_combination.json')
+
+    df_java_combination = get_combination_chunks(df1)
+    save_dataset_to_json(df_java_combination, 'dataset2_Java_combination.json')
+
+    df_csharp_combination = get_combination_chunks(df2)
+    save_dataset_to_json(df_csharp_combination, 'dataset2_CSharp_combination.json')
+
+    df_javascript_combination = get_combination_chunks(df3)
+    save_dataset_to_json(df_javascript_combination, 'dataset2_JavaScript_combination.json')
+
+    df_typescript_combination = get_combination_chunks(df4)
+    save_dataset_to_json(df_typescript_combination, 'dataset2_TypeScript_combination.json')

@@ -6,4 +6,5 @@ mergeGen/OUTPUT
 mergeGen/PROCESSED
 mergeGen/RESULTS
 mergeGen/AUX_FILES
+mergeGen/LOGS
 */__pycache__

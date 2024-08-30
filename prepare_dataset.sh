@@ -41,8 +41,17 @@ python3 transform_fse2022_dataset_for_ase2023.py
 echo "Running SBES2022 dataset transformation..."
 python3 transform_SBES2022_dataset_to_ase2023.py
 
+python3 filter_FSE_dataset.py
+
 python3 separate_dataset.py
 
-python3 filter_FSE_dataset.py
+cd mergeGen
+python3 run_total_dataset.py dataset1 dataset_parallel.py
+python3 run_total_dataset.py dataset2 dataset_parallel.py
+python3 run_total_dataset.py dataset2_Java dataset_parallel.py
+python3 run_total_dataset.py dataset2_CSharp dataset_parallel.py
+python3 run_total_dataset.py dataset2_JavaScript dataset_parallel.py
+python3 run_total_dataset.py dataset2_TypeScript dataset_parallel.py
+cd ..
 
 echo "All tasks completed."
