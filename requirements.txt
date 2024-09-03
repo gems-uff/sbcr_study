@@ -6,3 +6,5 @@ multiset==3.2.0
 torch==1.10.2
 transformers==4.19.2
 tqdm==4.54.1
+pylcs==0.0.1
+openpyxl==3.1.5
