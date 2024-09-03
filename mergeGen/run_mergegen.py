@@ -42,7 +42,7 @@ class dotdict(dict):
 
 args = dotdict({
     'batch_size':5,
-    'test_batch_size':5,
+    'test_batch_size':1,
     'epoches':100,
     'lr':1e-4,
     'model_type':model_type,
@@ -286,10 +286,12 @@ def test_beam(model, test_loader, dataset_name):
 
     total_output_strings = []
     total_target_strings = []
+    test_time_strings = []
     for idx, batch in enumerate(tqdm(test_loader)):
         for i in range(len(batch)):
             batch[i] = get_tensor(batch[i])
             batch[i] = batch[i].cuda()
+        start_time = time.time()
         with torch.no_grad():   
             input_attention_mask = batch[0] != tokenizer.pad_token_id
             input_em = model.t5.encoder(input_ids=batch[0], attention_mask=input_attention_mask, return_dict=True)['last_hidden_state']
@@ -325,6 +327,7 @@ def test_beam(model, test_loader, dataset_name):
             output_strings, ref_strings = see_results(batch[0], beam_output, batch[1])
             total_output_strings.extend(output_strings)
             total_target_strings.extend(ref_strings)
+            test_time_strings.append(time.time() - start_time)
             # -----------------see succeed/fail data-----------------
         total_data += len(output)
 
@@ -334,7 +337,7 @@ def test_beam(model, test_loader, dataset_name):
     exactly_match_num = total_results.sum().item()
 
     assert total_data == len(test_loader.dataset)
-
+    print(len(total_output_strings), len(total_target_strings), len(test_time_strings))
 
     # -----------------see succeed/fail data-----------------
     output_path = f'OUTPUT/{dataset_name}/model_{model_name}/test_OUTPUT'
@@ -351,6 +354,7 @@ def test_beam(model, test_loader, dataset_name):
         p.write('---------------------------------\n')
         p.write('output:\n%s\n'%total_output_strings[i])
         p.write('---------------------------------\n')
+        p.write('time: %f s\n'%test_time_strings[i])
         p.close()
         p.close()
     # -----------------see succeed/fail data-----------------        
@@ -372,7 +376,7 @@ def main_train(dataset_name):
     dev_set = Dataset(args, tokenizer, 'valid', dataset_name)
     start_time = time.time()
     train_loader = DataLoader(dataset=train_set, batch_size=args.batch_size, shuffle=True)
-    dev_loader = DataLoader(dataset=dev_set, batch_size=args.test_batch_size)
+    dev_loader = DataLoader(dataset=dev_set, batch_size=args.batch_size)
     model = MergeT5(args)
     optimizer = AdamW(model.parameters(), args.lr)
     model, optimizer, train_loader = accelerator.prepare(model, optimizer, train_loader)
@@ -443,7 +447,7 @@ def main_test(dataset_name):
     dev_loader = DataLoader(dataset=dev_set, batch_size=args.batch_size)
 
     test_set = Dataset(args, tokenizer, 'test', dataset_name)
-    test_loader = DataLoader(dataset=test_set, batch_size=args.batch_size)
+    test_loader = DataLoader(dataset=test_set, batch_size=args.test_batch_size)
     model = MergeT5(args)
     model.load_state_dict(torch.load(f"MODELS/{model_name}/best_model.pt"))
     if use_cuda:

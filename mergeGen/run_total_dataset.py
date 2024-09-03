@@ -13,7 +13,7 @@ if __name__ == '__main__':
     all_num = len(all_raw_base)
 #     print(all_num)
     jobs = []
-    max_num = 30
+    max_num = 10
     each_num = 1000
     for i in range(math.ceil(all_num / each_num)):
         while True:
