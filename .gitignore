@@ -7,4 +7,10 @@ mergeGen/PROCESSED
 mergeGen/RESULTS
 mergeGen/AUX_FILES
 mergeGen/LOGS
+mergeGen/*.txt
 */__pycache__
+sbcr/DEBUG
+sbcr/OUTPUT
+sbcr/RESULTS
+sbcr/tmp
+sbcr/*.txt
