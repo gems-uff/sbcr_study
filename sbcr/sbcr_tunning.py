@@ -158,6 +158,8 @@ def get_gestalt(file1,file2):
             file1_text = f1.read()
         with open(file2, 'r', encoding='iso-8859-1') as f2:
             file2_text = f2.read()
+            if file1_text == file2_text:
+                return 1
             return 2*len(get_lcs(file1_text, file2_text)) / (len(file1_text) + len(file2_text))
     except Exception as e:
         print(e)
@@ -447,6 +449,7 @@ def tunning():
     adapt_dataset(df_chunks)
     clear_iteration_info()
     count = 1
+    chunk_count = 1
     columns = ['chunk_id', 'fitness', 'solution_sim_lcs', 'status', 'neighbor_timeout', 'local_search_timeout', 'ils_timeout', 'maximum_neighbors', 'max_iterations_without_improvement', 'time_seconds']
     analyzed_chunk_ids = []
     if os.path.exists(RESULT_FILE):
@@ -456,7 +459,7 @@ def tunning():
     for index, row in df_chunks.iterrows():
         chunk_id = row['chunk_id']
         if chunk_id not in analyzed_chunk_ids:
-            print(f"Analyzing chunk ({chunk_id}) {count} of {len(df_chunks)}", flush=True)
+            print(f"{time.ctime()} ### Analyzing chunk ({chunk_id}) {chunk_count} of {len(df_chunks)}", flush=True)
             if len(row['v1'])<20000 and len(row['v2']) < 20000:
                 v1 = row['v1']
                 v2 = row['v2']
@@ -476,7 +479,7 @@ def tunning():
                                 LOCAL_SEARCH_MAXIMUM_NEIGHBORS = maximum_neighbors
                                 for timeout in TUNNING_TIMEOUTS:
                                     ILS_TIMEOUT_SECONDS = timeout
-                                    print(f"Analyzing chunk ({chunk_id}) with {ILS_TIMEOUT_SECONDS}s timeout, {LOCAL_SEARCH_MAXIMUM_NEIGHBORS} maximum neighbors, {ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT} max iterations without improvement", flush=True)
+#                                     print(f"Analyzing chunk ({chunk_id}) with {ILS_TIMEOUT_SECONDS}s timeout, {LOCAL_SEARCH_MAXIMUM_NEIGHBORS} maximum neighbors, {ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT} max iterations without improvement", flush=True)
                                     start_time = time.time()
                                     candidate, fitness = ils_resolution(v1, v2)
                                     end_time = time.time()
@@ -486,7 +489,7 @@ def tunning():
                                             os.mkdir(OUTPUT_FOLDER)
                                         write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
                                     lcs_solution_similarity = compare(solution, candidate)
-                                    print(f"Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
+#                                     print(f"Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
                                     data.append([row['chunk_id'], fitness, lcs_solution_similarity, 'ok', NEIGHBOR_FINDING_TIMEOUT_SECONDS, LOCAL_SEARCH_TIMEOUT_SECONDS, ILS_TIMEOUT_SECONDS, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT, elapsed_time])
                                     if count % 5 == 0:
                                         pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
@@ -504,5 +507,6 @@ def tunning():
                 data.append([row['chunk_id'], "", "", "OUT_OF_LIMITS", "", "", "", "", "", ""])
         else:
             print(f"Chunk ({chunk_id}) {count} of {len(df_chunks)} was already analyzed before.", flush=True)
+        chunk_count+=1
     pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
 tunning()
