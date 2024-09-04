@@ -2,7 +2,6 @@ import pandas as pd
 import os
 
 RANDOM_SEED = 27082024
-dataset_parts = ['training', 'validation', 'testing']
 dataset1_path = 'data/dataset1_complete.json'
 dataset2_path = 'data/dataset2_complete.json'
 dataset2_subs = ['Java', 'CSharp', 'JavaScript', 'TypeScript']
@@ -38,5 +37,13 @@ save_json(dataset1_test, 'data/dataset1_testing.json')
 save_json(dataset2_train, 'data/dataset2_training.json')
 save_json(dataset2_val, 'data/dataset2_validation.json')
 save_json(dataset2_test, 'data/dataset2_testing.json')
+
+for dataset2_sub in dataset2_subs:
+    dataset_df = pd.read_json(f"data/dataset2_{dataset2_sub}_complete.json")
+    training_data, validation_data, testing_data = split_data(dataset_df)
+    save_json(training_data, f'data/dataset2_{dataset2_sub}_training.json')
+    save_json(validation_data, f'data/dataset2_{dataset2_sub}_validation.json')
+    save_json(testing_data, f'data/dataset2_{dataset2_sub}_testing.json')
+        
 
 print("Datasets have been successfully split and saved.")

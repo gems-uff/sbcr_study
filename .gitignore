@@ -13,4 +13,5 @@ sbcr/DEBUG
 sbcr/OUTPUT
 sbcr/RESULTS
 sbcr/tmp
+sbcr/LOGS
 sbcr/*.txt
