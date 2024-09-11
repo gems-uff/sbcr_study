@@ -49,45 +49,79 @@ if DEBUG_ACTIVE:
 if not os.path.exists("tmp"):
     os.mkdir("tmp")
 
-def get_sorted_random_lines(original_list, n):
+"""
+    Given a candidate representation, returns a string with the candidate text
+"""
+def get_candidate_text(indexes, v1, v2):
+    candidate = []
+    for index in indexes:
+        candidate.append(eval(f"{index[0]}.splitlines()[{index[1]}]"))
+    return '\n'.join(candidate)
+
+"""
+    Given a list, returns `n` sorted random indexes from it
+"""
+def get_sorted_random_indexes(original_list, n):
     # Get n random indices
     random_indices = random.sample(range(len(original_list)), n)
 
     # Sort the indices in ascending order
     sorted_indices = sorted(random_indices)
 
-    # Create a new list using the sorted indices
-    new_list = [original_list[i] for i in sorted_indices]
+    return sorted_indices
 
-    return new_list
-    
+"""
+    Given two source code versions, returns a random candidate,
+    respecting the partial order of the versions
+    Uses the candidate data structure: [('v1', 0), ('v1', 1), ('v1', 2), ('v2', 1)]
+"""
 def partial_order_random_candidate(v1, v2):
     v1 = v1.splitlines()
     v2 = v2.splitlines()
     number_lines_v1 = random.randrange(len(v1)+1)
     number_lines_v2 = random.randrange(len(v2)+1)
     candidate_size = number_lines_v1 + number_lines_v2
-    lines_v1 = random.sample(v1, number_lines_v1).sort()
-    lines_v2 = random.sample(v2, number_lines_v2).sort()
     
-    lines_v1 = get_sorted_random_lines(v1, number_lines_v1)
-    lines_v2 = get_sorted_random_lines(v2, number_lines_v2)
+    indexes_v1 = get_sorted_random_indexes(v1, number_lines_v1)
+    indexes_v2 = get_sorted_random_indexes(v2, number_lines_v2)
     
     candidate = []
     while(len(candidate) < candidate_size):
         line_source = ''
-        if(len(lines_v1)>0 and len(lines_v2)>0):
+        if(len(indexes_v1)>0 and len(indexes_v2)>0):
             line_source = random.choice(['v1', 'v2'])
-        elif len(lines_v2)==0:
+        elif len(indexes_v2)==0:
             line_source='v1'
         else:
             line_source='v2'
         if line_source == 'v1':
-            candidate.append(lines_v1.pop(0))
+            candidate.append(('v1', indexes_v1.pop(0)))
         else:
-            candidate.append(lines_v2.pop(0))
+            candidate.append(('v2', indexes_v2.pop(0)))
     
-    return '\n'.join(candidate)
+    return candidate
+
+'''
+    A resolution violates the partial order when there is no way to arrange the 
+        chunk lines to compose the resolution without breaking their original order
+    Uses candidate data structure, thus the analysis is based on matching lines indexes
+'''
+def candidate_has_partial_order(v1,v2, candidate):
+    
+    last_v1_index = -1
+    last_v2_index = -1
+    for candidate_element in candidate:
+        line_side = candidate_element[0]
+        line_index = candidate_element[1]
+        if line_side == 'v1':
+            if line_index < last_v1_index:
+                return False
+            last_v1_index = line_index
+        else:
+            if line_index < last_v2_index:
+                return False
+            last_v2_index = line_index
+    return True
 
 '''
     Cleans the chunk resolution text by removing potential context lines.
@@ -230,80 +264,6 @@ def compare(content1, content2):
         print(e)
         return -1
 
-class LineOccurrence:
-    def __init__(self, content) -> None:
-        self.content = content
-        self.last_v1_index = None
-        self.last_v2_index = None
-        self.v1 = False
-        self.v2 = False
-
-    def set_version(self, version):
-        if version == 'v1':
-            self.v1 = True
-        if version == 'v2':
-            self.v2 = True
-    
-    def set_index(self, version, index):
-        if version == 'v1':
-            if self.last_v1_index != None:
-                if index > self.last_v1_index:
-                    self.last_v1_index = index
-            else:
-                self.last_v1_index = index
-
-        if version == 'v2':
-            if self.last_v2_index != None:
-                if index > self.last_v2_index:
-                    self.last_v2_index = index
-            else:
-                self.last_v2_index = index
-
-def populate_index(lines, version, index):
-    for line_index, line in enumerate(lines):
-        if line not in index:
-            occurrence = LineOccurrence(line)
-            occurrence.set_version(version)
-            occurrence.set_index(version, line_index+1)
-            index[line] = occurrence
-        else:
-            occurrence = index[line]
-            occurrence.set_version(version)
-            occurrence.set_index(version, line_index+1)
-            index[line] = occurrence
-    return index
-
-
-def violates_partial_order(v1,v2, candidate):
-    v1 = normalize_lines(v1.splitlines())
-    v2 = normalize_lines(v2.splitlines())
-    
-    if type(candidate) == str:
-        candidate = normalize_lines(candidate.splitlines())
-    index = {}
-    index = populate_index(v1, 'v1', index)
-    index = populate_index(v2, 'v2', index)
-    
-    last_v1_index = None
-    last_v2_index = None
-    
-    for line in candidate:
-        if line != '':
-            if line in index:
-                # side, side_index, multiple = index[line]
-                occurrence = index[line]
-                if occurrence.v1:
-                    if last_v1_index != None:
-                        if occurrence.last_v1_index < last_v1_index:
-                            return True
-                    last_v1_index = occurrence.last_v1_index
-                if occurrence.v2:
-                    if last_v2_index != None:
-                        if occurrence.last_v2_index < last_v2_index:
-                            return True
-                    last_v2_index = occurrence.last_v2_index
-    return False
-
 '''
     Gets one random line of available_lines and 
         adds it to the current_lines at the parameter position
@@ -318,49 +278,160 @@ def get_available_lines(current_lines, all_possible_lines):
     return available_lines
 
 '''
-    Given a candidate, returns a random neighbor
-        A neighbor is defined as a candidate that differs
-        at most in one line (either by addition or removal)
-'''
-def get_random_neighbor(candidate, v1, v2):
-    candidate_lines = candidate.splitlines()
-    v1_lines = v1.splitlines()
-    v2_lines = v2.splitlines()
-    raffled_action = random.choice(['add', 'remove'])
-    chunk_size = len(v1_lines) + len(v2_lines)
-
-    if len(candidate_lines)>=chunk_size:
-        raffled_action = 'remove'
-
-    if len(candidate_lines) == 1:
-        raffled_action = 'add'
-    
-    if len(candidate_lines) > 0:
-        position = random.randint(0, len(candidate_lines)-1)
-    else:
-        position = 0
-        raffled_action = 'add'
-        
-    if raffled_action == 'add':
-        add_line(candidate_lines, position, get_available_lines(candidate_lines, v1_lines + v2_lines))
-    else:
-        candidate_lines.pop(position)
-    return '\n'.join(candidate_lines)
-
-'''
-    Gets a random neighbor and 
+    Get a random neighbor and 
         check if the neighbor satisfies the partial order,
         Otherwise, generate another, until one that satisfies is found
     Timeouts if no partial order complaint neighbor is found
 '''
 def get_next_neighbor(candidate, v1, v2, neighbors):
     random_neighbor = get_random_neighbor(candidate, v1, v2)
+    random_neighbor_text = get_candidate_text(random_neighbor, v1, v2)
     start_time = time.time()
-    while violates_partial_order(v1, v2, random_neighbor) or hash(random_neighbor) in neighbors:
-        if time.time() - start_time > NEIGHBOR_FINDING_TIMEOUT_SECONDS:
+    count_tries = 0
+    has_partial_order = candidate_has_partial_order(v1, v2, random_neighbor)
+    while not has_partial_order or hash(random_neighbor_text) in neighbors:
+        if time.time() - start_time > NEIGHBOR_FINDING_TIMEOUT_SECONDS or count_tries >= MAX_NEIGHBOR_TRYING:
             return None
         random_neighbor = get_random_neighbor(candidate, v1, v2)
+        random_neighbor_text = get_candidate_text(random_neighbor, v1, v2)
+        count_tries+=1
+        has_partial_order = candidate_has_partial_order(v1, v2, random_neighbor)
+        if not has_partial_order:
+            print('Violates partial order', flush=True)
     return random_neighbor
+
+"""
+    Given a candidate, a position and which side to look for (v1 or v2), 
+    returns the first index before the position that is from the side
+"""
+def get_first_index_before_position(candidate, position, side):
+    first_index_before = -1
+    if position > 0:
+        for element in candidate[position-1::-1]:
+            element_side = element[0]
+            element_index = element[1]
+            if element_side == side:
+                first_index_before = element_index
+                break
+    return first_index_before
+
+"""
+    Given a candidate, a position and which side to look for (v1 or v2),
+    returns the first index after the position that is from the side
+"""
+def get_first_index_after_position(candidate, position, side):
+    first_index_after = float('inf')
+    if position < len(candidate):
+        for element in candidate[position:]:
+            element_side = element[0]
+            element_index = element[1]
+            if element_side == side:
+                first_index_after = element_index
+                break
+    return first_index_after
+
+'''
+    Given a candidate, a position and the two versions,
+    returns the lines that can be added to the candidate at the position,
+    respecting the partial order
+        Candidate example: [('v1', 0), ('v1', 1), ('v1', 2), ('v2', 1)]
+'''
+def find_feasible_lines_to_add(candidate, v1, v2, position):
+    feasible_lines = []
+    # Get the lines that are not in the candidate
+    v1_lines_indexes = list(range(len(v1.splitlines())))
+    v2_lines_indexes = list(range(len(v2.splitlines())))
+    for candidate_element in candidate:
+        line_side = candidate_element[0]
+        line_index = candidate_element[1]
+        v1_lines_indexes.remove(line_index) if line_side == 'v1' else v2_lines_indexes.remove(line_index)
+    
+    # Get the lines that can be added to the candidate
+    v1_index_before = get_first_index_before_position(candidate, position, 'v1')
+    v2_index_before = get_first_index_before_position(candidate, position, 'v2')
+    v1_index_after = get_first_index_after_position(candidate, position, 'v1')
+    v2_index_after = get_first_index_after_position(candidate, position, 'v2')
+
+    for line_index in v1_lines_indexes:
+        if line_index > v1_index_before and line_index < v1_index_after:
+            feasible_lines.append(('v1', line_index))
+
+    for line_index in v2_lines_indexes:
+        if line_index > v2_index_before and line_index < v2_index_after:
+            feasible_lines.append(('v2', line_index))
+    
+    return feasible_lines
+
+"""
+    Given a candidate and a side (v1 or v2),
+    returns the index of the last element from the side in the candidate
+"""
+def get_last_side_index(candidate, side):
+    last_side_index = -1
+    for candidate_element in candidate[-1::-1]:
+        element_side = candidate_element[0]
+        if element_side == side:
+            last_side_index = candidate_element[1]
+            break
+    return last_side_index
+
+'''
+    Given a candidate, returns a random neighbor
+        A neighbor is defined as a candidate that differs
+        at most in one line (either by addition, removal or swapping)
+        Candidate example: [('v1', 0), ('v1', 1), ('v1', 2), ('v2', 1)]
+'''
+def get_random_neighbor(candidate, v1, v2):
+    neighbor = candidate.copy()
+    v1_lines = v1.splitlines()
+    v2_lines = v2.splitlines()
+    feasible_actions = []
+    if len(candidate) > 0:
+        random_position = random.randint(0, len(candidate)-1)
+        feasible_actions.append('remove')
+        if random_position > 0:
+                # we can only swap when the other element is from the opposite side
+                if candidate[random_position-1][0] != candidate[random_position][0]:
+                    feasible_actions.append('swap_before')
+        if random_position < len(candidate)-1:
+            # we can only swap when the other element is from the opposite side
+            if candidate[random_position+1][0] != candidate[random_position][0]:
+                feasible_actions.append('swap_after')
+        if len(candidate) < len(v1_lines) + len(v2_lines):
+            feasible_lines = find_feasible_lines_to_add(candidate, v1, v2, random_position)
+            if len(feasible_lines) > 0:
+                feasible_actions.append('add')
+    else: # candidate is empty, only add is possible
+        random_position = random.randint(0, len(candidate))
+        feasible_actions = ['add']
+        feasible_lines = find_feasible_lines_to_add(candidate, v1, v2, random_position)
+    raffled_action = random.choice(feasible_actions)
+    
+    if raffled_action == 'remove':
+        neighbor.pop(random_position)
+    elif raffled_action == 'swap_before':
+        neighbor[random_position], neighbor[random_position-1] = neighbor[random_position-1], neighbor[random_position]
+    elif raffled_action == 'swap_after':
+        neighbor[random_position], neighbor[random_position+1] = neighbor[random_position+1], neighbor[random_position]
+    else: # add
+        if random_position == len(candidate)-1: # a chance to add at the end
+            if random.choice([0,1]) == 1:
+                # we can only add at the end when either the last v1 index or last v2 index 
+                # are smaller than the length of v1 and v2, respectively
+                last_v1_index = get_last_side_index(candidate, 'v1')
+                last_v2_index = get_last_side_index(candidate, 'v2')
+                if last_v1_index < len(v1.splitlines())-1 or last_v2_index < len(v2.splitlines())-1:
+                    random_position += 1
+                    # need to update the feasible lines beause the position has changed
+                    feasible_lines = find_feasible_lines_to_add(candidate, v1, v2, random_position)
+        if len(feasible_lines) > 0:
+            random_line = random.choice(feasible_lines)
+            neighbor.insert(random_position, random_line)
+        else:
+            print('No feasible lines to add')
+            print('candidate', candidate, 'position:', random_position)
+    # print('raffled_action', raffled_action, 'random_position', random_position)
+    return neighbor
 
 def get_fittest(neighbors):
     fittest_neighbor = None
@@ -374,14 +445,17 @@ def get_fittest(neighbors):
 def local_search(starting_candidate, starting_candidate_fitness, n, v1, v2, source, depth):
     neighbors = {}
     start_time = time.time()
-    while len(neighbors) < n and time.time() - start_time < LOCAL_SEARCH_TIMEOUT_SECONDS:
+    tries_count = 0
+    while len(neighbors) < n and time.time() - start_time < LOCAL_SEARCH_TIMEOUT_SECONDS and tries_count < MAX_NEIGHBOR_TRYING:
         s_new = get_next_neighbor(starting_candidate, v1, v2, neighbors)
         if s_new != None:
-            f_new = evaluate(s_new, v1, v2)
-            neighbors[hash(s_new)] = [s_new, f_new]
+            f_new = evaluate(get_candidate_text(s_new, v1, v2), v1, v2)
+            neighbors[hash(get_candidate_text(s_new, v1, v2))] = [s_new, f_new]
 
-            save_candidate(s_new, f'neighbor_{source}-{depth}_{get_current_timestamp()}')
+            save_candidate(get_candidate_text(s_new, v1, v2), f'neighbor_{source}-{depth}_{get_current_timestamp()}')
             save_candidate(f_new, f'neighbor_{source}-{depth}_{get_current_timestamp()}_f')
+        else:
+            tries_count+=1
 
     s_candidate, f_candidate = get_fittest(neighbors)
     if f_candidate > starting_candidate_fitness:
@@ -397,14 +471,14 @@ def ils_resolution(v1, v2):
     save_candidate(v1+'\n'+v2, 'available_lines')
 
     s_star = partial_order_random_candidate(v1, v2)
-    f_star = evaluate(s_star, v1, v2)
+    f_star = evaluate(get_candidate_text(s_star, v1, v2), v1, v2)
 
-    save_candidate(s_star, 'initial_candidate')
+    save_candidate(get_candidate_text(s_star, v1, v2), 'initial_candidate')
     save_candidate(f_star, 'initial_candidate_f')
 
     s_star, f_star = local_search(s_star, f_star, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, v1, v2, 'initial', 0)
 
-    save_candidate(s_star, 'initial_candidate_from_localsearch')
+    save_candidate(get_candidate_text(s_star, v1, v2), 'initial_candidate_from_localsearch')
     save_candidate(f_star, 'initial_candidate_from_localsearch_f')
 
     start_time = time.time()
@@ -415,13 +489,13 @@ def ils_resolution(v1, v2):
         s_new = pertubate(s_star, v1, v2)
         f_new = evaluate(s_new, v1, v2)
 
-        save_candidate(s_new, f'perturbed_candidate_it-{iteration_number}')
+        save_candidate(get_candidate_text(s_star, v1, v2), f'perturbed_candidate_it-{iteration_number}')
         save_candidate(f_new, f'perturbed_candidate_it-{iteration_number}_f')
         save_candidate(time.time() - start_time, f'perturbed_candidate_it-{iteration_number}_t')
 
         s_star_new, f_star_new = local_search(s_new, f_new, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, v1, v2, f'it-{iteration_number}', 0)
 
-        save_candidate(s_star_new, f'candidate_after_localsearch_it-{iteration_number}')
+        save_candidate(get_candidate_text(s_star_new, v1, v2), f'candidate_after_localsearch_it-{iteration_number}')
         save_candidate(f_star_new, f'candidate_after_localsearch_it-{iteration_number}_f')
         save_candidate(time.time() - start_time, f'candidate_after_localsearch_it-{iteration_number}_t')
         original_iterations = iterations_without_improvement
@@ -441,7 +515,7 @@ def adapt_dataset(df):
         df['chunk_id'] = df['merge_id'].astype(str) + '-' + df['chunk_number'].astype(str)
     if 'v1' not in df.columns:
         df.rename(columns={'all_raw_a':'v1', 'all_raw_b':'v2', 'all_raw_res':'solution'}, inplace=True)
-            
+      
 
 def tunning():
     global DEBUG_REPOSITORY_PATH, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_TIMEOUT_SECONDS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT
