@@ -8,6 +8,7 @@ from datetime import datetime
 import sys
 
 NEIGHBOR_FINDING_TIMEOUT_SECONDS = 3
+MAX_NEIGHBOR_TRYING = 200
 LOCAL_SEARCH_TIMEOUT_SECONDS = 5
 ILS_TIMEOUT_SECONDS = 100
 ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT = 5
@@ -558,6 +559,7 @@ def tunning():
 #                                     print(f"Analyzing chunk ({chunk_id}) with {ILS_TIMEOUT_SECONDS}s timeout, {LOCAL_SEARCH_MAXIMUM_NEIGHBORS} maximum neighbors, {ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT} max iterations without improvement", flush=True)
                                     start_time = time.time()
                                     candidate, fitness = ils_resolution(v1, v2)
+                                    candidate = get_candidate_text(candidate, v1, v2)
                                     end_time = time.time()
                                     elapsed_time = end_time - start_time
                                     if SAVE_CANDIDATE:
@@ -565,7 +567,7 @@ def tunning():
                                             os.mkdir(OUTPUT_FOLDER)
                                         write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
                                     lcs_solution_similarity = compare(solution, candidate)
-#                                     print(f"Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
+                                    # print(f"Config: ({LOCAL_SEARCH_MAXIMUM_NEIGHBORS},{ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT},{ILS_TIMEOUT_SECONDS}). Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
                                     data.append([row['chunk_id'], fitness, lcs_solution_similarity, 'ok', NEIGHBOR_FINDING_TIMEOUT_SECONDS, LOCAL_SEARCH_TIMEOUT_SECONDS, ILS_TIMEOUT_SECONDS, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT, elapsed_time])
                                     if count % 5 == 0:
                                         pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
