@@ -26,7 +26,7 @@ DATASET = "dataset1"
 
 CANDIDATES_FOLDER = f"{OUTPUT_FOLDER}/candidates_tunning"
 SAVE_CANDIDATE = False
-NUMBER_OF_CHUNKS = 100
+NUMBER_OF_CHUNKS = 200
 
 if len(sys.argv) > 1:
     DATASET = sys.argv[1]
@@ -521,12 +521,13 @@ def adapt_dataset(df):
 def tunning():
     global DEBUG_REPOSITORY_PATH, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_TIMEOUT_SECONDS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT
     df_chunks = pd.read_json(f"../data/{DATASET}_training.json")
-    df_chunks = df_chunks.sample(NUMBER_OF_CHUNKS, random_state=RANDOM_SEED)
+    df_chunks = df_chunks.sample(frac=1, random_state=RANDOM_SEED)
     data = []
     adapt_dataset(df_chunks)
     clear_iteration_info()
     count = 1
     chunk_count = 1
+    analyzed_chunk_count = 0
     columns = ['chunk_id', 'fitness', 'solution_sim_lcs', 'status', 'neighbor_timeout', 'local_search_timeout', 'ils_timeout', 'maximum_neighbors', 'max_iterations_without_improvement', 'time_seconds']
     analyzed_chunk_ids = []
     if os.path.exists(RESULT_FILE):
@@ -534,57 +535,59 @@ def tunning():
         data = df.values.tolist()
         analyzed_chunk_ids = df['chunk_id'].unique()
     for index, row in df_chunks.iterrows():
-        chunk_id = row['chunk_id']
-        if chunk_id not in analyzed_chunk_ids:
-            print(f"{time.ctime()} ### Analyzing chunk ({chunk_id}) {chunk_count} of {len(df_chunks)}", flush=True)
-            if len(row['v1'])<20000 and len(row['v2']) < 20000:
-                v1 = row['v1']
-                v2 = row['v2']
-                if 'before_context' in df_chunks.columns:
-                    solution = get_clean_solution(row['solution'], row['before_context'], row['after_context'])
+        if analyzed_chunk_count < NUMBER_OF_CHUNKS:
+            chunk_id = row['chunk_id']
+            if chunk_id not in analyzed_chunk_ids:
+                print(f"{time.ctime()} ### Analyzing chunk ({chunk_id}) {chunk_count} of {NUMBER_OF_CHUNKS}", flush=True)
+                if len(row['v1'])<20000 and len(row['v2']) < 20000:
+                    v1 = row['v1']
+                    v2 = row['v2']
+                    if 'before_context' in df_chunks.columns:
+                        solution = get_clean_solution(row['solution'], row['before_context'], row['after_context'])
+                    else:
+                        solution = row['solution']
+                    if solution != None:
+                        solution = '\n'.join(solution)
+                        try:
+                            DEBUG_REPOSITORY_PATH = f"{ORIGINAL_DEBUG_REPOSITORY_PATH}/{chunk_id}"
+                            if not os.path.exists(f"{DEBUG_REPOSITORY_PATH}"):
+                                os.makedirs(DEBUG_REPOSITORY_PATH, exist_ok=True) 
+                            for max_iterations_without_improvement in MAX_ITERATIONS_WITHOUT_IMPROVEMENT_VALUES:
+                                ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT = max_iterations_without_improvement
+                                for maximum_neighbors in LOCAL_SEARCH_MAXIMUM_NEIGHBORS_VALUES:
+                                    LOCAL_SEARCH_MAXIMUM_NEIGHBORS = maximum_neighbors
+                                    for timeout in TUNNING_TIMEOUTS:
+                                        ILS_TIMEOUT_SECONDS = timeout
+    #                                     print(f"Analyzing chunk ({chunk_id}) with {ILS_TIMEOUT_SECONDS}s timeout, {LOCAL_SEARCH_MAXIMUM_NEIGHBORS} maximum neighbors, {ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT} max iterations without improvement", flush=True)
+                                        start_time = time.time()
+                                        candidate, fitness = ils_resolution(v1, v2)
+                                        candidate = get_candidate_text(candidate, v1, v2)
+                                        end_time = time.time()
+                                        elapsed_time = end_time - start_time
+                                        if SAVE_CANDIDATE:
+                                            if not os.path.exists(f"{OUTPUT_FOLDER}"):
+                                                os.mkdir(OUTPUT_FOLDER)
+                                            write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
+                                        lcs_solution_similarity = compare(solution, candidate)
+                                        # print(f"Config: ({LOCAL_SEARCH_MAXIMUM_NEIGHBORS},{ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT},{ILS_TIMEOUT_SECONDS}). Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
+                                        data.append([row['chunk_id'], fitness, lcs_solution_similarity, 'ok', NEIGHBOR_FINDING_TIMEOUT_SECONDS, LOCAL_SEARCH_TIMEOUT_SECONDS, ILS_TIMEOUT_SECONDS, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT, elapsed_time])
+                                        if count % 5 == 0:
+                                            pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
+                                            count=0
+                                        count+=1
+                                analyzed_chunk_count+=1
+                        except Exception as e:
+                            error = e
+                            print(e)
+                            data.append([row['chunk_id'], "", "", e, "", "", "", "", "", ""])
+                    else:
+                        print('Empty solution', flush=True)
                 else:
-                    solution = row['solution']
-                if solution != None:
-                    solution = '\n'.join(solution)
-                    try:
-                        DEBUG_REPOSITORY_PATH = f"{ORIGINAL_DEBUG_REPOSITORY_PATH}/{chunk_id}"
-                        if not os.path.exists(f"{DEBUG_REPOSITORY_PATH}"):
-                            os.makedirs(DEBUG_REPOSITORY_PATH, exist_ok=True) 
-                        for max_iterations_without_improvement in MAX_ITERATIONS_WITHOUT_IMPROVEMENT_VALUES:
-                            ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT = max_iterations_without_improvement
-                            for maximum_neighbors in LOCAL_SEARCH_MAXIMUM_NEIGHBORS_VALUES:
-                                LOCAL_SEARCH_MAXIMUM_NEIGHBORS = maximum_neighbors
-                                for timeout in TUNNING_TIMEOUTS:
-                                    ILS_TIMEOUT_SECONDS = timeout
-#                                     print(f"Analyzing chunk ({chunk_id}) with {ILS_TIMEOUT_SECONDS}s timeout, {LOCAL_SEARCH_MAXIMUM_NEIGHBORS} maximum neighbors, {ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT} max iterations without improvement", flush=True)
-                                    start_time = time.time()
-                                    candidate, fitness = ils_resolution(v1, v2)
-                                    candidate = get_candidate_text(candidate, v1, v2)
-                                    end_time = time.time()
-                                    elapsed_time = end_time - start_time
-                                    if SAVE_CANDIDATE:
-                                        if not os.path.exists(f"{OUTPUT_FOLDER}"):
-                                            os.mkdir(OUTPUT_FOLDER)
-                                        write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
-                                    lcs_solution_similarity = compare(solution, candidate)
-                                    # print(f"Config: ({LOCAL_SEARCH_MAXIMUM_NEIGHBORS},{ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT},{ILS_TIMEOUT_SECONDS}). Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
-                                    data.append([row['chunk_id'], fitness, lcs_solution_similarity, 'ok', NEIGHBOR_FINDING_TIMEOUT_SECONDS, LOCAL_SEARCH_TIMEOUT_SECONDS, ILS_TIMEOUT_SECONDS, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT, elapsed_time])
-                                    if count % 5 == 0:
-                                        pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
-                                        count=0
-                                    count+=1
-                    except Exception as e:
-                        error = e
-                        print(e)
-                        data.append([row['chunk_id'], "", "", e, "", "", "", "", "", ""])
-                else:
-                    print('Empty solution', flush=True)
+                    print(len(row['v1']))
+                    print(len(row['v2']))
+                    data.append([row['chunk_id'], "", "", "OUT_OF_LIMITS", "", "", "", "", "", ""])
             else:
-                print(len(row['v1']))
-                print(len(row['v2']))
-                data.append([row['chunk_id'], "", "", "OUT_OF_LIMITS", "", "", "", "", "", ""])
-        else:
-            print(f"Chunk ({chunk_id}) {count} of {len(df_chunks)} was already analyzed before.", flush=True)
+                print(f"Chunk ({chunk_id}) {count} of {NUMBER_OF_CHUNKS} was already analyzed before.", flush=True)
         chunk_count+=1
     pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
 tunning()

@@ -13,7 +13,7 @@ fi
 {
     /usr/bin/time -o $LOGS_DIR/dataset1_tunning_time.txt -f "%E" python3 sbcr_tunning.py dataset1 2>&1 | tee $LOGS_DIR/dataset1_tunning_process.txt
     /usr/bin/time -o $LOGS_DIR/dataset2_Java_tunning_time.txt -f "%E" python3 sbcr_tunning.py dataset2_Java 2>&1 | tee $LOGS_DIR/dataset2_Java_tunning_process.txt
-    /usr/bin/time -o $LOGS_DIR/dataset2_CSharp_tunning_time.txt -f "%E" python3 sbcr_tunning.py dataset2_CSharp 2>&1 | tee $LOGS_DIR/dataset2_CSharp.txt
+    /usr/bin/time -o $LOGS_DIR/dataset2_CSharp_tunning_time.txt -f "%E" python3 sbcr_tunning.py dataset2_CSharp 2>&1 | tee $LOGS_DIR/dataset2_CSharp_tunning_process.txt
     /usr/bin/time -o $LOGS_DIR/dataset2_JavaScript_tunning_time.txt -f "%E" python3 sbcr_tunning.py dataset2_JavaScript 2>&1 | tee $LOGS_DIR/dataset2_JavaScript_tunning_process.txt
     /usr/bin/time -o $LOGS_DIR/dataset2_TypeScript_tunning_time.txt -f "%E" python3 sbcr_tunning.py dataset2_TypeScript 2>&1 | tee $LOGS_DIR/dataset2_TypeScript_tunning_process.txt
 } | tee -a $LOGS_DIR/all_sbcr_tunning.txt
