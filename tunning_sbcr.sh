@@ -5,7 +5,7 @@ cd sbcr
 
 # Check if LOGS_DIR exists, if not, create it
 if [ ! -d $LOGS_DIR ]; then
-    echo "Creating LOGS directory."
+    echo "Creating LOGS directory"
     mkdir $LOGS_DIR
 fi
 
