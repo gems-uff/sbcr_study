@@ -40,7 +40,9 @@ def extract_data(file_path):
     return output, reference, time
 
 def analyze_folder(folder_path, max_resolve_length):
-    max_resolve_length = int(max_resolve_length)
+    if max_resolve_length is not None:
+        max_resolve_length = int(max_resolve_length)
+    
     files = os.listdir(folder_path)
     outputs = []
     references = []
@@ -49,8 +51,12 @@ def analyze_folder(folder_path, max_resolve_length):
     for file in files:
         output, reference, time = extract_data(folder_path + '/' + file)
         if output is not None:
-            outputs.append(output[:max_resolve_length])
-            references.append(reference[:max_resolve_length])
+            if max_resolve_length is not None:
+                outputs.append(output[:max_resolve_length])
+                references.append(reference[:max_resolve_length])
+            else:
+                outputs.append(output)
+                references.append(reference)
             times.append(time)
             chunk_indexes.append(file)
     return outputs, references, times, chunk_indexes
@@ -94,5 +100,8 @@ def main(model, dataset, max_resolve_length):
     # print('Succeed similarities:', succeed_similarities)
 dataset_name = sys.argv[1]
 model_name = sys.argv[2]
-max_resolve_length = sys.argv[3]
+if len(sys.argv) > 3:
+    max_resolve_length = sys.argv[3]
+else:
+    max_resolve_length = None
 main(model_name, dataset_name, max_resolve_length)

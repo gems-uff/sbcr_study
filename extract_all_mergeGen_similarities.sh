@@ -2,7 +2,7 @@
 
 LOGS_DIR="LOGS"
 cd mergeGen
-MAX_RESOLVE_LENGTH=100
+# MAX_RESOLVE_LENGTH=100
 
 # Check if LOGS_DIR exists, if not, create it
 if [ ! -d $LOGS_DIR ]; then
