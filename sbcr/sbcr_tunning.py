@@ -544,10 +544,10 @@ def tunning():
                     v2 = row['v2']
                     if 'before_context' in df_chunks.columns:
                         solution = get_clean_solution(row['solution'], row['before_context'], row['after_context'])
+                        solution = '\n'.join(solution)
                     else:
                         solution = row['solution']
                     if solution != None:
-                        solution = '\n'.join(solution)
                         try:
                             DEBUG_REPOSITORY_PATH = f"{ORIGINAL_DEBUG_REPOSITORY_PATH}/{chunk_id}"
                             if not os.path.exists(f"{DEBUG_REPOSITORY_PATH}"):
@@ -575,7 +575,7 @@ def tunning():
                                             pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
                                             count=0
                                         count+=1
-                                analyzed_chunk_count+=1
+                            analyzed_chunk_count+=1
                         except Exception as e:
                             error = e
                             print(e)
