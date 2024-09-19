@@ -57,7 +57,7 @@ def get_candidate_text(indexes, v1, v2):
     candidate = []
     for index in indexes:
         candidate.append(eval(f"{index[0]}.splitlines()[{index[1]}]"))
-    return '\n'.join(candidate)
+    return '\n'.join(candidate) + "\n"
 
 """
     Given a list, returns `n` sorted random indexes from it
