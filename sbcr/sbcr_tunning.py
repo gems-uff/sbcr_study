@@ -77,14 +77,14 @@ def get_sorted_random_indexes(original_list, n):
     Uses the candidate data structure: [('v1', 0), ('v1', 1), ('v1', 2), ('v2', 1)]
 """
 def partial_order_random_candidate(v1, v2):
-    v1 = v1.splitlines()
-    v2 = v2.splitlines()
-    number_lines_v1 = random.randrange(len(v1)+1)
-    number_lines_v2 = random.randrange(len(v2)+1)
+    v1_lines = v1.splitlines()
+    v2_lines = v2.splitlines()
+    number_lines_v1 = random.randrange(len(v1_lines)+1)
+    number_lines_v2 = random.randrange(len(v2_lines)+1)
     candidate_size = number_lines_v1 + number_lines_v2
     
-    indexes_v1 = get_sorted_random_indexes(v1, number_lines_v1)
-    indexes_v2 = get_sorted_random_indexes(v2, number_lines_v2)
+    indexes_v1 = get_sorted_random_indexes(v1_lines, number_lines_v1)
+    indexes_v2 = get_sorted_random_indexes(v2_lines, number_lines_v2)
     
     candidate = []
     while(len(candidate) < candidate_size):
@@ -99,7 +99,11 @@ def partial_order_random_candidate(v1, v2):
             candidate.append(('v1', indexes_v1.pop(0)))
         else:
             candidate.append(('v2', indexes_v2.pop(0)))
-    
+            
+    candidate_text = get_candidate_text(candidate, v1, v2)
+    # we dont allow resolutions equal to v1 or v2 (only combination)
+    if candidate_text == v1 or candidate_text == v2:
+        return partial_order_random_candidate(v1, v2)
     return candidate
 
 '''
@@ -290,7 +294,8 @@ def get_next_neighbor(candidate, v1, v2, neighbors):
     start_time = time.time()
     count_tries = 0
     has_partial_order = candidate_has_partial_order(v1, v2, random_neighbor)
-    while not has_partial_order or hash(random_neighbor_text) in neighbors:
+    # we dont allow resolutions equal to v1 or v2 (only combination)
+    while not has_partial_order or hash(random_neighbor_text) in neighbors or random_neighbor_text == v1 or random_neighbor_text == v2:
         if time.time() - start_time > NEIGHBOR_FINDING_TIMEOUT_SECONDS or count_tries >= MAX_NEIGHBOR_TRYING:
             return None
         random_neighbor = get_random_neighbor(candidate, v1, v2)
@@ -547,7 +552,7 @@ def tunning():
                         solution = '\n'.join(solution)
                     else:
                         solution = row['solution']
-                    if solution != None:
+                    if solution != None and len(solution) > 0:
                         try:
                             DEBUG_REPOSITORY_PATH = f"{ORIGINAL_DEBUG_REPOSITORY_PATH}/{chunk_id}"
                             if not os.path.exists(f"{DEBUG_REPOSITORY_PATH}"):
