@@ -45,6 +45,8 @@ python3 filter_FSE_dataset.py
 
 python3 separate_dataset.py
 
+python3 extract_combination_on_separated_datasets.py
+
 cd mergeGen
 python3 run_total_dataset.py dataset1 dataset_parallel.py
 python3 run_total_dataset.py dataset2 dataset_parallel.py
