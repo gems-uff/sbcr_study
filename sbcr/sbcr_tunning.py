@@ -13,9 +13,9 @@ LOCAL_SEARCH_TIMEOUT_SECONDS = 5
 ILS_TIMEOUT_SECONDS = 100
 ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT = 5
 LOCAL_SEARCH_MAXIMUM_NEIGHBORS = 5
-TUNNING_TIMEOUTS = [10,20,30]
-MAX_ITERATIONS_WITHOUT_IMPROVEMENT_VALUES = [5,10,15]
-LOCAL_SEARCH_MAXIMUM_NEIGHBORS_VALUES = [3,5,7]
+TUNNING_TIMEOUTS = [10,20,30,40]
+MAX_ITERATIONS_WITHOUT_IMPROVEMENT_VALUES = [5,10,15,20]
+LOCAL_SEARCH_MAXIMUM_NEIGHBORS_VALUES = [1,3,5,7,9]
 DEBUG_FOLDER = "DEBUG"
 RESULTS_FOLDER = "RESULTS"
 OUTPUT_FOLDER = "OUTPUT"
@@ -260,6 +260,8 @@ def evaluate(candidate, v1, v2):
 
 def compare(content1, content2):
     try:
+        content1 = '\n'.join(remove_empty_lines(content1.splitlines()))
+        content2 = '\n'.join(remove_empty_lines(content2.splitlines()))
         write_file(content1, 'tmp/content1')
         write_file(content2, 'tmp/content2')
         content_similarity = get_gestalt('tmp/content1', 'tmp/content2')
@@ -533,12 +535,17 @@ def tunning():
     count = 1
     chunk_count = 1
     analyzed_chunk_count = 0
+    if os.path.exists("collected_configurations.csv"):
+        df_collected_configurations = pd.read_csv("collected_configurations.csv")
+        df_collected_configurations = list(df_collected_configurations[df_collected_configurations['dataset'] == DATASET]['configuration'])
+    else:
+        df_collected_configurations = []
     columns = ['chunk_id', 'fitness', 'solution_sim_lcs', 'status', 'neighbor_timeout', 'local_search_timeout', 'ils_timeout', 'maximum_neighbors', 'max_iterations_without_improvement', 'time_seconds']
     analyzed_chunk_ids = []
-    if os.path.exists(RESULT_FILE):
-        df = pd.read_excel(RESULT_FILE, engine='openpyxl')
-        data = df.values.tolist()
-        analyzed_chunk_ids = df['chunk_id'].unique()
+#     if os.path.exists(RESULT_FILE):
+#         df = pd.read_excel(RESULT_FILE, engine='openpyxl')
+#         data = df.values.tolist()
+#         analyzed_chunk_ids = df['chunk_id'].unique()
     for index, row in df_chunks.iterrows():
         if analyzed_chunk_count < NUMBER_OF_CHUNKS:
             chunk_id = row['chunk_id']
@@ -562,24 +569,26 @@ def tunning():
                                 for maximum_neighbors in LOCAL_SEARCH_MAXIMUM_NEIGHBORS_VALUES:
                                     LOCAL_SEARCH_MAXIMUM_NEIGHBORS = maximum_neighbors
                                     for timeout in TUNNING_TIMEOUTS:
-                                        ILS_TIMEOUT_SECONDS = timeout
-    #                                     print(f"Analyzing chunk ({chunk_id}) with {ILS_TIMEOUT_SECONDS}s timeout, {LOCAL_SEARCH_MAXIMUM_NEIGHBORS} maximum neighbors, {ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT} max iterations without improvement", flush=True)
-                                        start_time = time.time()
-                                        candidate, fitness = ils_resolution(v1, v2)
-                                        candidate = get_candidate_text(candidate, v1, v2)
-                                        end_time = time.time()
-                                        elapsed_time = end_time - start_time
-                                        if SAVE_CANDIDATE:
-                                            if not os.path.exists(f"{OUTPUT_FOLDER}"):
-                                                os.mkdir(OUTPUT_FOLDER)
-                                            write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
-                                        lcs_solution_similarity = compare(solution, candidate)
-                                        # print(f"Config: ({LOCAL_SEARCH_MAXIMUM_NEIGHBORS},{ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT},{ILS_TIMEOUT_SECONDS}). Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
-                                        data.append([row['chunk_id'], fitness, lcs_solution_similarity, 'ok', NEIGHBOR_FINDING_TIMEOUT_SECONDS, LOCAL_SEARCH_TIMEOUT_SECONDS, ILS_TIMEOUT_SECONDS, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT, elapsed_time])
-                                        if count % 5 == 0:
-                                            pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
-                                            count=0
-                                        count+=1
+                                        configuration = f"({maximum_neighbors}, {max_iterations_without_improvement}, {timeout})"
+                                        if not configuration in df_collected_configurations:
+                                            ILS_TIMEOUT_SECONDS = timeout
+                                            print(f"Analyzing chunk ({chunk_id}) with configuration {configuration}", flush=True)
+                                            start_time = time.time()
+                                            candidate, fitness = ils_resolution(v1, v2)
+                                            candidate = get_candidate_text(candidate, v1, v2)
+                                            end_time = time.time()
+                                            elapsed_time = end_time - start_time
+                                            if SAVE_CANDIDATE:
+                                                if not os.path.exists(f"{OUTPUT_FOLDER}"):
+                                                    os.mkdir(OUTPUT_FOLDER)
+                                                write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
+                                            lcs_solution_similarity = compare(solution, candidate)
+                                            # print(f"Config: ({LOCAL_SEARCH_MAXIMUM_NEIGHBORS},{ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT},{ILS_TIMEOUT_SECONDS}). Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
+                                            data.append([row['chunk_id'], fitness, lcs_solution_similarity, 'ok', NEIGHBOR_FINDING_TIMEOUT_SECONDS, LOCAL_SEARCH_TIMEOUT_SECONDS, ILS_TIMEOUT_SECONDS, LOCAL_SEARCH_MAXIMUM_NEIGHBORS, ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT, elapsed_time])
+                                            if count % 5 == 0:
+                                                pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
+                                                count=0
+                                            count+=1
                             analyzed_chunk_count+=1
                         except Exception as e:
                             error = e
