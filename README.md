@@ -14,6 +14,10 @@ $ python -m pip install -r requirements.txt
     - Dataset1: SBES 2022 Dataset (https://doi.org/10.6084/m9.figshare.26831818) Paper: https://doi.org/10.1145/3555228.3555229
     - Dataset2: FSE 2022 Dataset (https://zenodo.org/records/6366908) Paper: https://doi.org/10.1145/3540250.354916
 
+
+8. Run the following script to extract datasets stats: `./collect_dataset_stats.sh`
+
+
 3. Run the following script to train the MergeGen approach using each dataset: `./train_all_models.sh`
     * This action might take a long time, depending on your setup
 
@@ -25,3 +29,7 @@ $ python -m pip install -r requirements.txt
 
 
 6. Run the following script to execute the sbcr approach tunning: `./tunning_sbcr.sh`
+
+
+7. Run the following script to execute the sbcr approach evaluation: `./evaluate_sbcr.sh`
+

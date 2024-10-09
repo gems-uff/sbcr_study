@@ -48,8 +48,11 @@ def analyze_folder(folder_path, max_resolve_length):
     references = []
     times = []
     chunk_indexes = []
+    complete_references = []       
+        
     for file in files:
         output, reference, time = extract_data(folder_path + '/' + file)
+        complete_reference = get_original_resolution(file)
         if output is not None:
             if max_resolve_length is not None:
                 outputs.append(output[:max_resolve_length])
@@ -59,7 +62,8 @@ def analyze_folder(folder_path, max_resolve_length):
                 references.append(reference)
             times.append(time)
             chunk_indexes.append(file)
-    return outputs, references, times, chunk_indexes
+            complete_references.append(complete_reference)
+    return outputs, references, times, chunk_indexes, complete_references
 
 def get_lcs(text1,text2):
     res = pylcs.lcs_sequence_idx(text1, text2)
@@ -75,27 +79,38 @@ def get_gestalt(file1_text,file2_text):
         print(e)
         return 0
 
+def get_original_resolution(chunk_index):
+    return df_complete.iloc[int(chunk_index)]['all_raw_res']
+                     
 def calculate_similarity(output, reference):
     return get_gestalt(output, reference)
+
+def calculate_similarity_without_linebreaks(output, complete_reference):
+    return get_gestalt(output.replace(' ','').replace('\n',''), complete_reference.replace(' ','').replace('\n',''))
 
 def main(model, dataset, max_resolve_length):
     path = 'OUTPUT/' + dataset + '/model_' + model + '/test_OUTPUT'
     fail_path = path + '/FAIL'
     succeed_path = path + '/SUCCEED'
-    fail_outputs, fail_references, fail_times, fail_chunk_indexes = analyze_folder(fail_path, max_resolve_length)
-    succeed_outputs, succeed_references, succeed_times, succeed_chunk_indexes = analyze_folder(succeed_path, max_resolve_length)
+    fail_outputs, fail_references, fail_times, fail_chunk_indexes, fail_complete_references = analyze_folder(fail_path, max_resolve_length)
+    succeed_outputs, succeed_references, succeed_times, succeed_chunk_indexes, succeed_complete_references = analyze_folder(succeed_path, max_resolve_length)
     fail_similarities = []
     succeed_similarities = []
+    fail_complete_similarities = []
+    succeed_complete_similarities = []
+        
     for i in range(len(fail_outputs)):
         fail_similarities.append(calculate_similarity(fail_outputs[i], fail_references[i]))
+        fail_complete_similarities.append(calculate_similarity_without_linebreaks(fail_outputs[i], fail_complete_references[i]))
     for i in range(len(succeed_outputs)):
         succeed_similarities.append(calculate_similarity(succeed_outputs[i], succeed_references[i]))
+        succeed_complete_similarities.append(calculate_similarity_without_linebreaks(succeed_outputs[i], succeed_complete_references[i]))
     data = []
     for i in range(len(fail_outputs)):
-        data.append((fail_chunk_indexes[i], fail_similarities[i], fail_times[i], 'FAIL'))
+        data.append((fail_chunk_indexes[i], fail_similarities[i], fail_complete_similarities[i], fail_times[i], 'FAIL'))
     for i in range(len(succeed_outputs)):
-        data.append((succeed_chunk_indexes[i], succeed_similarities[i], succeed_times[i], 'SUCCEED'))
-    pd.DataFrame(data, columns=['chunk_index', 'similarity', 'time', 'result']).to_csv(f'RESULTS/mergeGen_{dataset}_model_{model}_similarities.csv', index=False)
+        data.append((succeed_chunk_indexes[i], succeed_similarities[i], succeed_complete_similarities[i], succeed_times[i], 'SUCCEED'))
+    pd.DataFrame(data, columns=['chunk_index', 'similarity', 'complete_similarity', 'time', 'result']).to_csv(f'RESULTS/mergeGen_{dataset}_model_{model}_similarities.csv', index=False)
     # print('Fail similarities:', fail_similarities)
     # print('Succeed similarities:', succeed_similarities)
 dataset_name = sys.argv[1]
@@ -104,4 +119,8 @@ if len(sys.argv) > 3:
     max_resolve_length = sys.argv[3]
 else:
     max_resolve_length = None
+# dataset_name = 'dataset1'
+# model_name = 'dataset1'
+# max_resolve_length = None
+df_complete = pd.read_json(f'/nvme/helenocampos/sbcr_study/data/{dataset_name}_complete.json')
 main(model_name, dataset_name, max_resolve_length)
