@@ -28,7 +28,7 @@ fi
 # Download the SBES2022 data if it doesn't already exist
 if [ ! -f $SBES2022_FILE ]; then
     echo "Downloading SBES2022 data..."
-    curl -L "https://api.figshare.com/v2/file/download/48792520" -o $SBES2022_FILE
+    curl -L "https://api.figshare.com/v2/file/download/49875561" -o $SBES2022_FILE
 else
     echo "SBES2022 data already exists. Skipping download."
 fi
