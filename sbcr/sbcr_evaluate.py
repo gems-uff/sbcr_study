@@ -13,20 +13,17 @@ LOCAL_SEARCH_TIMEOUT_SECONDS = 5
 ILS_TIMEOUT_SECONDS = 100
 ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT = 5
 LOCAL_SEARCH_MAXIMUM_NEIGHBORS = 5
-DEBUG_FOLDER = "DEBUG"
-RESULTS_FOLDER = "RESULTS"
-OUTPUT_FOLDER = "OUTPUT"
 DEBUG_ACTIVE = False
 SAVE_ITERATION_INFO = True
 RANDOM_SEED = 3022024
 DATASET = "dataset1"
-
-CANDIDATES_FOLDER = f"{OUTPUT_FOLDER}/candidates_tunning"
 SAVE_CANDIDATE = True
+EXECUTION_NAME = DATASET
 
 
 if len(sys.argv) > 1:
     DATASET = sys.argv[1]
+    EXECUTION_NAME = DATASET
     if len(sys.argv) > 2:
             # configuration example: "5,5,10"
             # The first value in the tuple is the maximum number of neighbors to be generated in the local search
@@ -37,24 +34,30 @@ if len(sys.argv) > 1:
         ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT = int(CONFIGURATION.split(',')[1].strip())
         ILS_TIMEOUT_SECONDS = int(CONFIGURATION.split(',')[2].replace('"','').strip())
         print(f"Configuration: {LOCAL_SEARCH_MAXIMUM_NEIGHBORS}, {ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT}, {ILS_TIMEOUT_SECONDS}")
-        
+        if len(sys.argv) > 3:
+            EXECUTION_NAME = sys.argv[3]
 
+OUTPUT_FOLDER = f"{EXECUTION_NAME}/OUTPUT"       
+DEBUG_FOLDER = f"{EXECUTION_NAME}/DEBUG"
+RESULTS_FOLDER = f"{EXECUTION_NAME}/RESULTS"
+CANDIDATES_FOLDER = f"{OUTPUT_FOLDER}/candidates_tunning"
 DEBUG_REPOSITORY_PATH = f"{DEBUG_FOLDER}/debug_timeout_{DATASET}"
 ORIGINAL_DEBUG_REPOSITORY_PATH = DEBUG_REPOSITORY_PATH
+TMP_FOLDER = f"{EXECUTION_NAME}/tmp"
         
 if not os.path.exists(RESULTS_FOLDER):
-    os.mkdir(RESULTS_FOLDER)
-RESULT_FILE = f'{RESULTS_FOLDER}/results_evaluate_{DATASET}_seed-{RANDOM_SEED}.xlsx'
+    os.makedirs(RESULTS_FOLDER)
+RESULT_FILE = f'{RESULTS_FOLDER}/results_evaluate_{DATASET}_{EXECUTION_NAME}_seed-{RANDOM_SEED}.xlsx'
 
 random.seed(RANDOM_SEED)
 
 if not os.path.exists(OUTPUT_FOLDER):
-    os.mkdir(OUTPUT_FOLDER)
+    os.makedirs(OUTPUT_FOLDER)
 if DEBUG_ACTIVE:
     if not os.path.exists(DEBUG_FOLDER):
-        os.mkdir(DEBUG_FOLDER)
-if not os.path.exists("tmp"):
-    os.mkdir("tmp")
+        os.makedirs(DEBUG_FOLDER)
+if not os.path.exists(TMP_FOLDER):
+    os.makedirs(TMP_FOLDER)
 
 """
     Given a candidate representation, returns a string with the candidate text
@@ -253,12 +256,12 @@ def get_current_timestamp():
 
 def evaluate(candidate, v1, v2):
     try:
-        write_file(candidate, 'tmp/candidate')
-        write_file(v1, 'tmp/v1')
-        write_file(v2, 'tmp/v2')
+        write_file(candidate, f'{TMP_FOLDER}/candidate')
+        write_file(v1, f'{TMP_FOLDER}/v1')
+        write_file(v2, f'{TMP_FOLDER}/v2')
 
-        v1_similarity = get_gestalt('tmp/candidate', 'tmp/v1')
-        v2_similarity = get_gestalt('tmp/candidate', 'tmp/v2')
+        v1_similarity = get_gestalt(f'{TMP_FOLDER}/candidate', f'{TMP_FOLDER}/v1')
+        v2_similarity = get_gestalt(f'{TMP_FOLDER}/candidate', f'{TMP_FOLDER}/v2')
         return (v1_similarity + v2_similarity) / 2
     except Exception as e:
         print(e)
@@ -268,9 +271,9 @@ def compare(content1, content2):
     try:
         content1 = '\n'.join(remove_empty_lines(content1.splitlines()))
         content2 = '\n'.join(remove_empty_lines(content2.splitlines()))
-        write_file(content1, 'tmp/content1')
-        write_file(content2, 'tmp/content2')
-        content_similarity = get_gestalt('tmp/content1', 'tmp/content2')
+        write_file(content1, f'{TMP_FOLDER}/content1')
+        write_file(content2, f'{TMP_FOLDER}/content2')
+        content_similarity = get_gestalt(f'{TMP_FOLDER}/content1', f'{TMP_FOLDER}/content2')
         
         return content_similarity
     except Exception as e:
@@ -570,7 +573,7 @@ def execute_experiment():
                         elapsed_time = end_time - start_time
                         if SAVE_CANDIDATE:
                             if not os.path.exists(f"{OUTPUT_FOLDER}"):
-                                os.mkdir(OUTPUT_FOLDER)
+                                os.makedirs(OUTPUT_FOLDER)
                             write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
                         lcs_solution_similarity = compare(solution, candidate)
                         # print(f"Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
@@ -590,7 +593,7 @@ def execute_experiment():
                 print(len(row['v2']))
                 data.append([row['chunk_id'], "", "", "OUT_OF_LIMITS", ""])
         else:
-            print(f"Chunk ({chunk_id}) {chunk_count} of {NUMBER_OF_CHUNKS} was already analyzed before.", flush=True)
+            print(f"Chunk ({chunk_id}) {chunk_count} of {len(df_chunks)} was already analyzed before.", flush=True)
         chunk_count+=1
     pd.DataFrame(data, columns=columns).to_excel(RESULT_FILE, index=False)
 execute_experiment()

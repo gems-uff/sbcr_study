@@ -2,6 +2,10 @@
 
 python3 collect_dataset_stats.py dataset1_complete
 python3 collect_dataset_stats.py dataset2_complete
+python3 collect_dataset_stats.py dataset2_Java_complete
+python3 collect_dataset_stats.py dataset2_CSharp_complete
+python3 collect_dataset_stats.py dataset2_JavaScript_complete
+python3 collect_dataset_stats.py dataset2_TypeScript_complete
 
 
 echo "All stats collected."

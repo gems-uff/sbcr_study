@@ -16,6 +16,8 @@ fi
     python3 extract_mergeGen_similarities.py dataset1 dataset1 $MAX_RESOLVE_LENGTH 2>&1 | tee $LOGS_DIR/dataset1_model_dataset1_similarities.txt
     echo "Extracting for dataset1 model dataset2..."
     python3 extract_mergeGen_similarities.py dataset1 dataset2 $MAX_RESOLVE_LENGTH 2>&1 | tee $LOGS_DIR/dataset1_model_dataset2_similarities.txt
+    echo "Extracting for dataset1 model dataset_Java..."
+    python3 extract_mergeGen_similarities.py dataset1 dataset2_Java $MAX_RESOLVE_LENGTH 2>&1 | tee $LOGS_DIR/dataset1_model_dataset2_similarities.txt
     
     echo "Extracting for dataset2_Java model dataset1..."
     python3 extract_mergeGen_similarities.py dataset2_Java dataset1 $MAX_RESOLVE_LENGTH 2>&1 | tee $LOGS_DIR/dataset2_Java_model_dataset1_similarities.txt
