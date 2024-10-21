@@ -16,39 +16,42 @@ LOCAL_SEARCH_MAXIMUM_NEIGHBORS = 5
 TUNNING_TIMEOUTS = [10,20,30,40]
 MAX_ITERATIONS_WITHOUT_IMPROVEMENT_VALUES = [5,10,15,20]
 LOCAL_SEARCH_MAXIMUM_NEIGHBORS_VALUES = [1,3,5,7,9]
-DEBUG_FOLDER = "DEBUG"
-RESULTS_FOLDER = "RESULTS"
-OUTPUT_FOLDER = "OUTPUT"
 DEBUG_ACTIVE = False
 SAVE_ITERATION_INFO = True
 RANDOM_SEED = 3022024
-DATASET = "dataset1"
-
-CANDIDATES_FOLDER = f"{OUTPUT_FOLDER}/candidates_tunning"
+DATASET = "dataset1_tunning"
+NUMBER_OF_CHUNKS = 100
 SAVE_CANDIDATE = False
-NUMBER_OF_CHUNKS = 200
+EXECUTION_NAME = DATASET
+
 
 if len(sys.argv) > 1:
     DATASET = sys.argv[1]
+    EXECUTION_NAME = DATASET
     if len(sys.argv) > 2:
-        NUMBER_OF_CHUNKS = int(sys.argv[2])
+        EXECUTION_NAME = sys.argv[2]
 
+OUTPUT_FOLDER = f"{EXECUTION_NAME}/OUTPUT"       
+DEBUG_FOLDER = f"{EXECUTION_NAME}/DEBUG"
+RESULTS_FOLDER = f"{EXECUTION_NAME}/RESULTS"
+CANDIDATES_FOLDER = f"{OUTPUT_FOLDER}/candidates_tunning"
 DEBUG_REPOSITORY_PATH = f"{DEBUG_FOLDER}/debug_timeout_{DATASET}"
 ORIGINAL_DEBUG_REPOSITORY_PATH = DEBUG_REPOSITORY_PATH
+TMP_FOLDER = f"{EXECUTION_NAME}/tmp"
         
 if not os.path.exists(RESULTS_FOLDER):
-    os.mkdir(RESULTS_FOLDER)
-RESULT_FILE = f'{RESULTS_FOLDER}/results_tunning_{DATASET}_seed-{RANDOM_SEED}.xlsx'
+    os.makedirs(RESULTS_FOLDER)
+RESULT_FILE = f'{RESULTS_FOLDER}/results_tunning_{DATASET}_{EXECUTION_NAME}_seed-{RANDOM_SEED}.xlsx'
 
 random.seed(RANDOM_SEED)
 
 if not os.path.exists(OUTPUT_FOLDER):
-    os.mkdir(OUTPUT_FOLDER)
+    os.makedirs(OUTPUT_FOLDER)
 if DEBUG_ACTIVE:
     if not os.path.exists(DEBUG_FOLDER):
-        os.mkdir(DEBUG_FOLDER)
-if not os.path.exists("tmp"):
-    os.mkdir("tmp")
+        os.makedirs(DEBUG_FOLDER)
+if not os.path.exists(TMP_FOLDER):
+    os.makedirs(TMP_FOLDER)
 
 """
     Given a candidate representation, returns a string with the candidate text
@@ -247,12 +250,12 @@ def get_current_timestamp():
 
 def evaluate(candidate, v1, v2):
     try:
-        write_file(candidate, 'tmp/candidate')
-        write_file(v1, 'tmp/v1')
-        write_file(v2, 'tmp/v2')
+        write_file(candidate, f'{TMP_FOLDER}/candidate')
+        write_file(v1, f'{TMP_FOLDER}/v1')
+        write_file(v2, f'{TMP_FOLDER}/v2')
 
-        v1_similarity = get_gestalt('tmp/candidate', 'tmp/v1')
-        v2_similarity = get_gestalt('tmp/candidate', 'tmp/v2')
+        v1_similarity = get_gestalt(f'{TMP_FOLDER}/candidate', f'{TMP_FOLDER}/v1')
+        v2_similarity = get_gestalt(f'{TMP_FOLDER}/candidate', f'{TMP_FOLDER}/v2')
         return (v1_similarity + v2_similarity) / 2
     except Exception as e:
         print(e)
@@ -262,9 +265,9 @@ def compare(content1, content2):
     try:
         content1 = '\n'.join(remove_empty_lines(content1.splitlines()))
         content2 = '\n'.join(remove_empty_lines(content2.splitlines()))
-        write_file(content1, 'tmp/content1')
-        write_file(content2, 'tmp/content2')
-        content_similarity = get_gestalt('tmp/content1', 'tmp/content2')
+        write_file(content1, f'{TMP_FOLDER}/content1')
+        write_file(content2, f'{TMP_FOLDER}/content2')
+        content_similarity = get_gestalt(f'{TMP_FOLDER}/content1', f'{TMP_FOLDER}/content2')
         
         return content_similarity
     except Exception as e:
@@ -580,7 +583,7 @@ def tunning():
                                             elapsed_time = end_time - start_time
                                             if SAVE_CANDIDATE:
                                                 if not os.path.exists(f"{OUTPUT_FOLDER}"):
-                                                    os.mkdir(OUTPUT_FOLDER)
+                                                    os.makedirs(OUTPUT_FOLDER)
                                                 write_file(candidate, f"{OUTPUT_FOLDER}/{chunk_id}")
                                             lcs_solution_similarity = compare(solution, candidate)
                                             # print(f"Config: ({LOCAL_SEARCH_MAXIMUM_NEIGHBORS},{ILS_STOP_CRITERIA_ITERATIONS_WITHOUT_IMPROVEMENT},{ILS_TIMEOUT_SECONDS}). Elapsed time: {elapsed_time}, Fitness: {fitness}, LCS Similarity: {lcs_solution_similarity}", flush=True)
