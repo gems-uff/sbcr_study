@@ -12,19 +12,19 @@ fi
 # Time each command and log the time taken
 {
     echo "Evaluating for dataset1..."
-    /usr/bin/time -o $LOGS_DIR/dataset1_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset1 "3,15,40" rq2 2>&1 | tee $LOGS_DIR/dataset1_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset1_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset1 "5,15,10" rq2 2>&1 | tee $LOGS_DIR/dataset1_evaluation_process.txt
     echo "Evaluating for Java..."
-    /usr/bin/time -o $LOGS_DIR/dataset2_Java_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_Java_combination "3,20,10" rq2 2>&1 | tee $LOGS_DIR/dataset2_Java_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset2_Java_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_Java_combination "5,10,20" rq2 2>&1 | tee $LOGS_DIR/dataset2_Java_evaluation_process.txt
     echo "Evaluating for CSharp..."
-    /usr/bin/time -o $LOGS_DIR/dataset2_CSharp_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_CSharp_combination "9,5,10" rq2 2>&1 | tee $LOGS_DIR/dataset2_CSharp_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset2_CSharp_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_CSharp_combination "3,10,40" rq2 2>&1 | tee $LOGS_DIR/dataset2_CSharp_evaluation_process.txt
     echo "Evaluating for JavaScript..."
-    /usr/bin/time -o $LOGS_DIR/dataset2_JavaScript_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_JavaScript_combination rq2 "7,10,40" 2>&1 | tee $LOGS_DIR/dataset2_JavaScript_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset2_JavaScript_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_JavaScript_combination rq2 "9,15,20" 2>&1 | tee $LOGS_DIR/dataset2_JavaScript_evaluation_process.txt
     echo "Evaluating for TypeScript..."
-    /usr/bin/time -o $LOGS_DIR/dataset2_TypeScript_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_TypeScript_combination rq2 "3,10,10" 2>&1 | tee $LOGS_DIR/dataset2_TypeScript_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset2_TypeScript_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_TypeScript_combination rq2 "9,15,10" 2>&1 | tee $LOGS_DIR/dataset2_TypeScript_evaluation_process.txt
     echo "Evaluating for dataset1 rq3..."
-    /usr/bin/time -o $LOGS_DIR/dataset1_rq3_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset1 "3,20,10" rq3 2>&1 | tee $LOGS_DIR/dataset1_rq3_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset1_rq3_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset1 "5,10,20" rq3 2>&1 | tee $LOGS_DIR/dataset1_rq3_evaluation_process.txt
     echo "Evaluating for Dataset2 Java rq3..."
-    /usr/bin/time -o $LOGS_DIR/dataset2_Java_rq3_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_Java_combination "3,15,40" rq3 2>&1 | tee $LOGS_DIR/dataset2_Java_rq3_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset2_Java_rq3_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_Java_combination "5,15,10" rq3 2>&1 | tee $LOGS_DIR/dataset2_Java_rq3_evaluation_process.txt
 } | tee -a $LOGS_DIR/all_sbcr_evaluation_3.txt
 
 
