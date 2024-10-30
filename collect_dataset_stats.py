@@ -46,10 +46,14 @@ if len(sys.argv) > 1:
         v2_size = get_line_size(v2)
         v1_size_char = len(v1)
         v2_size_char = len(v2)
-        
-        resolution_v1_sim = get_gestalt(solution, v1)
-        resolution_v2_sim = get_gestalt(solution, v2)
-        resolution_parents_sim = (resolution_v1_sim + resolution_v2_sim) / 2
+        if v1_size_char < 20000 and v2_size_char < 20000:
+            resolution_v1_sim = get_gestalt(solution, v1)
+            resolution_v2_sim = get_gestalt(solution, v2)
+            resolution_parents_sim = (resolution_v1_sim + resolution_v2_sim) / 2
+        else:
+            resolution_v1_sim = -1
+            resolution_v2_sim = -1
+            resolution_parents_sim = -1
         
         data.append([row['chunk_id'], chunk_size, solution_size, chunk_size_char, solution_size_char, v1_size_char, v2_size_char, v1_size, v2_size, resolution_v1_sim, resolution_v2_sim, resolution_parents_sim])
         
