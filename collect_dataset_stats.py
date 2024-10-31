@@ -21,7 +21,7 @@ def get_gestalt(file1_text,file2_text):
 
 if len(sys.argv) > 1:
     dataset_name = sys.argv[1]
-
+    print("Dataset: ", dataset_name)
     df_chunks = pd.read_json(f'data/{dataset_name}.json')
     data = []
     count = 1
@@ -46,7 +46,7 @@ if len(sys.argv) > 1:
         v2_size = get_line_size(v2)
         v1_size_char = len(v1)
         v2_size_char = len(v2)
-        if v1_size_char < 20000 and v2_size_char < 20000:
+        if v1_size_char < 20000 and v2_size_char < 20000 and solution_size_char < 200000 :
             resolution_v1_sim = get_gestalt(solution, v1)
             resolution_v2_sim = get_gestalt(solution, v2)
             resolution_parents_sim = (resolution_v1_sim + resolution_v2_sim) / 2
@@ -59,5 +59,6 @@ if len(sys.argv) > 1:
         
         count+=1
     columns = ['chunk_id', 'chunk_size', 'solution_size', 'chunk_size_char', 'solution_size_char', 'v1_size_char', 'v2_size_char', 'v1_size', 'v2_size', 'resolution_v1_sim', 'resolution_v2_sim', 'resolution_parents_sim']
+    print(f"Saving stats file for dataset {dataset_name}. Total of analyzed rows: {len(data)}")
     pd.DataFrame(data, columns=columns).to_csv(f'data/{dataset_name}_stats.csv', index=False)
     

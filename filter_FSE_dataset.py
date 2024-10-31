@@ -130,15 +130,24 @@ def save_dataset_to_json(dataset, file_name):
 if __name__ == "__main__":
     folder_path = "data/fse2022/automated-analysis-data/Java"
     df1 = list_json_files(folder_path)
+    df1['chunk_id'] = df1['mergeId'].astype(str) + '-' + df1['chunk_index_merge'].astype(str)
     folder_path = "data/fse2022/automated-analysis-data/CSharp"
     df2 = list_json_files(folder_path)
+    df2['chunk_id'] = df2['mergeId'].astype(str) + '-' + df2['chunk_index_merge'].astype(str)
     folder_path = "data/fse2022/automated-analysis-data/JavaScript"
     df3 = list_json_files(folder_path)
+    df3['chunk_id'] = df3['mergeId'].astype(str) + '-' + df3['chunk_index_merge'].astype(str)
     folder_path = "data/fse2022/automated-analysis-data/TypeScript"
     df4 = list_json_files(folder_path)
+    df4['chunk_id'] = df4['mergeId'].astype(str) + '-' + df4['chunk_index_merge'].astype(str)
     df = pd.concat([df1, df2, df3, df4])
-    df['chunk_id'] = df['mergeId'].astype(str) + '-' + df['chunk_index_merge'].astype(str)
+    
 
+    save_dataset_to_json(df1[['chunk_id', 'mergeId', 'language', 'fileName', 'repo', 'commitHash', 'chunk_index_merge']], 'dataset2_Java_metadata.json')
+    save_dataset_to_json(df2[['chunk_id', 'mergeId', 'language', 'fileName', 'repo', 'commitHash', 'chunk_index_merge']], 'dataset2_CSharp_metadata.json')
+    save_dataset_to_json(df3[['chunk_id', 'mergeId', 'language', 'fileName', 'repo', 'commitHash', 'chunk_index_merge']], 'dataset2_JavaScript_metadata.json')
+    save_dataset_to_json(df4[['chunk_id', 'mergeId', 'language', 'fileName', 'repo', 'commitHash', 'chunk_index_merge']], 'dataset2_TypeScript_metadata.json')
+    
     df_combination = get_combination_chunks(df)
     save_dataset_to_json(df_combination, 'dataset2_combination.json')
 
