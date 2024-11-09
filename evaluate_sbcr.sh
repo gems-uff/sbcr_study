@@ -12,9 +12,9 @@ fi
 # Time each command and log the time taken
 {
     echo "Evaluating for dataset1..."
-    /usr/bin/time -o $LOGS_DIR/dataset1_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset1 "5,15,10" rq2_dataset1 2>&1 | tee $LOGS_DIR/dataset1_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset1_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset1 "5,15,10" rq1_dataset1 2>&1 | tee $LOGS_DIR/dataset1_evaluation_process.txt
     echo "Evaluating for Java..."
-    /usr/bin/time -o $LOGS_DIR/dataset2_Java_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_Java_combination "5,10,20" rq2_Java 2>&1 | tee $LOGS_DIR/dataset2_Java_evaluation_process.txt
+    /usr/bin/time -o $LOGS_DIR/dataset2_Java_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_Java_combination "5,10,20" rq1_Java 2>&1 | tee $LOGS_DIR/dataset2_Java_evaluation_process.txt
     echo "Evaluating for CSharp..."
     /usr/bin/time -o $LOGS_DIR/dataset2_CSharp_evaluation_time.txt -f "%E" python3 sbcr_evaluate.py dataset2_CSharp_combination "3,10,40" rq2_CSharp 2>&1 | tee $LOGS_DIR/dataset2_CSharp_evaluation_process.txt
     echo "Evaluating for JavaScript..."
