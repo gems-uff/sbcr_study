@@ -10,3 +10,4 @@ pylcs==0.0.1
 openpyxl==3.1.5
 matplotlib==3.7.5
 seaborn==0.13.2
+pingouin==0.5.5
