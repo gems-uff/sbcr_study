@@ -3,7 +3,7 @@
 
 Three arms, all on the deduplicated data:
 
-- `random`  random split at the level of the chunk;
+- `control` random split at the level of the chunk;
 - `mg`      merge-grouped: the chunks of a merge always fall in the same partition;
 - `pd`      project-disjoint: the chunks of a project always fall in the same partition.
 
@@ -39,7 +39,7 @@ from survey import (  # noqa: E402
     without_spaces,
 )
 
-ARMS = ("random", "mg", "pd")
+ARMS = ("control", "mg", "pd")
 RATIOS = (0.8, 0.1, 0.1)
 
 
@@ -67,7 +67,7 @@ def deduplicate(df):
 
 
 def groups(df, arm):
-    if arm == "random":
+    if arm == "control":
         return df.dataset + "|" + df.chunk_id
     uf = UnionFind()
     keys = ["merge", "h_content_norm"] if arm == "mg" else ["project", "commit", "h_content_norm"]

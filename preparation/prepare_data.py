@@ -31,7 +31,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from survey import LANGUAGES, load_dataset1, load_dataset2  # noqa: E402
 
-ARMS = ("random", "mg", "pd")
+ARMS = ("control", "mg", "pd")
 CODE = ("run_mergegen.py", "dataset.py", "dataset_parallel.py", "run_total_dataset.py",
         "mergegen_inference.py")
 OUTPUTS = ("PROCESSED", "AUX_FILES", "MODELS", "OUTPUT", "RESULTS", "LOGS")

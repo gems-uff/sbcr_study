@@ -30,7 +30,7 @@ TARGETS = {  # name -> (base dataset, conflicts in the test, uses the configurat
     "rq3_java": ("dataset2_Java", 1717, "dataset1"),
 }
 SEEDS = ["3022024", "20260904", "7412", "98765", "31337"]
-ARMS = ["random", "mg", "pd"]
+ARMS = ["control", "mg", "pd"]
 # seconds per conflict, to order the queue and estimate its length
 COST = {"dataset1": 4.79, "dataset2_Java": 4.03, "dataset2_CSharp": 2.57,
         "dataset2_JavaScript": 14.81, "dataset2_TypeScript": 8.68,

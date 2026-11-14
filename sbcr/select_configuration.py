@@ -56,7 +56,7 @@ def main():
     rows = []
     for file in sorted(glob.glob(f"{root}/sbcr/tuning_*/RESULTS/*.xlsx")):
         label = os.path.basename(os.path.dirname(os.path.dirname(file))).replace("tuning_", "")
-        arm = re.search(r"_(random|mg|pd)$", label)
+        arm = re.search(r"_(control|mg|pd)$", label)
         arm = arm.group(1) if arm else "?"
         if args.arm and arm != args.arm:
             continue
