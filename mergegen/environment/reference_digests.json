@@ -1,0 +1,11 @@
+{
+  "description": "SHA-256 of the outputs of MergeGen over fixtures/smoke_conflicts.json, one per checkpoint of the models archive. verify_env.py compares the outputs of the environment with it.",
+  "fixture": "fixtures/smoke_conflicts.json",
+  "inference_params": {
+    "max_conflict_length": 500,
+    "max_resolve_length": 200,
+    "num_beams": 3,
+    "do_sample": false
+  },
+  "digests": {}
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "chunk_id": "201013-5",
+    "all_raw_base": "",
+    "all_raw_a": "        this.config.setFilterBranchName(filterBranchName);\n",
+    "all_raw_b": "\n        this.config.getContent().setShowTriggeredBy(Boolean.parseBoolean(showTriggeredBy));\n"
+  },
+  {
+    "chunk_id": "7891-2",
+    "all_raw_base": "          if (!updatedSubscribers.add(s.getSuperProject())) {\n            log.error(\"Possible circular subscription involving \"\n                + s.toString());\n          } else {\n\n            Map<Branch.NameKey, ObjectId> modules =\n                new HashMap<Branch.NameKey, ObjectId>(1);\n            modules.put(updatedBranch, mergedCommit);\n\n            Map<Branch.NameKey, String> paths =\n                new HashMap<Branch.NameKey, String>(1);\n            paths.put(updatedBranch, s.getPath());\n\n            try {\n",
+    "all_raw_a": "          if (!updatedSubscribers.add(s.getSuperProject())) {\n            log.error(\"Possible circular subscription involving \"\n                + s.toString());\n          } else {\n\n            Map<Branch.NameKey, ObjectId> modules = new HashMap<>(1);\n            modules.put(updatedBranch, mergedCommit);\n\n            Map<Branch.NameKey, String> paths = new HashMap<>(1);\n            paths.put(updatedBranch, s.getPath());\n\n            try {\n",
+    "all_raw_b": "\n          try {\n            if (!updatedSubscribers.add(s.getSuperProject())) {\n              log.error(\"Possible circular subscription involving \" + s);\n            } else {\n\n              Map<Branch.NameKey, ObjectId> modules =\n                  new HashMap<Branch.NameKey, ObjectId>(1);\n              modules.put(updatedBranch, mergedCommit);\n\n              Map<Branch.NameKey, String> paths =\n                  new HashMap<Branch.NameKey, String>(1);\n              paths.put(updatedBranch, s.getPath());\n"
+  },
+  {
+    "chunk_id": "160639-191",
+    "all_raw_base": "    if (jj_3_152()) {\n    jj_scanpos = xsp;\n    if (jj_3R_296()) return true;\n",
+    "all_raw_a": "    if (jj_3_152()) {\n      jj_scanpos = xsp;\n      if (jj_3R_296()) return true;\n",
+    "all_raw_b": "\n    if (jj_3R_955()) {\n    jj_scanpos = xsp;\n    if (jj_3R_956()) return true;\n"
+  },
+  {
+    "chunk_id": "171164-2",
+    "all_raw_base": "\t\tfinal List<Node> clauses = createConstraintNodes(constraint, new LinkedList<Node>());\n\t\tif (cnfType != CNFType.Regular && clauses.size() == 1) {\n",
+    "all_raw_a": "\t\tfinal List<Node> clauses = createConstraintNodes(constraint, new LinkedList<Node>());\n\t\tif ((cnfType != CNFType.Regular) && (clauses.size() == 1)) {\n",
+    "all_raw_b": "\n\t\treturn createConstraintNode(constraint, true);\n\t}\n\n\t/**\n\t * Creates the node for a single constraint of the feature model.\n\t *\n\t * @param constraint constraint to transform\n\t * @param positive false to negate the node of the constraint before adding\n\t * @return the transformed node\n\t */\n\tpublic Node createConstraintNode(IConstraint constraint, boolean positive) {\n\t\tfinal List<Node> clauses = createConstraintNodes(constraint, new LinkedList<Node>(), positive);\n\t\tif ((cnfType != CNFType.Regular) && (clauses.size() == 1)) {\n"
+  },
+  {
+    "chunk_id": "157397-3",
+    "all_raw_base": "            vertx.eventBus().publish(\"key.released\", code);\n            if (keySet.contains(code) && pressedKeys.containsAll(keySet)) {\n                vertx.eventBus().publish(\"asr.stop\", null);\n            }\n",
+    "all_raw_a": "            vertx.eventBus().publish(\"key.released\", code);\n            if (keySet.contains(code) && pressedKeys.containsAll(keySet)) {\n                if (System.currentTimeMillis() - pressedTimestamp < RELEASE_TIMEOUT) {\n                    vertx.eventBus().publish(\"asr.listen\", null);\n                } else {\n                    vertx.eventBus().publish(\"asr.stop\", null);\n                }\n            }\n",
+    "all_raw_b": "\n            actionMap.entrySet().stream().filter(entry -> entry.getValue().contains(code) && pressedKeys.containsAll(entry.getValue())).forEach(entry -> {\n                vertx.eventBus().send(entry.getKey() + \".stop\", null);\n            });\n"
+  },
+  {
+    "chunk_id": "180728-12",
+    "all_raw_base": "\n\t\t\tif(descriptors.getDescriptor(pid, fd) == null){\n\t\t\t\tdescriptors.addUnknownDescriptor(pid, fd);\n\t\t\t\tmarkNewEpochForArtifact(descriptors.getDescriptor(pid, fd));\n\t\t\t}\n\n\t\t\tartifactIdentifier = descriptors.getDescriptor(pid, fd);\n",
+    "all_raw_a": "\t\t\tartifactIdentifier = processManager.getFd(pid, fd);\n\t\t\tif(artifactIdentifier == null){\n\t\t\t\tartifactIdentifier = addUnknownFd(pid, fd);\n\t\t\t}\n",
+    "all_raw_b": "\n\t\t\tartifactIdentifier = descriptors.getDescriptor(pid, fd);\n\t\t\tif(artifactIdentifier == null){\n\t\t\t\tartifactIdentifier = addUnknownFdAndMarkEpoch(pid, fd);\n\t\t\t}\n"
+  },
+  {
+    "chunk_id": "183799-42",
+    "all_raw_base": "\t\t\t\t\tsetState(337);\n",
+    "all_raw_a": "\t\t\t\t\tsetState(339);\n",
+    "all_raw_b": "\n\t\t\t\t\tsetState(335);\n"
+  },
+  {
+    "chunk_id": "134343-11",
+    "all_raw_base": "     * Get max datetime value with positive num offset\n     * 9999-12-31t23:59:59.9999999-14:00\n",
+    "all_raw_a": "",
+    "all_raw_b": "\n     * Get max datetime value with positive num offset 9999-12-31t23:59:59.9999999-14:00\n"
+  },
+  {
+    "chunk_id": "109925-10",
+    "all_raw_base": "    PageObjectLogging.logInfo(\"Geo cookie: \", driver.manage().getCookieNamed(\"Geo\").getValue());\n    Assertion.assertFalse(new TrackingOptInModal().isVisible());\n",
+    "all_raw_a": "    Log.info(\"Geo cookie: \", driver.manage().getCookieNamed(\"Geo\").getValue());\n    Assertion.assertFalse(new TrackingOptInModal().isVisible());\n",
+    "all_raw_b": "\n    PageObjectLogging.logInfo(\"Geo cookie: \", driver.manage().getCookieNamed(\"Geo\").getValue());\n    Assertion.assertFalse(new TrackingOptInPage().isVisible());\n"
+  },
+  {
+    "chunk_id": "107076-1",
+    "all_raw_base": "import org.janelia.saalfeldlab.paintera.viewer3d.Viewer3DFX;\n",
+    "all_raw_a": "import javafx.beans.property.SimpleIntegerProperty;\n",
+    "all_raw_b": "\nimport javafx.beans.property.SimpleObjectProperty;\nimport javafx.scene.paint.Color;\nimport javafx.scene.transform.Affine;\nimport org.janelia.saalfeldlab.paintera.viewer3d.Viewer3DFX;\nimport org.slf4j.Logger;\nimport org.slf4j.LoggerFactory;\n\nimport java.lang.invoke.MethodHandles;\n"
+  }
+]
