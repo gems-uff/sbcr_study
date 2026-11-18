@@ -72,7 +72,7 @@ def main():
 
     tok = pd.read_csv(f"{root}/population_tokens.csv", dtype={"chunk_id": str})
     tok = tok[tok.arm == args.arm]
-    for c in ["input_above_500", "resolution_above_200", "mergegen_candidate_empty", "mergegen_candidate_truncated"]:
+    for c in ["input_above_500", "resolution_above_200", "candidate_mergegen_empty", "candidate_mergegen_truncated"]:
         tok[c] = as_bool(tok[c])
     cand = pd.read_csv(f"{root}/population_candidates.csv",
                        dtype={"chunk_id": str, "seed": str, "status": str}, keep_default_na=False)
@@ -81,9 +81,9 @@ def main():
     cand["exact_match"] = as_bool(cand.exact_match)
 
     mg = cand[cand.approach == "mergegen"].merge(
-        tok[["dataset", "chunk_id", "mergegen_candidate_empty"]], on=["dataset", "chunk_id"], how="outer",
+        tok[["dataset", "chunk_id", "candidate_mergegen_empty"]], on=["dataset", "chunk_id"], how="outer",
         indicator=True)
-    if (mg._merge != "both").any() or (mg["empty"] != mg.mergegen_candidate_empty).any():
+    if (mg._merge != "both").any() or (mg["empty"] != mg.candidate_mergegen_empty).any():
         raise SystemExit("the MergeGen rows of the two population CSVs do not match")
     check_exact_match(root, args.arm, args.seed, cand)
 
@@ -102,12 +102,12 @@ def main():
             row = {"dataset": name, "population": population, "n": len(t),
                    "input_above_500": int(t.input_above_500.sum()),
                    "resolution_above_200": int(t.resolution_above_200.sum()),
-                   "mergegen_truncated": int(t.mergegen_candidate_truncated.sum()),
+                   "mergegen_truncated": int(t.candidate_mergegen_truncated.sum()),
                    "mergegen_empty": int(m["empty"].sum()),
                    "mergegen_empty_exact_match": int((m["empty"] & m.exact_match).sum()),
                    "mergegen_exact_match": int(m.exact_match.sum()),
                    "mergegen_nonempty": len(m_full),
-                   "mergegen_only_v1v2": int((m_full.only_v1v2_lines.astype(str) == "True").sum())}
+                   "mergegen_only_v1v2": int((m_full.formed_only_v1v2.astype(str) == "True").sum())}
             if population == "combination":
                 ok = s[s.status == OK]
                 s_full = s[~s["empty"]]
@@ -119,7 +119,7 @@ def main():
                             "sbcr_empty_processed": int(ok["empty"].sum()),
                             "sbcr_exact_match": int(s.exact_match.sum()),
                             "sbcr_nonempty": len(s_full),
-                            "sbcr_only_v1v2": int((s_full.only_v1v2_lines.astype(str) == "True").sum())})
+                            "sbcr_only_v1v2": int((s_full.formed_only_v1v2.astype(str) == "True").sum())})
             rows.append(row)
     table = pd.DataFrame(rows)
     table = table.astype({c: "Int64" for c in table.columns if c.startswith("sbcr_")})

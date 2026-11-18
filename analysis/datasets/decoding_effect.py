@@ -249,7 +249,7 @@ def population(root, decoded):
 
     same = ((j.empty_stored.astype(str) == j["empty"].astype(str))
             & (j.exact_stored.astype(str) == j.exact_match.astype(str))
-            & (flag(j.v1v2_stored) == flag(j.only_v1v2_lines)))
+            & (flag(j.v1v2_stored) == flag(j.formed_only_v1v2)))
     if not same.all():
         raise SystemExit(f"{int((~same).sum())} MergeGen rows differ from population_candidates.csv")
     return p

@@ -81,7 +81,7 @@ def main():
             row[f"{column}_mean"] = g[column].mean()
             row[f"{column}_sd"] = g[column].std(ddof=1)
         row["difference_min"], row["difference_max"] = g.difference.min(), g.difference.max()
-        row["difference_range"] = g.difference.max() - g.difference.min()
+        row["difference_amplitude"] = g.difference.max() - g.difference.min()
         row["p_max"] = g.p.max()
         row["mergegen_wins_min"], row["mergegen_wins_max"] = g.mergegen_wins.min(), g.mergegen_wins.max()
         spread.append(row)
@@ -94,7 +94,7 @@ def main():
                            sort=False).round(4).to_string())
     print("\n=== spread across partitions ===")
     print(spread[["analysis", "dataset", "difference_mean", "difference_sd", "difference_min",
-                  "difference_max", "difference_range", "p_max"]].round(4).to_string(index=False))
+                  "difference_max", "difference_amplitude", "p_max"]].round(4).to_string(index=False))
     others = everything[everything.variant != f"seed_{SEED}"]
     if len(others):
         print("\n=== reference: mean over seeds, where there is more than one ===")

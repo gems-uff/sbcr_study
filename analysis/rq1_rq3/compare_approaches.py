@@ -31,7 +31,7 @@ from scipy.stats import wilcoxon
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "similarity"))
 from sbcr_scores import SIM, load_sbcr_similarities, sbcr_per_conflict  # noqa: E402
 
-ARMS = ["control", "mg", "pd"]
+ARMS = ["random", "mg", "pd"]
 EXCLUDING = "_excluding_out_of_limits"
 
 
@@ -165,18 +165,18 @@ def main():
 
     sb = load_sbcr_similarities(root, seeds=seeds)
     # Each arm's evaluations on its own test partition only. The common-set evaluations
-    # (partition pd, arm control or mg) would otherwise count seed 3022024 twice.
+    # (partition pd, arm random or mg) would otherwise count seed 3022024 twice.
     sb = sb[sb.partition == sb.arm]
     mg = load_mergegen(root, evaluated)
 
     per_seed = sb.groupby(["target", "arm", "seed"])[SIM].mean().reset_index()
     spread = per_seed.groupby(["target", "arm"])[SIM].agg(["mean", "std", "min", "max"])
-    spread["range"] = spread["max"] - spread["min"]
+    spread["amplitude"] = spread["max"] - spread["min"]
     spread.round(4).to_csv(f"{out}/seed_spread.csv")
     seeds = per_seed.seed.nunique()
     print(f"=== spread across the {seeds} seeds ===")
     if seeds > 1:
-        print(f"largest standard deviation: {spread['std'].max():.4f}   largest range: {spread['range'].max():.4f}")
+        print(f"largest standard deviation: {spread['std'].max():.4f}   largest range: {spread['amplitude'].max():.4f}")
     else:
         print("one seed only, no spread")
 

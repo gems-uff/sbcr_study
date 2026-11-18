@@ -380,7 +380,7 @@ def render(report, dims, freq):
     st = report.get("sample_tools")
     if st:
         lines += ["", "## Packages the authors read", "",
-                  f"The tool behind the candidates of the {st['cases']} cases of the sample draw is in "
+                  f"The tool behind the candidates of the {st['cases']} cases of the draw of the sample is in "
                   f"`sample_tools.csv`, in the bands or not. {st['at_scale']} of them are in the bands and have a "
                   "case at scale."]
     return "\n".join(lines) + "\n"

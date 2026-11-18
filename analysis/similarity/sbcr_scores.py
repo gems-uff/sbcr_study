@@ -59,12 +59,12 @@ def parse_evaluation_folder(folder):
     """
     label = os.path.basename(folder).replace("eval_", "")
     if label.startswith("common_"):
-        m = re.match(r"common_(.+)_(control|mg)$", label)
+        m = re.match(r"common_(.+)_(random|mg)$", label)
         if not m:
             return None
         target, arm = m.groups()
         return target, arm, "3022024", "pd"
-    m = re.match(r"(.+)_(control|mg|pd)_s(\d+)$", label)
+    m = re.match(r"(.+)_(random|mg|pd)_s(\d+)$", label)
     if not m:
         return None
     target, arm, seed = m.groups()

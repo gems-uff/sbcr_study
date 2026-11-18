@@ -99,7 +99,7 @@ def rows_mergegen(root, name, arm, data, idx, test_ids):
             "dataset": name, "arm": arm, "approach": "mergegen", "seed": "", "status": "",
             "chunk_id": c, "empty": str(cand).strip() == "",
             "exact_match": normalize(cand) == normalize(res),
-            "only_v1v2_lines": made_only_of_v1v2(cand, v1, v2),
+            "formed_only_v1v2": made_only_of_v1v2(cand, v1, v2),
         })
     return rows
 
@@ -122,12 +122,12 @@ def rows_sbcr(root, name, arm, data, idx, sbcr_ids, seeds):
             base = {"dataset": name, "arm": arm, "approach": "sbcr", "seed": seed,
                     "status": status, "chunk_id": c}
             if status != OK or not os.path.exists(path):
-                rows.append({**base, "empty": True, "exact_match": False, "only_v1v2_lines": None})
+                rows.append({**base, "empty": True, "exact_match": False, "formed_only_v1v2": None})
                 continue
             cand = open(path, encoding="utf-8", errors="replace").read()
             rows.append({**base, "empty": cand.strip() == "",
                          "exact_match": normalize(cand) == normalize(res),
-                         "only_v1v2_lines": made_only_of_v1v2(cand, v1, v2)})
+                         "formed_only_v1v2": made_only_of_v1v2(cand, v1, v2)})
     return rows
 
 

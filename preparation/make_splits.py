@@ -3,7 +3,7 @@
 
 Three arms, all on the deduplicated data:
 
-- `control` random split at the level of the chunk;
+- `random`  random split at the level of the chunk;
 - `mg`      merge-grouped: the chunks of a merge always fall in the same partition;
 - `pd`      project-disjoint: the chunks of a project always fall in the same partition.
 
@@ -14,7 +14,7 @@ split together, since they share projects, commits and identical conflicts.
 
 Inputs: the datasets in `--data-root` (see `survey.py`).
 Outputs, in `--out`: `<arm>/<dataset>.csv` (chunk_id, partition, group), `summary.csv`
-(sizes and the largest group per dataset and arm) and `contamination.csv` (test chunks that
+(sizes and the largest group per dataset and arm) and `acceptance_check.csv` (test chunks that
 share content, merge or project with training, the acceptance test).
 
     python preparation/make_splits.py --data-root <data> --out <root>/splits --seed <seed> \
@@ -39,7 +39,7 @@ from survey import (  # noqa: E402
     without_spaces,
 )
 
-ARMS = ("control", "mg", "pd")
+ARMS = ("random", "mg", "pd")
 RATIOS = (0.8, 0.1, 0.1)
 
 
@@ -67,7 +67,7 @@ def deduplicate(df):
 
 
 def groups(df, arm):
-    if arm == "control":
+    if arm == "random":
         return df.dataset + "|" + df.chunk_id
     uf = UnionFind()
     keys = ["merge", "h_content_norm"] if arm == "mg" else ["project", "commit", "h_content_norm"]
@@ -216,12 +216,12 @@ def main():
                 print(json.dumps(r, ensure_ascii=False), flush=True)
             if len(universe) > 1:
                 print(f"  (joint universe {'+'.join(universe)}: "
-                      f"{removed_total} duplicates removed in all)", flush=True)
+                      f"{removed_total} duplicates removed in total)", flush=True)
 
     os.makedirs(out, exist_ok=True)
     pd.DataFrame(rows).to_csv(os.path.join(out, "summary.csv"), index=False)
 
-    print("\n=== check: test chunks shared with training, per arm ===", flush=True)
+    print("\n=== check: contamination of the test by the training, per arm ===", flush=True)
     check(raw, out, arms)
     print(f"\nwritten to {out}")
 
@@ -239,7 +239,7 @@ def check(raw, out, arms=ARMS):
                 row[label] = int(test[column].isin(set(train[column])).sum())
             rows.append(row)
     table = pd.DataFrame(rows)
-    table.to_csv(os.path.join(out, "contamination.csv"), index=False)
+    table.to_csv(os.path.join(out, "acceptance_check.csv"), index=False)
     print(table.to_string(index=False))
 
 

@@ -10,9 +10,10 @@ preparation and analysis scripts.
 Inputs: `dataset1_complete.json`, `dataset1_metadata.csv`, `dataset2_<language>_complete.json`,
 `dataset2_<language>_metadata.json` and the combination partitions of the submitted version,
 all in `--data-root`.
-Outputs: `<out>.csv`, one row per dataset, and `<out>_overlap_dataset1_dataset2_java.json`.
+Outputs, in `--out`: `overlap_per_dataset.csv`, one row per dataset, and
+`overlap_dataset1_dataset2_java.json`.
 
-    python preparation/survey.py --data-root <data> --out <dir>/survey
+    python preparation/survey.py --data-root <data> --out <dir>
 """
 import argparse
 import json
@@ -171,11 +172,11 @@ def analyze(name, df, root):
         "dataset": name,
         "rows": len(df),
         "unique_chunk_ids": int(df.chunk_id.nunique()),
-        "exact_duplicates": len(df) - int(df.h_content.nunique()),
-        "exact_duplicates_normalized": len(df) - int(df.h_content_norm.nunique()),
-        "duplicates_same_input": len(df) - int(df.h_input.nunique()),
+        "dup_exact_content": len(df) - int(df.h_content.nunique()),
+        "dup_exact_normalized": len(df) - int(df.h_content_norm.nunique()),
+        "dup_same_input": len(df) - int(df.h_input.nunique()),
         "merges": int(df["merge"].nunique()),
-        "merge_files": int(df["merge_file"].nunique()),
+        "merges_per_file": int(df["merge_file"].nunique()),
         "projects": int(df.project.nunique()),
         "fork_components": int(df.fork_component.nunique()),
         "test_total": len(df[df.partition == "test"]),
@@ -210,9 +211,9 @@ def overlap_dataset1_dataset2_java(df1, df2):
     return {
         "projects_dataset1": len(projects1),
         "projects_dataset2_Java": len(projects2),
-        "shared_projects": len(projects1 & projects2),
-        "shared_commits": len(values(df1, "commit") & values(df2, "commit")),
-        "shared_files": len(files(df1) & files(df2)),
+        "projects_in_common": len(projects1 & projects2),
+        "commits_in_common": len(values(df1, "commit") & values(df2, "commit")),
+        "files_in_common": len(files(df1) & files(df2)),
         "identical_conflicts": len(values(df1, "h_content_norm") & values(df2, "h_content_norm")),
         "identical_inputs": len(values(df1, "h_input") & values(df2, "h_input")),
     }
@@ -221,10 +222,11 @@ def overlap_dataset1_dataset2_java(df1, df2):
 def main():
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     p.add_argument("--data-root", required=True, help="folder with the two datasets")
-    p.add_argument("--out", required=True, help="prefix of the output files")
+    p.add_argument("--out", required=True, help="folder of the output files")
     args = p.parse_args()
     root = os.path.expanduser(args.data_root)
-    os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
+    out = os.path.expanduser(args.out)
+    os.makedirs(out, exist_ok=True)
 
     rows, frames = [], {}
     print("loading dataset1...", flush=True)
@@ -241,15 +243,15 @@ def main():
         frames[name] = df
         print(json.dumps(r, indent=2, ensure_ascii=False), flush=True)
 
-    pd.DataFrame(rows).to_csv(args.out + ".csv", index=False)
+    pd.DataFrame(rows).to_csv(os.path.join(out, "overlap_per_dataset.csv"), index=False)
 
     overlap = overlap_dataset1_dataset2_java(frames["dataset1"], frames["dataset2_Java"])
-    with open(args.out + "_overlap_dataset1_dataset2_java.json", "w") as f:
+    with open(os.path.join(out, "overlap_dataset1_dataset2_java.json"), "w") as f:
         json.dump(overlap, f, indent=2, ensure_ascii=False)
 
-    print("\n=== overlap of Dataset1 and Dataset2_Java ===")
+    print("\n=== overlap Dataset1 x Dataset2_Java ===")
     print(json.dumps(overlap, indent=2, ensure_ascii=False))
-    print(f"\nwritten to {args.out}.csv")
+    print(f"\nwritten to {os.path.join(out, 'overlap_per_dataset.csv')}")
 
 
 if __name__ == "__main__":

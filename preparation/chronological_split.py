@@ -23,7 +23,7 @@ is not chronological.
 Inputs: the datasets in `--data-root`, `commit_dates.csv` of `commit_dates.py` (`--dates`).
 Outputs, in `--out`: `mg/<dataset>.csv` (chunk_id, partition, group), `excluded_groups.csv`,
 `summary.csv` (the columns of `make_splits.summary`, plus the chunks left out, the cut dates
-and the combination conflicts per partition), `contamination.csv` and `chrono_split.json`
+and the combination conflicts per partition), `acceptance_check.csv` and `chrono_split.json`
 (the cut dates, the check of the strict order and the hash of the dates file).
 
     python preparation/chronological_split.py --data-root <data> --dates <dir>/commit_dates.csv --out <root>/splits

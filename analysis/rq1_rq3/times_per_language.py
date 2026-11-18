@@ -23,7 +23,7 @@ the run by more than 0.05 min (the log rounds it to 0.1 min), SBCR's times agree
 `sbcr_similarities.csv`, and their sum does not exceed the wall time of the evaluation in
 `logs/sbcr_queue.csv`.
 
-Inputs: the root (`--root`), with `chosen_configurations.csv`.
+Inputs: the root (`--root`), with `selected_configurations.csv`.
 Output: `<root>/times_per_language.csv`, and the tables as Markdown on the standard output.
 
     python analysis/rq1_rq3/times_per_language.py --root <root> [--arm mg] [--seed 3022024]
@@ -50,11 +50,11 @@ PRE = ["tokenization", "git_merge", "tensors"]
 
 def sbcr_configuration(root, name, arm):
     """(neighbors, stagnation iterations, timeout in seconds) chosen for the dataset, from
-    `chosen_configurations.csv` (`sbcr/select_configuration.py`)."""
-    c = pd.read_csv(f"{root}/chosen_configurations.csv")
+    `selected_configurations.csv` (`sbcr/select_configuration.py`)."""
+    c = pd.read_csv(f"{root}/selected_configurations.csv")
     c = c[c.run == f"{name}_{arm}"]
     if len(c) != 1:
-        raise SystemExit(f"{name}: {len(c)} rows for {name}_{arm} in chosen_configurations.csv")
+        raise SystemExit(f"{name}: {len(c)} rows for {name}_{arm} in selected_configurations.csv")
     return tuple(int(v) for v in c.configuration.iloc[0].split(","))
 def wall_minutes(root):
     """Wall time of each run of the dataset's own model, from `mergeGen/LOGS/jit.log`."""

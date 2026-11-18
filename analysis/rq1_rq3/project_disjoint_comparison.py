@@ -2,10 +2,10 @@
 """The common set of `leakage_effect.py` with SBCR scored 0 above its size limit.
 
 The comparison of SBCR and MergeGen on the test partition of `pd`, the project-disjoint arm,
-restricted to the conflicts outside the training of the `control` and `mg` models, with SBCR
+restricted to the conflicts outside the training of the `random` and `mg` models, with SBCR
 loaded through `sbcr_scores.load_sbcr_similarities`, so each `OUT_OF_LIMITS` conflict enters
 with similarity 0 (`--out-of-limits exclude` leaves them out). Two paired changes of the gap
-SBCR − MergeGen are tested with the Wilcoxon signed-rank test: `pd` minus `control` and `pd`
+SBCR − MergeGen are tested with the Wilcoxon signed-rank test: `pd` minus `random` and `pd`
 minus `mg`.
 
 Inputs: the root of the three arms (`--root`) and, optionally, another root for `mg` (`--mg-root`).
@@ -56,7 +56,7 @@ def common_set(mg, sb, part, test, reference, rule):
     j["gap"] = j.sbcr - j.mergegen
     rows = []
     for ds in DATASETS:
-        clean = test[ds] - seen(part, "control", ds, reference) - seen(part, "mg", ds, reference)
+        clean = test[ds] - seen(part, "random", ds, reference) - seen(part, "mg", ds, reference)
         g = j[(j.dataset == ds) & (j.chunk_id.isin(clean))]
         w = g.pivot_table(index="chunk_id", columns="arm", values="gap")
         if not all(arm in w for arm in ARMS):
@@ -65,8 +65,8 @@ def common_set(mg, sb, part, test, reference, rule):
         w = w[ARMS].dropna()
         ool = g[g.chunk_id.isin(w.index) & g.out_of_limits].chunk_id.nunique()
         row = {"rule": rule, "reference": reference, "dataset": ds, "n": len(w), "sbcr_out_of_limits": ool,
-               "gap_control": w.control.mean(), "gap_mg": w.mg.mean(), "gap_pd": w.pd.mean()}
-        for other in ("control", "mg"):
+               "gap_random": w["random"].mean(), "gap_mg": w.mg.mean(), "gap_pd": w.pd.mean()}
+        for other in ("random", "mg"):
             change, ci, p = paired(w.pd, w[other])
             row.update({f"change_pd_minus_{other}": change, f"ci95_pd_minus_{other}": ci,
                         f"p_pd_minus_{other}": p})

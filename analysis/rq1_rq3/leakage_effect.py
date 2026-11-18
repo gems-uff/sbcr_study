@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Effect of leakage on MergeGen, and the two approaches on a set of conflicts common to the three arms.
 
-- **Leakage**: the MergeGen models of the `control` and `mg` arms evaluated on the test
+- **Leakage**: the MergeGen models of the `random` and `mg` arms evaluated on the test
   partition of `pd`, against the model of `pd` itself, restricted to the conflicts the other
   model did not see.
 - **Common set**: the difference SBCR − MergeGen in the three arms, on the conflicts of the
@@ -36,7 +36,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 from sbcr_scores import SIM  # noqa: E402
 
 DATASETS = ["dataset1", "dataset2_Java", "dataset2_CSharp", "dataset2_JavaScript", "dataset2_TypeScript"]
-ARMS = ["control", "mg", "pd"]
+ARMS = ["random", "mg", "pd"]
 
 
 def partitions(root, mg_root=None):
@@ -91,7 +91,7 @@ def ci95(x):
 
 def leakage_analysis(mg, part, test, reference):
     rows = []
-    for other in ("control", "mg"):
+    for other in ("random", "mg"):
         for ds in DATASETS:
             eligible = test[ds] - seen(part, other, ds, reference)
             g = mg[(mg.dataset == ds) & (mg.chunk_id.isin(eligible))]
@@ -120,21 +120,21 @@ def common_set_analysis(mg, sb, part, test, reference):
     j["gap"] = j.sbcr - j.mergegen
     rows = []
     for ds in DATASETS:
-        clean = test[ds] - seen(part, "control", ds, reference) - seen(part, "mg", ds, reference)
+        clean = test[ds] - seen(part, "random", ds, reference) - seen(part, "mg", ds, reference)
         w = j[(j.dataset == ds) & (j.chunk_id.isin(clean))].pivot_table(
             index="chunk_id", columns="arm", values="gap")
         if not all(arm in w for arm in ARMS):
             rows.append({"reference": reference, "dataset": ds, "n": 0})
             continue
         w = w[ARMS].dropna()
-        change = w.pd - w.control
+        change = w.pd - w["random"]
         try:
-            _, p = wilcoxon(w.pd, w.control)
+            _, p = wilcoxon(w.pd, w["random"])
         except ValueError:
             p = float("nan")
         rows.append({"reference": reference, "dataset": ds, "n": len(w),
-                     "gap_control": w.control.mean(), "gap_mg": w.mg.mean(), "gap_pd": w.pd.mean(),
-                     "change_pd_minus_control": change.mean(), "ci95": ci95(change), "p": p})
+                     "gap_random": w["random"].mean(), "gap_mg": w.mg.mean(), "gap_pd": w.pd.mean(),
+                     "change_pd_minus_random": change.mean(), "ci95": ci95(change), "p": p})
     return pd.DataFrame(rows)
 
 

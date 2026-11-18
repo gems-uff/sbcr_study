@@ -6,7 +6,7 @@ interruption leaves incomplete spreadsheets that look finished. The script count
 each result, takes as done only those that reached the size of the test partition, deletes
 the partial ones and queues the rest, five seeds and three arms per target.
 
-Inputs, under `--root`: `chosen_configurations.csv` (`select_configuration.py`) and the
+Inputs, under `--root`: `selected_configurations.csv` (`select_configuration.py`) and the
 partitions of `prepare_sbcr.py`. Outputs: `<root>/sbcr/eval_<target>_<arm>_s<seed>/` and their
 logs in `<root>/mergeGen/LOGS/`.
 
@@ -30,7 +30,7 @@ TARGETS = {  # name -> (base dataset, conflicts in the test, uses the configurat
     "rq3_java": ("dataset2_Java", 1717, "dataset1"),
 }
 SEEDS = ["3022024", "20260904", "7412", "98765", "31337"]
-ARMS = ["control", "mg", "pd"]
+ARMS = ["random", "mg", "pd"]
 # seconds per conflict, to order the queue and estimate its length
 COST = {"dataset1": 4.79, "dataset2_Java": 4.03, "dataset2_CSharp": 2.57,
         "dataset2_JavaScript": 14.81, "dataset2_TypeScript": 8.68,
@@ -60,7 +60,7 @@ def main():
     args = p.parse_args()
     root = os.path.expanduser(args.root)
 
-    cfgs = pd.read_csv(os.path.join(root, "chosen_configurations.csv"))
+    cfgs = pd.read_csv(os.path.join(root, "selected_configurations.csv"))
     cfg = {(r.run.rsplit("_", 1)[0], r.run.rsplit("_", 1)[1]): r.configuration.replace(" ", "")
            for r in cfgs.itertuples()}
 

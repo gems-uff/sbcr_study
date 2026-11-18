@@ -107,7 +107,7 @@ def sbcr(root, refs):
     wait_for(os.path.join(root, "markers", "sbcr_evaluation.ok"), "the CPU queue of the chronological root")
     tasks = []
     for ref, ref_root in refs:
-        cfg = pd.read_csv(os.path.join(ref_root, "chosen_configurations.csv"))
+        cfg = pd.read_csv(os.path.join(ref_root, "selected_configurations.csv"))
         cfg = {r.run.rsplit("_", 1)[0]: r.configuration.replace(" ", "") for r in cfg.itertuples()}
         for d in DATASETS:
             label = f"eval_{ref}cfg_{d}"

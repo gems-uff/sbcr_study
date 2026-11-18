@@ -142,9 +142,9 @@ def main():
                     "dataset": name, "arm": arm, "chunk_id": chunk,
                     "input_tokens": input_tokens, "input_above_500": input_tokens > MAX_CONFLICT_LENGTH,
                     "resolution_tokens": resolution_tokens, "resolution_above_200": resolution_tokens > MAX_RESOLVE_LENGTH,
-                    "mergegen_candidate_empty": cand_empty,
-                    "mergegen_candidate_tokens": cand_tokens,
-                    "mergegen_candidate_truncated": (cand_tokens is not None and not cand_empty
+                    "candidate_mergegen_empty": cand_empty,
+                    "candidate_mergegen_tokens": cand_tokens,
+                    "candidate_mergegen_truncated": (cand_tokens is not None and not cand_empty
                                                      and cand_tokens >= MAX_NEW_TOKENS),
                 })
                 if (k + 1) % 200 == 0:

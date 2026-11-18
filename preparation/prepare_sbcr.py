@@ -23,7 +23,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from combination import strategy  # noqa: E402
 from survey import LANGUAGES  # noqa: E402
 
-ARMS = ("control", "mg", "pd")
+ARMS = ("random", "mg", "pd")
 PARTITIONS = (("train", "training"), ("validation", "validation"), ("test", "testing"))
 
 

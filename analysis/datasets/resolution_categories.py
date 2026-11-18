@@ -49,7 +49,7 @@ def main():
     root = os.path.expanduser(p.parse_args().data_root)
 
     print("=" * 72)
-    print("Resolution category of each chunk of the complete Dataset2")
+    print("Classification by category over the complete Dataset2")
     print("=" * 72)
     grand = collections.Counter()
     for lang in LANGS:
@@ -65,7 +65,7 @@ def main():
     print(f"  Combination (kept) = {grand['Combination']}   excluded = {excluded}")
 
     print("\n" + "=" * 72)
-    print("Combination against the combination partitions")
+    print("Combination vs the combination partitions actually used")
     print("=" * 72)
     for lang in LANGS:
         counter, _ = classify_complete(os.path.join(root, f"dataset2_{lang}_complete.json"))
@@ -77,7 +77,7 @@ def main():
         assert comb == sum(parts.values())
 
     print("\n" + "=" * 72)
-    print("Projects (unique repositories) per language")
+    print("Count of projects (unique repo) per language")
     print("=" * 72)
     for lang in LANGS:
         meta_full = load(root, f"dataset2_{lang}_metadata.json")
@@ -87,11 +87,11 @@ def main():
             comb_ids.update(load(root, f"dataset2_{lang}_combination_{p}.json")["chunk_id"])
         repos_all = set(meta_full["repo"])
         repos_comb = {chunk_to_repo[c] for c in comb_ids if c in chunk_to_repo}
-        print(f"  {lang}: repositories in the complete dataset = {len(repos_all)}   "
-              f"repositories with combination chunks = {len(repos_comb)}")
+        print(f"  {lang}: repos in the complete dataset = {len(repos_all)}   "
+              f"repos that contribute combination chunks = {len(repos_comb)}")
 
     print("\n" + "=" * 72)
-    print("Dataset1 (filtered to combination by its source)")
+    print("Dataset1 (already filtered to combination by its source)")
     print("=" * 72)
     counter, total = classify_complete(os.path.join(root, "dataset1_complete.json"))
     print(f"total = {total}")
