@@ -3,7 +3,7 @@
 
 Until this script runs, nobody knows the band of a case or which tool produced each of its
 candidates. Its outputs name the tool of each case, so they go to a folder that neither the
-coders nor the annotator read. Runs in `sbcr-analise`: the packages are read by `parse_package`,
+coders nor the annotator read. Runs in `sbcr-analysis`: the packages are read by `parse_package`,
 which needs pylcs for a conflict whose split into the two versions is ambiguous.
 
 The frequencies per band are those of the population of the bands in partition 1, since every

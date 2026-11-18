@@ -14,7 +14,7 @@ tokenizer and pylcs live in different environments:
   `mergeGen/JIT/*_<arm>/model_*/candidates.json` files, checks each result against the
   tokenizer's `convert_tokens_to_string`, and writes the candidates whose text changes to
   `decoded_candidates.json` and the counts to `decode.json`;
-- `measure` (environment `sbcr-analise`): recomputes `sim_lcs_no_whitespace` and the exact match
+- `measure` (environment `sbcr-analysis`): recomputes `sim_lcs_no_whitespace` and the exact match
   of the changed candidates, after checking that the stored text reproduces the stored values,
   and runs the paired comparison, the RQ3 gaps and the MergeGen columns of
   `tabulate_population.py` on the stored and on the decoded values, checking that the stored
@@ -28,7 +28,7 @@ Also a library: `corrected_mergegen` gives the decoded similarities to `analysis
 
     conda run -n mergegen-train python analysis/datasets/decoding_effect.py decode \
         --root <root> --tokenizer <dir>/codet5-small-local --out <dir>
-    conda run -n sbcr-analise python analysis/datasets/decoding_effect.py measure \
+    conda run -n sbcr-analysis python analysis/datasets/decoding_effect.py measure \
         --root <root> --out <dir> [--rq3-gaps <rq3_gaps_s3022024.csv>]
 """
 import argparse
@@ -384,7 +384,7 @@ def main():
     d.add_argument("--root", required=True)
     d.add_argument("--tokenizer", required=True, help="folder of CodeT5's tokenizer")
     d.add_argument("--out", required=True)
-    m = sub.add_parser("measure", help="recompute and compare (environment sbcr-analise)")
+    m = sub.add_parser("measure", help="recompute and compare (environment sbcr-analysis)")
     m.add_argument("--root", required=True)
     m.add_argument("--out", required=True)
     m.add_argument("--rq3-gaps", help="rq3_gaps_s3022024.csv of rq3_gaps.py, to check the stored run against")

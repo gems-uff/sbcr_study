@@ -4,7 +4,7 @@
 The root is made up here in the layout `compare_approaches.py` and `sbcr_scores.py` read: the
 test partitions in `data/`, `sbcr_similarities.csv`, the SBCR result spreadsheets and candidates
 in `sbcr/eval_*`, and the MergeGen similarity files in `mergeGen/JIT`. Needs pandas, SciPy and
-openpyxl (environment `sbcr-analise`).
+openpyxl (environment `sbcr-analysis`).
 
     python analysis/rq1_rq3/test_rq3_gaps.py
 """

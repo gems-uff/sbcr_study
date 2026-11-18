@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Where SBCR's candidates come from, and whether its evaluation function prefers them to the resolution.
 
-Environment `sbcr-analise` (pandas, numpy and pylcs). SBCR reads only V1 and V2, and
+Environment `sbcr-analysis` (pandas, numpy and pylcs). SBCR reads only V1 and V2, and
 `sbcr/sbcr_evaluate.py` rejects a candidate whose text equals a version, but that check compares
 the raw strings, and every candidate gets a line break appended (`get_candidate_text`), while the
 codes and the similarity set whitespace aside. On partition 1:

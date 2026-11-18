@@ -5,7 +5,7 @@ The functions that read the root and the join need the root of partition 1, wher
 `sbcr_candidate_origin.py` checks the score of every SBCR candidate against its result spreadsheet.
 These tests cover the parts that do not need the root: the origin categories, the search space,
 the score as `sbcr/sbcr_evaluate.py` computes it, and the summaries.
-Environment `sbcr-analise` (pandas, numpy and pylcs).
+Environment `sbcr-analysis` (pandas, numpy and pylcs).
 
     python analysis/rq4/test_sbcr_candidate_origin.py
 """

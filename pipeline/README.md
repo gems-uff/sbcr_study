@@ -2,7 +2,7 @@
 
 The drivers that ran the experiments, in the order they ran. Each experiment root is a folder outside this repository that holds the data, the splits, the MergeGen code and outputs (`mergeGen/`), the SBCR outputs (`sbcr/`) and the logs of one run of the pipeline. The archives hold the roots the paper reads (`partition-1` to `partition-3`, `split-comparison`, `chronological` and the others), without the trained models except those of `partition-1`, and without the tokenized intermediates, which the drivers rebuild.
 
-Every driver takes its paths from environment variables, and none of them needs to run from a given folder. They use the conda environments of `environments/`: `sbcr-analise` for the preparation and SBCR, `mergegen-train` for MergeGen.
+Every driver takes its paths from environment variables, and none of them needs to run from a given folder. They use the conda environments of `environments/`: `sbcr-analysis` for the preparation and SBCR, `mergegen-train` for MergeGen.
 
 ## The three partitions of the merge-grouped design
 

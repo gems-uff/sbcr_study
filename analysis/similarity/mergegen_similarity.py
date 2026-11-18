@@ -14,7 +14,7 @@ one row per candidate:
 - `exact_match_full`: equality with the whole resolution, with all whitespace removed;
 - `reference_truncated`: whether the cut reference differs from the whole resolution.
 
-A folder that already has `similarities.csv` is skipped. Runs in the `sbcr-analise` environment.
+A folder that already has `similarities.csv` is skipped. Runs in the `sbcr-analysis` environment.
 
 Inputs, under `--root`: `data/{dataset}.json`, `references/{dataset}.json` and
 `mergeGen/JIT/*/model_*/candidates.json`.

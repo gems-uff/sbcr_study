@@ -55,7 +55,7 @@ fail() { say "STOP: $*"; [ "$WRITE_STATUS" = 1 ] && echo "FAILED $(date -u +%FT%
 # shellcheck disable=SC1091
 set +u  # the activation scripts of conda read unset variables
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate sbcr-analise
+conda activate sbcr-analysis
 set -u
 cd "$REPO"
 
@@ -96,7 +96,7 @@ checks() {
     [ "$n" -eq "$CASES" ] || fail "the coding sheet has $n cases, not $CASES"
     local free; free="$(df -Pk "$OUTROOT" 2>/dev/null | awk 'NR==2 {print int($4/1048576)}')"
     [ "${free:-0}" -ge 2 ] || fail "less than 2 GB free for $OUTROOT"
-    python -c "import anthropic" || fail "the environment sbcr-analise has no anthropic package"
+    python -c "import anthropic" || fail "the environment sbcr-analysis has no anthropic package"
     say "checks passed: $CASES cases in $PROCS processes, instructions v1 $INSTR_SHA," \
         "scheme $SCHEME_SHA, coding sheet and packages of the coding at scale," \
         "API address ${ANTHROPIC_BASE_URL:-default}, outputs in $OUTROOT"

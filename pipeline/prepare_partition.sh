@@ -48,7 +48,7 @@ ARMS=mg
 
 step() { echo "=== $1 :: $(date -Is) ==="; }
 
-conda activate sbcr-analise
+conda activate sbcr-analysis
 
 if [ ! -f "$M/splits.ok" ]; then
   step "splits (seed $DRAW_SEED, rule $RULE)"
@@ -138,7 +138,7 @@ if [ ! -f "$M/references.ok" ]; then
   touch "$M/references.ok"
 fi
 
-conda activate sbcr-analise
+conda activate sbcr-analysis
 if [ ! -f "$M/sbcr.ok" ]; then
   step "SBCR slices and acceptance of the evaluated test"
   mkdir -p "$ROOT/sbcr"

@@ -17,7 +17,7 @@ LEAKAGE_FROM="${LEAKAGE_FROM:-}"
 export REPO
 set -euo pipefail
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate sbcr-analise
+conda activate sbcr-analysis
 mkdir -p "$OUT"
 
 number() {  # the partition number of a root, by PARTITIONS

@@ -8,7 +8,7 @@ ROOT="${ROOT:?set ROOT, the root of the three arms}"
 export REPO ROOT
 set -uo pipefail
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate sbcr-analise
+conda activate sbcr-analysis
 cd "$ROOT/sbcr"
 export NUM_CHUNKS=100
 SLOTS=5

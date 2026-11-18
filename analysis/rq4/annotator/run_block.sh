@@ -43,7 +43,7 @@ fail() { say "STOP: $*"; [ "$WRITE_STATUS" = 1 ] && echo "FAILED $(date -u +%FT%
 # shellcheck disable=SC1091
 set +u  # the activation scripts of conda read unset variables
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate sbcr-analise
+conda activate sbcr-analysis
 set -u
 cd "$REPO"
 

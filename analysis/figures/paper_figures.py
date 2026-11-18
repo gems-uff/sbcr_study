@@ -13,7 +13,7 @@
   `analysis/rq4/build_scale.py`, and the script stops if the band counts differ from `bands.csv` of
   the coding at scale or the limits from its `draw.json`.
 
-Runs in the `sbcr-analise` environment. The PDFs carry no creation date, so a rerun on the same
+Runs in the `sbcr-analysis` environment. The PDFs carry no creation date, so a rerun on the same
 data writes the same bytes.
 
 Inputs: the root of partition 1 (`--root`) and the folder of the coding at scale (`--scale`, with

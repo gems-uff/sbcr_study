@@ -4,7 +4,7 @@
 The stand-in is a local HTTP server that the script reaches through `ANTHROPIC_BASE_URL`. It
 answers `POST /v1/messages` with a response in the shape the API gives, built from the spec of
 each test, and keeps the body and headers of each request. Needs the `anthropic` package
-(environment `sbcr-analise`).
+(environment `sbcr-analysis`).
 
     python analysis/rq4/annotator/test_run_annotator.py
 """

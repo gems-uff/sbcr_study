@@ -9,7 +9,7 @@ ROOT="${ROOT:?set ROOT, the root of the three arms}"
 export REPO ROOT
 set -uo pipefail
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate sbcr-analise
+conda activate sbcr-analysis
 
 while pgrep -f "[s]bcr_tuning\.py" > /dev/null; do sleep 300; done
 echo "=== tunings finished, applying the selection rule :: $(date -Is) ==="

@@ -2,7 +2,7 @@
 """Tests of the join of the RQ4 labels at scale with band and tool, on synthetic data.
 
 The packages are written by `package()` of `build_packages.py`, as the real ones are, which needs
-pandas and pylcs (environment `sbcr-analise`). The sealed file, the draw record, the scheme, the
+pandas and pylcs (environment `sbcr-analysis`). The sealed file, the draw record, the scheme, the
 annotator's records and the coding sheet are made up here, in the formats `build_scale.py`,
 and `run_annotator.py` write.
 

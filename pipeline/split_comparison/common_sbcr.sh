@@ -7,7 +7,7 @@ ROOT="${ROOT:?set ROOT, the root of the three arms}"
 export REPO ROOT
 set -uo pipefail
 source "$(conda info --base)/etc/profile.d/conda.sh"
-conda activate sbcr-analise
+conda activate sbcr-analysis
 cd "$ROOT/sbcr"
 SLOTS=5
 wait_slot() { while [ "$(pgrep -fc '[s]bcr_evaluate\.py' || echo 0)" -ge "$SLOTS" ]; do sleep 60; done; }

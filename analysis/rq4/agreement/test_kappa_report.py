@@ -3,7 +3,7 @@
 
 The packages are written by `package()` of `build_packages.py`, so the empty and identical
 candidates are read from packages as the real ones are written, which needs pandas and pylcs
-(environment `sbcr-analise`). The sheet, the scheme and the annotator's records are made up
+(environment `sbcr-analysis`). The sheet, the scheme and the annotator's records are made up
 here, in the formats the docstring of `kappa_report.py` gives.
 
     python analysis/rq4/agreement/test_kappa_report.py

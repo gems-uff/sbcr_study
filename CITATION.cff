@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this replication package, please cite the paper."
+title: "Replication package of \"Learning-based Generation vs. Search-based Combination for Merge Conflict Resolution: An Empirical Comparison of MergeGen and SBCR\""
+type: software
+license: MIT
+repository-code: "https://github.com/gems-uff/sbcr_study"
+authors:
+  - family-names: "de Souza Campos Junior"
+    given-names: "Heleno"
+    affiliation: "Federal Fluminense University"
+  - family-names: "Gresta Paulino Murta"
+    given-names: "Leonardo"
+    affiliation: "Federal Fluminense University"
+preferred-citation:
+  type: article
+  title: "Learning-based Generation vs. Search-based Combination for Merge Conflict Resolution: An Empirical Comparison of MergeGen and SBCR"
+  authors:
+    - family-names: "de Souza Campos Junior"
+      given-names: "Heleno"
+    - family-names: "Gresta Paulino Murta"
+      given-names: "Leonardo"
+  journal: "Empirical Software Engineering"
+  status: submitted
