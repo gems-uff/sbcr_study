@@ -1,0 +1,99 @@
+{
+ "version": "block 1, frozen on 2026-10-19, wording of F4, F6 and the cand rules revised on 2026-10-23",
+ "dimensions": [
+  {
+   "id": "merge",
+   "name": "Merge characteristic",
+   "rules": "What the two versions did to the base, and what the developers' resolution did with their changes. The merge covers the two conflicting versions and the resolution. Apply the first category that fits, in the order C4, C3, C2, C1. CR is for a case none of them fits.",
+   "categories": [
+    {
+     "code": "C4",
+     "name": "Large conflict",
+     "definition": "The longer of the two versions, as the conflict shows it, has more than 30 lines that are not blank. This category comes before all the others of the dimension, whatever the structure of the changes."
+    },
+    {
+     "code": "C3",
+     "name": "Resolution departs from the union",
+     "definition": "The resolution is not what combining the changes of both versions gives. It keeps the base where a version changed it, it drops a change of a version that no change of the other version forced it to drop, or it breaks the order the lines have in a version, so that a line that comes after another in a version comes before it in the resolution. When what the resolution drops is the losing side of an overlap, as C2 defines it, the case is C2."
+    },
+    {
+     "code": "C2",
+     "name": "Overlapping edits",
+     "definition": "The two versions touch the same part of the base. At least one line of the base is changed or deleted by both versions, or one version deletes a block that the other version edits, or both versions insert code at the same position of the base. The resolution keeps one side of the overlap, or mixes the two, and keeps the other changes of the versions."
+    },
+    {
+     "code": "C1",
+     "name": "Adjacent independent edits",
+     "definition": "The two versions change different lines of the base, next to each other or near each other. No line of the base is changed by both, no block deleted by one is edited by the other, and no two insertions fall at the same position. The resolution keeps the changes of both versions, in the order their lines have in the versions."
+    },
+    {
+     "code": "CR",
+     "name": "Other merge",
+     "definition": "Residual category. A case that none of C1 to C4 fits. The coder describes it in free text, which is mandatory.",
+     "residual": true
+    }
+   ]
+  },
+  {
+   "id": "cand",
+   "name": "Candidate characteristic",
+   "rules": "What sets the further candidate apart from the resolution. In F1 to F6 this is a failure of that candidate, and in the predefined values FD and FU no candidate is further, so the dimension describes the candidates and not only a failure. The further candidate is the one whose text, with all whitespace removed, is less similar to the developers' resolution. It is judged by the text and not by what the code does: two pieces of code that behave the same are close only as far as their text is. Apply first the three predefined values, in the order FN, FD, FU. Otherwise, code the further candidate by the kind of difference between its text and the resolution: changes missing (F1, F2, F3), changes in excess (F4), text cut off at one point (F5), or changes altered (F6). When more than one applies, the code is the one that explains most of the difference, and the other is the secondary category.",
+   "categories": [
+    {
+     "code": "FN",
+     "name": "No candidate",
+     "definition": "At least one of the two candidates is empty, and neither version is. An empty candidate that is the text of an empty version is not a missing candidate, and the case is coded like any other.",
+     "predefined": true
+    },
+    {
+     "code": "FD",
+     "name": "No difference between the candidates",
+     "definition": "The two candidates have the same text, whitespace aside, so no candidate is further from the resolution. It also applies when both candidates are empty and a version is empty.",
+     "predefined": true
+    },
+    {
+     "code": "FU",
+     "name": "Neither candidate clearly further from the resolution",
+     "definition": "The two candidates have code and differ, but the reading of the case does not show which one is further from the resolution, or shows them about equally close to it. It is decided by the reading of the texts, and it can be assigned in any case.",
+     "predefined": true
+    },
+    {
+     "code": "F1",
+     "name": "Misses one version's change",
+     "definition": "The further candidate is the text of version 1 or of version 2, or differs from it only in a token or two, while the resolution has changes of the other version that the candidate lacks. It includes an empty candidate that is the text of an empty version. When the change the candidate took is itself what the resolution discarded, the code is F4."
+    },
+    {
+     "code": "F2",
+     "name": "Misses both versions' changes",
+     "definition": "The further candidate is the text of the base, or differs from it only in a token or two. It has no change of either version, while the resolution has at least one."
+    },
+    {
+     "code": "F3",
+     "name": "Misses parts of the combination",
+     "definition": "The further candidate has changes of both versions, or mixes their text, but lacks lines or elements that the resolution has, in more than one place or in a place that is not its end. It is not the text of a version or of the base (F1, F2), and its text does not stop at one point with everything after it missing (F5)."
+    },
+    {
+     "code": "F4",
+     "name": "Adds a change the resolution discarded",
+     "definition": "The further candidate has a change of a version, an added line, an edit or a deletion, that the resolution does not have, because the developers kept the base there or dropped that change. It includes a candidate that combines both versions when the resolution keeps the base or a single version. The difference is a change the candidate has in excess, and not a change it lacks (F1 to F3)."
+    },
+    {
+     "code": "F5",
+     "name": "Cut off before the end",
+     "definition": "The further candidate matches the start of the resolution, or of the combination of the versions, and then stops, often in the middle of a statement, so everything the resolution has after that point is missing. The gap is at the end, at a single point, unlike F3."
+    },
+    {
+     "code": "F6",
+     "name": "Distorted combination",
+     "definition": "The further candidate has changes of the versions in the wrong place, duplicated, nested where it does not belong or mixed line by line, or has tokens that are in no version, in the base or in the resolution. What it contains is altered, rather than missing (F1 to F3, F5) or in excess (F4)."
+    },
+    {
+     "code": "FR",
+     "name": "Other difference from the resolution",
+     "definition": "Residual category. A case that none of the categories above fits. The coder describes it in free text, which is mandatory.",
+     "residual": true
+    }
+   ]
+  }
+ ]
+}
