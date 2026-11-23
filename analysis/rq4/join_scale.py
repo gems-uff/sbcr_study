@@ -312,8 +312,8 @@ def render(report, dims, freq):
                     and f["dimension"] == dim and f["code"] == code)
 
     lines = ["# Join of the RQ4 labels at scale with band and tool", "",
-             f"Generated {report['generated']} by `analysis/rq4/join_scale.py` at commit "
-             f"`{report['git_commit']}`" + (", with local changes" if report["git_dirty"] else "") + ".", "",
+             f"Generated {report['generated']} by `analysis/rq4/join_scale.py`"
+             + (", with local changes" if report["git_dirty"] else "") + ".", "",
              "## Inputs", ""]
     lines += [f"- {k}: `{v}`" for k, v in report["inputs"].items()]
     lines += ["", "The bands are labeled whole, so the shares below are those of the population of the bands in "
@@ -450,10 +450,10 @@ def main(argv=None, expected_cases=EXPECTED_CASES):
                 empty.append({"band": b, "tool": t, "cases": len(sub),
                               "above_sbcr_limit": sum(r["sbcr_out_of_limits"] for r in sub),
                               "codes": dict(Counter(r[f"code_{cand}"] for r in sub))})
-    commit, dirty = git_state()
+    _, dirty = git_state()
     report = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "git_commit": commit, "git_dirty": dirty,
+        "git_dirty": dirty,
         "inputs": {"sealed_sha256": sha256_file(sealed), "coding_sheet_sha256": draw_record["coding_sheet_sha256"],
                    "scheme_version": version, "scheme_sha256": scheme_sha, "description": description,
                    "labeling": labeling, "script_sha256": sha256_file(__file__)},

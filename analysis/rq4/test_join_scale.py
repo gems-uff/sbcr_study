@@ -218,8 +218,8 @@ class JoinTest(unittest.TestCase):
         self.assertEqual((b1["measures"]["cand"]["approval_vs_authors_all"]["cases"],
                           b1["measures"]["cand"]["approval_vs_authors_all"]["agreements"]), (2, 1))
         self.assertIn("approval, authors, all of block 1", printed)
-        self.assertEqual(report["git_commit"], js.git_state()[0])
-        self.assertIsNotNone(report["git_commit"])
+        self.assertNotIn("git_commit", report)
+        self.assertIn("by `analysis/rq4/join_scale.py`", printed)
         block1 = self.read("block1.csv")
         self.assertEqual([(r["draw_case"], r["case"], r["scale_cand"], r["approval_cand"]) for r in block1],
                          [("B1-01", "S0006", "FU", "F1")])
