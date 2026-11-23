@@ -5,7 +5,7 @@ The shares of `times_per_language.csv` times the number of paired conflicts, for
 the combination population.
 
 Input: `times_per_language.csv` of a root (`times_per_language.py`).
-Output: one line, `n faster slower ties`, on the standard output.
+Output: one line, `paired <n> faster <k> <share> slower <k> <share> ties <k>`, on the standard output.
 
     python analysis/rq1_rq3/faster_slower_counts.py <root>/times_per_language.csv [--dataset dataset1]
 """
@@ -22,8 +22,9 @@ def main():
     t = pd.read_csv(args.table)
     d = t[(t.dataset == args.dataset) & (t.population == "combination")].iloc[0]
     n = int(d.paired_n)
-    print(n, round(d.sbcr_faster_share * n), round(d.sbcr_slower_share * n),
-          round((1 - d.sbcr_faster_share - d.sbcr_slower_share) * n))
+    faster, slower = round(d.sbcr_faster_share * n), round(d.sbcr_slower_share * n)
+    ties = round((1 - d.sbcr_faster_share - d.sbcr_slower_share) * n)
+    print(f"paired {n} faster {faster} {100 * faster / n:.1f}% slower {slower} {100 * slower / n:.1f}% ties {ties}")
 
 
 if __name__ == "__main__":
