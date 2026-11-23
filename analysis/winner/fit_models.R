@@ -36,6 +36,10 @@ suppressPackageStartupMessages(library(lme4))
 
 USAGE <- "usage: fit_models.R <folder with conflicts.csv> [--two] [--out=<folder>]"
 args <- commandArgs(trailingOnly = TRUE)
+if (any(args %in% c("-h", "--help"))) {
+  cat(USAGE, "\n")
+  quit(status = 0)
+}
 flags <- args[startsWith(args, "--")]
 if (length(args) - length(flags) != 1 || !all(flags == "--two" | startsWith(flags, "--out=")) ||
     sum(startsWith(flags, "--out=")) > 1) stop(USAGE)

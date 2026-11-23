@@ -28,6 +28,10 @@ suppressPackageStartupMessages(library(lme4))
 
 USAGE <- "usage: bootstrap_main.R <folder with conflicts.csv> [resamples] [--two] [--out=<folder>]"
 args <- commandArgs(trailingOnly = TRUE)
+if (any(args %in% c("-h", "--help"))) {
+  cat(USAGE, "\n")
+  quit(status = 0)
+}
 flags <- args[startsWith(args, "--")]
 positional <- args[!startsWith(args, "--")]
 if (!length(positional) %in% 1:2 || !all(flags == "--two" | startsWith(flags, "--out=")) ||
