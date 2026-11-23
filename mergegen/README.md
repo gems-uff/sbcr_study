@@ -22,7 +22,12 @@ The code resolves its paths relative to the working directory: `./codet5-small-l
 **Smoke test.** `verify_env.py` checks the versions of the pinned dependencies, the GPU and `git`, loads a checkpoint of the models archive and compares the SHA-256 of its outputs over the ten conflicts of `environment/fixtures/smoke_conflicts.json` with `environment/reference_digests.json`.
 
 ```bash
-mergegen/environment/setup_env.sh
+mergegen/environment/setup_env.sh --models <archives>/partition-1/mergeGen/MODELS --backbone <dir>/codet5-small-local
+```
+
+The reference digests were recorded over `Salesforce/codet5-small` at revision `b1ee9570c289f21b5922b9c768a1ce12957bf968`, whose files are the bytes of the backbone the models were trained on. `setup_env.sh` without `--models` only creates the environment, and `verify_env.py` runs on one checkpoint:
+
+```bash
 conda activate mergegen-repl
 python mergegen/environment/verify_env.py --backbone <dir>/codet5-small-local \
     --checkpoint <models>/dataset2_Java_mg/best_model.pt --reference dataset2_Java_mg
