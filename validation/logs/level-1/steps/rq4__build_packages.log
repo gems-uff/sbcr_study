@@ -1,0 +1,7 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq4/build_packages.py --root /w/partition-1 --sealed /w/rq4/sealed/sealed_sample.csv --draw /w/rq4/sample --data-root /w/datasets/source --out /w/validation-new/sample-packages
+
+packages: 160 ({'sample': 150, 'pilot': 10}); candidates match the sealed similarities
+cases out of SBCR's size limit, shown with an empty SBCR candidate: 0
+written to /w/validation-new/sample-packages/packages and /w/validation-new/sample-packages/index.md; reveal files in /w/rq4/sealed/reveal
+
+exit 0, 7 s

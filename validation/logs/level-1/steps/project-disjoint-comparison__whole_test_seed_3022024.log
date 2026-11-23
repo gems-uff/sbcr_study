@@ -1,0 +1,161 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/compare_approaches.py --root /w/split-comparison --out /w/project-disjoint-comparison/whole-test/seed-3022024 --seeds 3022024
+
+=== spread across the 1 seeds ===
+one seed only, no spread
+
+=== SBCR vs MergeGen: same conflicts, same metric ===
+
+--- SBCR ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.8081  0.8127  0.7969
+dataset2_CSharp      0.7679  0.7388  0.7589
+dataset2_Java        0.7799  0.7725  0.7715
+dataset2_JavaScript  0.7845  0.7976  0.8020
+dataset2_TypeScript  0.7784  0.7838  0.8077
+
+--- MergeGen ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.9132  0.9199  0.8859
+dataset2_CSharp      0.8826  0.8482  0.8243
+dataset2_Java        0.8993  0.8861  0.8731
+dataset2_JavaScript  0.8989  0.8994  0.8839
+dataset2_TypeScript  0.8951  0.8947  0.8922
+
+--- SBCR − MergeGen ---
+arm                  random      mg      pd
+dataset                                    
+dataset1            -0.1051 -0.1072 -0.0890
+dataset2_CSharp     -0.1147 -0.1094 -0.0654
+dataset2_Java       -0.1194 -0.1135 -0.1016
+dataset2_JavaScript -0.1145 -0.1018 -0.0819
+dataset2_TypeScript -0.1167 -0.1109 -0.0845
+
+--- SBCR wins (share of conflicts) ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.1512  0.1457  0.1985
+dataset2_CSharp      0.1447  0.1722  0.2271
+dataset2_Java        0.1316  0.1526  0.1736
+dataset2_JavaScript  0.1682  0.1649  0.1980
+dataset2_TypeScript  0.1454  0.1301  0.1633
+
+--- tie ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.2769  0.2459  0.2313
+dataset2_CSharp      0.2747  0.2070  0.1868
+dataset2_Java        0.2312  0.1957  0.2225
+dataset2_JavaScript  0.1276  0.2113  0.2196
+dataset2_TypeScript  0.1964  0.1837  0.2398
+
+--- MergeGen wins ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.5719  0.6084  0.5701
+dataset2_CSharp      0.5806  0.6209  0.5861
+dataset2_Java        0.6372  0.6517  0.6040
+dataset2_JavaScript  0.7042  0.6239  0.5824
+dataset2_TypeScript  0.6582  0.6862  0.5969
+
+--- paired rank-biserial (+ favors SBCR) ---
+arm                  random      mg      pd
+dataset                                    
+dataset1            -0.6243 -0.6832 -0.5339
+dataset2_CSharp     -0.6361 -0.5436 -0.3931
+dataset2_Java       -0.6930 -0.6238 -0.5928
+dataset2_JavaScript -0.6579 -0.6192 -0.5226
+dataset2_TypeScript -0.6710 -0.7050 -0.5964
+
+--- SBCR median ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.8680  0.8412  0.8413
+dataset2_CSharp      0.8738  0.8043  0.8496
+dataset2_Java        0.8420  0.8290  0.8272
+dataset2_JavaScript  0.8462  0.8665  0.8739
+dataset2_TypeScript  0.8591  0.8309  0.8600
+
+--- MergeGen median ---
+arm                  random   mg   pd
+dataset                              
+dataset1                1.0  1.0  1.0
+dataset2_CSharp         1.0  1.0  1.0
+dataset2_Java           1.0  1.0  1.0
+dataset2_JavaScript     1.0  1.0  1.0
+dataset2_TypeScript     1.0  1.0  1.0
+
+--- SBCR exact match (share of conflicts) ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.2969  0.2495  0.2423
+dataset2_CSharp      0.2473  0.1648  0.1630
+dataset2_Java        0.1858  0.1584  0.1724
+dataset2_JavaScript  0.1276  0.1980  0.2005
+dataset2_TypeScript  0.2041  0.1480  0.2219
+
+--- MergeGen exact match (share of conflicts) ---
+arm                  random      mg      pd
+dataset                                    
+dataset1             0.6466  0.6448  0.5811
+dataset2_CSharp      0.6667  0.5678  0.5055
+dataset2_Java        0.6552  0.6302  0.5673
+dataset2_JavaScript  0.5949  0.5965  0.5402
+dataset2_TypeScript  0.6378  0.5893  0.5689
+
+--- p (paired Wilcoxon) ---
+arm                    random       mg       pd
+dataset                                        
+dataset1              4.3e-27  2.1e-33  2.0e-21
+dataset2_CSharp       5.3e-28  1.1e-22  7.1e-13
+dataset2_Java        1.9e-105  1.1e-89  1.5e-78
+dataset2_JavaScript   2.3e-76  1.6e-61  6.8e-44
+dataset2_TypeScript   5.6e-25  8.2e-28  4.5e-19
+
+--- rq1_rq2: out-of-limits conflicts scored 0 vs. left out ---
+            dataset    arm    n  out_of_limits  difference  difference_excl  change
+    dataset2_CSharp     mg  546             18     -0.1094          -0.1100  0.0006
+    dataset2_CSharp     pd  546             20     -0.0654          -0.0648 -0.0006
+    dataset2_CSharp random  546             14     -0.1147          -0.1150  0.0002
+      dataset2_Java     mg 1717             23     -0.1135          -0.1137  0.0002
+      dataset2_Java     pd 1717             24     -0.1016          -0.1015 -0.0000
+      dataset2_Java random 1717             10     -0.1194          -0.1196  0.0002
+dataset2_JavaScript     mg 1207             10     -0.1018          -0.1021  0.0003
+dataset2_JavaScript     pd 1207             12     -0.0819          -0.0820  0.0001
+dataset2_JavaScript random 1207              7     -0.1145          -0.1147  0.0003
+dataset2_TypeScript     mg  392              2     -0.1109          -0.1111  0.0002
+dataset2_TypeScript     pd  392              1     -0.0845          -0.0844 -0.0001
+dataset2_TypeScript random  392              1     -0.1167          -0.1168  0.0001
+largest change in the mean difference: 0.0006
+
+=== RQ3: trained or tuned on the other dataset ===
+
+--- SBCR (crossed) ---
+arm            random      mg      pd
+dataset                              
+dataset1       0.8076  0.8159  0.7980
+dataset2_Java  0.7739  0.7651  0.7617
+
+--- MergeGen (crossed) ---
+arm            random      mg      pd
+dataset                              
+dataset1       0.9068  0.9156  0.8900
+dataset2_Java  0.8968  0.8777  0.8583
+
+--- SBCR − MergeGen ---
+arm            random      mg      pd
+dataset                              
+dataset1      -0.0993 -0.0997 -0.0921
+dataset2_Java -0.1229 -0.1126 -0.0966
+
+--- rq3: out-of-limits conflicts scored 0 vs. left out ---
+      dataset    arm    n  out_of_limits  difference  difference_excl  change
+dataset2_Java     mg 1717             23     -0.1126          -0.1129  0.0003
+dataset2_Java     pd 1717             24     -0.0966          -0.0966  0.0001
+dataset2_Java random 1717             10     -0.1229          -0.1228 -0.0001
+largest change in the mean difference: 0.0003
+
+written to /w/project-disjoint-comparison/whole-test/seed-3022024/comparison.csv
+
+exit 0, 2 s

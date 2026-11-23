@@ -1,0 +1,7 @@
+labeling prompt of annotator-instructions-v1.md with the scheme: aec19954c214f80bd2281d35760b2cbaee883a2d5f1d680ac69074d8daec97b0
+  block1-labeling: 50/50 records with this prompt
+  scale-labeling: 1979/1979 records with this prompt
+derivation prompt: b817ad003fdcebd4e757e18030b1632ad7a845f78f93e5c389378ef06c5b23da, schema: 667295657ed04d99c167aee81385e9d780175bb97e57245c6aada39e72e1cdea
+  2/2 derivation records with this prompt and schema
+
+prompts equal to the run records

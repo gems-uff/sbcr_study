@@ -1,0 +1,6 @@
+            dataset  test_1  test_2  test_3  in_all  pair_min_pct  pair_max_pct  all_min_pct  all_max_pct  pct_1_in_2  pct_1_in_3  pct_2_in_1  pct_2_in_3  pct_3_in_1  pct_3_in_2
+           dataset1     549     549     548       5           7.3          12.2          0.9          0.9         7.3         9.5         7.3        12.2         9.5        12.2
+      dataset2_Java    5764    5767    5762      36           9.0          10.3          0.6          0.6         9.1         9.0         9.1        10.3         9.0        10.3
+    dataset2_CSharp    1637    1632    1632      15           8.0          12.1          0.9          0.9         8.0        10.3         8.0        12.1        10.3        12.1
+dataset2_JavaScript    4673    4631    4665      16           7.4          11.3          0.3          0.3        10.9        11.3        11.0         7.5        11.3         7.4
+dataset2_TypeScript    1151    1144    1154      29           8.0          14.9          2.5          2.5         8.0        14.8         8.0        14.9        14.7        14.8

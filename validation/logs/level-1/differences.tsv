@@ -1,0 +1,63 @@
+partition-1:mergegen_similarity	partition-1/logs/similarity_mergegen.log	elapsed times	
+partition-1:compare_approaches	partition-1/logs/consolidate.log	paths	
+partition-2:mergegen_similarity	partition-2/logs/similarity_mergegen.log	elapsed times	
+partition-2:compare_approaches	partition-2/logs/consolidate.log	paths	
+partition-3:mergegen_similarity	partition-3/logs/similarity_mergegen.log	elapsed times	
+partition-3:compare_approaches	partition-3/logs/consolidate.log	paths	
+chronological:mergegen_similarity	chronological/logs/similarity_mergegen.log	elapsed times	
+chronological:compare_approaches	chronological/logs/consolidate.log	paths	
+split-comparison:sbcr_similarity	split-comparison/sbcr_similarities.csv	same rows in another order	
+partition-1-sbcr-seeds:compare_approaches	partition-1-sbcr-seeds/logs/consolidate.log	paths	
+partition-1-sbcr-seeds:seed_spread	partition-1-sbcr-seeds/logs/seed_spread.log	paths	
+partition_spread	partition-spread/spread.log	paths	
+partition-spread:leakage_effect	partition-spread/common_set/common_set.csv	content	rows in another order; 38 cells differ, largest numeric difference 0.0574; first: gap_random: -0.06610306260112617 vs -0.059269513710412274; gap_mg: -0.009212249471572915 vs -0.003584052440568317; gap_pd: -0.058376916294519715 vs -0.05167525799541179; change_pd_minus_random: 0.007726146306606473 vs 0.0075942557150004844; ci95: 0.09711028297883742 vs 0.09707890059879273
+partition-spread:leakage_effect	partition-spread/common_set/leakage_effect.csv	content	rows in another order; 81 cells differ, largest numeric difference 0.0131; first: sim_other: 0.8613470154039887 vs 0.8556185693121088; sim_pd: 0.8742621042586641 vs 0.8682550244522064; difference: -0.012915088854675408 vs -0.012636455140097636; ci95: 0.027591392154761557 vs 0.027386399144443397; p: 0.41234652788813886 vs 0.4254511364591589
+partition-spread:leakage_effect	partition-spread/common_set.log	content	archived: train random vs pd dataset1 98 0.8785 0.8602 0.0183 0.0274 0.1829 0.5816 0.5408 | new: train random vs pd dataset1 98 0.8824 0.8639 0.0185 0.0275 0.1742 0.5816 0.5408
+split-comparison:leakage_effect	split-comparison/leakage_effect.log	paths	
+split-comparison:leakage_effect partition-1	split-comparison/partition-1/leakage_effect.log	paths	
+project-disjoint-comparison:split-comparison	project-disjoint-comparison/run-split-comparison.log	paths	
+project-disjoint-comparison:partition-1	project-disjoint-comparison/run-partition-1.log	paths	
+project-disjoint-comparison:whole test, seed 3022024	project-disjoint-comparison/whole-test-seed-3022024.log	lines in another order	
+project-disjoint-comparison:whole test, five seeds	project-disjoint-comparison/whole-test-five-seeds.log	lines in another order	
+rq3_gaps	rq3-statistics/rq3_gaps_s3022024.json	provenance	
+rq3_gaps	rq3-statistics/rq3_gaps_s3022024.log	paths	
+chronological:chronological_effects	chronological/effects/chrono_effects.json	provenance	
+chronological:chronological_effects	chronological/logs/chrono_effects.log	paths	
+commit-dates:temporal_structure	commit-dates/partition-1/temporal_structure.json	provenance	
+commit-dates:temporal_structure	commit-dates/partition-1.log	paths	
+survey	dataset-overlap/dataset_overlap.log	paths	
+mergegen-decoding:decode	mergegen-decoding/decode.json	provenance	
+mergegen-decoding:decode	mergegen-decoding/decode.log	paths	
+mergegen-decoding:measure	mergegen-decoding/measure.log	paths	
+mergegen-decoding:measure	mergegen-decoding/measure.json	provenance	
+winner-model-three-predictors:build_table	winner-model-three-predictors/build_table.json	provenance	
+winner-model-three-predictors:fit_models	winner-model-three-predictors/fit_models.log	content	archived: Running under: Ubuntu 24.04.4 LTS | new: Running under: Ubuntu 24.04.5 LTS
+winner-model-three-predictors:fit_models	winner-model-three-predictors/fit_models.stdout	content	archived: === logistic: logistic mixed model of SBCR winning, ties left out === | new: Computing profile confidence intervals ...
+winner-model-three-predictors:bootstrap_main	winner-model-three-predictors/bootstrap_main.log	content	archived: Running under: Ubuntu 24.04.4 LTS | new: Running under: Ubuntu 24.04.5 LTS
+winner-model-two-predictors/stored:build_table	winner-model-two-predictors/stored/build_table.json	provenance	
+winner-model-two-predictors/stored/three:fit_models	winner-model-two-predictors/stored/three/coefficients.csv	content	rows in another order; 13 cells differ, largest numeric difference 3.54e-06; first: estimate: -0.0544017606653594 vs -0.0544032730447112; ci_low: -0.354557107112971 vs -0.354557157222873; ci_high: 0.243686732822695 vs 0.243686666020581; p_lrt: 0.722034072088299 vs 0.722034070913564; p_holm: 0.722034072088299 vs 0.722034070913564
+winner-model-two-predictors/stored/three:fit_models	winner-model-two-predictors/stored/three/fit.csv	content	rows in another order; 1 cells differ, largest numeric difference 7.54e-07; first: project_sd: 0.967014478037805 vs 0.9670137236976
+winner-model-two-predictors/stored/three:fit_models	winner-model-two-predictors/stored/three/fit_models.log	content	archived: (Intercept) -0.76492 0.39867 -1.919 0.055025 . | new: (Intercept) -0.76493 0.39868 -1.919 0.055024 .
+winner-model-two-predictors/stored/three:fit_models	winner-model-two-predictors/stored/three/fit_models.stdout	content	archived: Computing profile confidence intervals ... | new: conflicts: 4413 projects: 1590
+winner-model-two-predictors/stored/two:fit_models	winner-model-two-predictors/stored/two/coefficients.csv	content	rows in another order; 10 cells differ, largest numeric difference 7.1e-06; first: estimate: -0.0802749801791621 vs -0.0802778779416861; ci_low: -0.381848978734838 vs -0.381849173750399; ci_high: 0.219249101138958 vs 0.219248995275067; p_lrt: 0.600857410434532 vs 0.600857411276156; p_holm: 0.600857410434532 vs 0.600857411276156
+winner-model-two-predictors/stored/two:fit_models	winner-model-two-predictors/stored/two/fit.csv	content	3 cells differ, largest numeric difference 4.97e-07; first: project_sd: 0.998268101590338 vs 0.998267834578615; auc_fixed: 0.623447583372457 vs 0.623448080702787; auc_conditional: 0.889026704649442 vs 0.889026207319111
+winner-model-two-predictors/stored/two:fit_models	winner-model-two-predictors/stored/two/fit_models.log	content	archived: (Intercept) -0.86303 0.40035 -2.156 0.031108 * | new: (Intercept) -0.86305 0.40034 -2.156 0.031102 *
+winner-model-two-predictors/stored/two:fit_models	winner-model-two-predictors/stored/two/fit_models.stdout	content	archived: Computing profile confidence intervals ... | new: conflicts: 4413 projects: 1590
+winner-model-two-predictors/decoded:build_table	winner-model-two-predictors/decoded/build_table.json	provenance	
+winner-model-two-predictors/decoded/two:fit_models	winner-model-two-predictors/decoded/two/coefficients.csv	content	rows in another order; 9 cells differ, largest numeric difference 1.23e-05; first: estimate: -0.0139959253810041 vs -0.0139998527854164; ci_high: 0.287470520963246 vs 0.287470518414722; p_lrt: 0.927664907175504 vs 0.927664916596866; p_holm: 0.927664907175504 vs 0.927664916596866; estimate: 2.49922977709845 vs 2.49924208604183
+winner-model-two-predictors/decoded/two:fit_models	winner-model-two-predictors/decoded/two/fit.csv	content	3 cells differ, largest numeric difference 2.06e-06; first: project_sd: 0.960100681754145 vs 0.960101856521555; auc_fixed: 0.631948941536854 vs 0.631946880816705; auc_conditional: 0.885583665495662 vs 0.885583150315625
+winner-model-two-predictors/decoded/two:fit_models	winner-model-two-predictors/decoded/two/fit_models.log	content	archived: (Intercept) -1.08687 0.40219 -2.702 0.006884 ** | new: (Intercept) -1.08689 0.40216 -2.703 0.006879 **
+winner-model-two-predictors/decoded/two:fit_models	winner-model-two-predictors/decoded/two/fit_models.stdout	content	archived: Computing profile confidence intervals ... | new: conflicts: 4413 projects: 1590
+winner-model-two-predictors/decoded/three:fit_models	winner-model-two-predictors/decoded/three/coefficients.csv	content	rows in another order; 12 cells differ, largest numeric difference 4.88e-06; first: estimate: -0.0183350793109595 vs -0.0183336951619751; ci_high: 0.283467190270413 vs 0.283467190954441; p_lrt: 0.905437187021136 vs 0.905437188523892; p_holm: 0.905437187021136 vs 0.905437188523892; estimate: 2.49882347891347 vs 2.49881860055946
+winner-model-two-predictors/decoded/three:fit_models	winner-model-two-predictors/decoded/three/fit.csv	content	rows in another order; 1 cells differ, largest numeric difference 1.96e-07; first: project_sd: 0.962630710263022 vs 0.962630514575989
+winner-model-two-predictors/decoded/three:fit_models	winner-model-two-predictors/decoded/three/fit_models.log	content	archived: (Intercept) -1.12866 0.40535 -2.784 0.005362 ** | new: (Intercept) -1.12865 0.40533 -2.785 0.005361 **
+winner-model-two-predictors/decoded/three:fit_models	winner-model-two-predictors/decoded/three/fit_models.stdout	content	archived: Computing profile confidence intervals ... | new: conflicts: 4413 projects: 1590
+rq4:draw_sample	validation-new/sample/coding_sheet.csv	date of the run	
+rq4:draw_sample	validation-new/sample/draw.json	provenance	
+rq4:build_scale	validation-new/scale/coding_sheet.csv	date of the run	
+rq4:build_scale	validation-new/scale/draw.json	provenance	
+consistency-checks:band_code_checks	consistency-checks/band-codes-against-limits.log	spacing	
+rq4:sbcr_candidate_origin	validation-new/sbcr-candidate-origin/report.json	provenance	
+rq4:sbcr_candidate_origin	validation-new/sbcr-candidate-origin/report.md	content	archived: Run on <time>, root `partition-1`, encoding utf-8. 4368 of 4413 conflicts processed by SBCR. Score check failed in 0 of 4368 non-empty candidates. | new: Run on <time>, commit <hash>, root `partition-1`, encoding utf-8. 4368 of 4413 conflicts processed by SBCR. Score check failed in 0 of 4368 non-empty candidates.
+rq4:join_scale	validation-new/join/join_report.json	provenance	
+rq4:join_scale	validation-new/join/join_report.md	hashes and commits	

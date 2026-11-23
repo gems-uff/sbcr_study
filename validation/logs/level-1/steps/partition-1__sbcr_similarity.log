@@ -1,0 +1,21 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/similarity/sbcr_similarity.py --root /w/partition-1
+
+common_dataset1_mg: 549 conflicts
+common_dataset2_CSharp_mg: 526 conflicts
+common_dataset2_JavaScript_mg: 1195 conflicts
+common_dataset2_Java_mg: 1693 conflicts
+common_dataset2_TypeScript_mg: 391 conflicts
+common_rq3_ds1_mg: 549 conflicts
+common_rq3_java_mg: 1693 conflicts
+dataset1_mg_s3022024: 549 conflicts
+dataset2_CSharp_mg_s3022024: 538 conflicts
+dataset2_JavaScript_mg_s3022024: 1190 conflicts
+dataset2_Java_mg_s3022024: 1699 conflicts
+dataset2_TypeScript_mg_s3022024: 392 conflicts
+rq3_ds1_mg_s3022024: 549 conflicts
+rq3_java_mg_s3022024: 1699 conflicts
+
+written: 13,212 rows
+mean difference to the original column: +0.0008
+
+exit 0, 83 s

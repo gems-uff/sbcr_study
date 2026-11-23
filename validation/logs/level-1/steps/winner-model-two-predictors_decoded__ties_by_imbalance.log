@@ -1,0 +1,13 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/winner/ties_by_imbalance.py /w/winner-model-two-predictors/decoded
+
+            group  imbalance_min  imbalance_max    n  ties  ties_share  with_winner  sbcr_wins  sbcr_wins_share  mean_difference
+       quartile 1         0.0000         0.0914 1104   308      0.2790          796        176           0.2211          -0.0325
+       quartile 2         0.0920         0.2848 1103   272      0.2466          831        154           0.1853          -0.0743
+       quartile 3         0.2851         0.6064 1103   225      0.2040          878        157           0.1788          -0.1273
+       quartile 4         0.6068         1.0000 1103   138      0.1251          965        214           0.2218          -0.1795
+one empty version         1.0000         1.0000  575    90      0.1565          485         89           0.1835          -0.1648
+              all         0.0000         1.0000 4413   943      0.2137         3470        701           0.2020          -0.1034
+
+written in /w/winner-model-two-predictors/decoded/ties_by_imbalance.csv
+
+exit 0, 1 s

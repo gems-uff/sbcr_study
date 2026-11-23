@@ -1,0 +1,51 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/datasets/resolution_categories.py --data-root /w/datasets/source
+
+========================================================================
+Classification by category over the complete Dataset2
+========================================================================
+
+Java: total = 65742
+  V1=12783  V2=12420  ConcatV1V2=5416  ConcatV2V1=2271  New code=12485  None=664  Combination=19703
+
+CSharp: total = 20695
+  V1=3154  V2=4548  ConcatV1V2=1254  ConcatV2V1=622  New code=4604  None=77  Combination=6436
+
+JavaScript: total = 51485
+  V1=11717  V2=8415  ConcatV1V2=3928  ConcatV2V1=874  New code=11284  None=2121  Combination=13146
+
+TypeScript: total = 13504
+  V1=2133  V2=1621  ConcatV1V2=1491  ConcatV2V1=426  New code=2883  None=50  Combination=4900
+
+Dataset2 (sum of the four languages):
+  V1=29787  V2=27004  ConcatV1V2=12089  ConcatV2V1=4193  New code=31256  None=2912  Combination=44185
+  total = 151426
+  Combination (kept) = 44185   excluded = 107241
+
+========================================================================
+Combination vs the combination partitions actually used
+========================================================================
+
+Java: Combination = 19703   train 15795 / val 1917 / test 1991   (sum 19703)
+
+CSharp: Combination = 6436   train 5171 / val 641 / test 624   (sum 6436)
+
+JavaScript: Combination = 13146   train 10487 / val 1352 / test 1307   (sum 13146)
+
+TypeScript: Combination = 4900   train 3918 / val 475 / test 507   (sum 4900)
+
+========================================================================
+Count of projects (unique repo) per language
+========================================================================
+  Java: repos in the complete dataset = 2957   repos that contribute combination chunks = 2203
+  CSharp: repos in the complete dataset = 1280   repos that contribute combination chunks = 908
+  JavaScript: repos in the complete dataset = 4545   repos that contribute combination chunks = 3205
+  TypeScript: repos in the complete dataset = 1083   repos that contribute combination chunks = 817
+
+========================================================================
+Dataset1 (already filtered to combination by its source)
+========================================================================
+total = 6269
+  V1=3  V2=3  ConcatV1V2=0  ConcatV2V1=0  New code=5  None=0  Combination=6258
+partitions: train 5015 / val 626 / test 628   (sum 6269)
+
+exit 0, 10 s

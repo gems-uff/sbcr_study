@@ -1,0 +1,264 @@
+$ conda run --no-capture-output -n winner-model Rscript /package/analysis/winner/fit_models.R /w/winner-model-two-predictors/stored --two --out=/w/winner-model-two-predictors/stored/two
+
+conflicts: 4413   projects: 1590 
+
+=== main: linear mixed model of SBCR − MergeGen === 
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: difference ~ imbalance + input_above_500 + log_size + dataset +  
+    (1 | project)
+   Data: t
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   -717.2    -653.3     368.6    -737.2      4403 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.3950 -0.4866  0.1580  0.4621  5.7207 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ project  (Intercept) 0.004106 0.06408 
+ Residual             0.046185 0.21491 
+Number of obs: 4413, groups:  project, 1590
+
+Fixed effects:
+                            Estimate Std. Error t value
+(Intercept)                 0.093780   0.027840   3.369
+imbalance                  -0.170366   0.010527 -16.184
+input_above_500TRUE         0.307053   0.018649  16.465
+log_size                   -0.021029   0.004111  -5.116
+datasetdataset2_Java       -0.022139   0.012430  -1.781
+datasetdataset2_CSharp     -0.007444   0.015981  -0.466
+datasetdataset2_JavaScript -0.030614   0.013128  -2.332
+datasetdataset2_TypeScript -0.040787   0.016877  -2.417
+
+Correlation of Fixed Effects:
+            (Intr) imblnc i__500 log_sz dts2_J dt2_CS dt2_JS
+imbalance   -0.335                                          
+in__500TRUE  0.603 -0.166                                   
+log_size    -0.905  0.195 -0.670                            
+dtstdtst2_J -0.313  0.013 -0.031 -0.025                     
+dtstdts2_CS -0.266  0.020 -0.040 -0.006  0.585              
+dtstdts2_JS -0.377  0.093 -0.063  0.042  0.710  0.572       
+dtstdts2_TS -0.296  0.051 -0.039  0.039  0.550  0.443  0.546
+Computing profile confidence intervals ...
+
+=== logistic: logistic mixed model of SBCR winning, ties left out === 
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: sbcr_wins ~ imbalance + input_above_500 + log_size + dataset +  
+    (1 | project)
+   Data: tw
+Control: glmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e+05))
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   3254.9    3310.3   -1618.5    3236.9      3481 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-2.1965 -0.4121 -0.3395 -0.2599  4.0769 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ project (Intercept) 0.9965   0.9983  
+Number of obs: 3490, groups:  project, 1405
+
+Fixed effects:
+                           Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                -0.86305    0.40034  -2.156 0.031102 *  
+imbalance                  -0.08027    0.15358  -0.523 0.601178    
+input_above_500TRUE         2.55958    0.23707  10.797  < 2e-16 ***
+log_size                   -0.07246    0.05713  -1.268 0.204704    
+datasetdataset2_Java       -0.63001    0.17655  -3.569 0.000359 ***
+datasetdataset2_CSharp     -0.38640    0.23228  -1.663 0.096218 .  
+datasetdataset2_JavaScript -0.70521    0.18965  -3.718 0.000200 ***
+datasetdataset2_TypeScript -0.70788    0.24567  -2.881 0.003960 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) imblnc i__500 log_sz dts2_J dt2_CS dt2_JS
+imbalance   -0.374                                          
+in__500TRUE  0.604 -0.198                                   
+log_size    -0.904  0.235 -0.700                            
+dtstdtst2_J -0.296  0.012 -0.076 -0.013                     
+dtstdts2_CS -0.245  0.009 -0.059 -0.003  0.547              
+dtstdts2_JS -0.353  0.094 -0.110  0.051  0.672  0.532       
+dtstdts2_TS -0.288  0.052 -0.073  0.058  0.513  0.407  0.511
+Computing profile confidence intervals ...
+Warning message:
+In zeta(shiftpar, start = opt[seqpar1][-w]) :
+  slightly lower deviances (diff=-0.000319216) detected
+
+=== within_limits: main model without the conflicts above SBCR's limit === 
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: difference ~ imbalance + input_above_500 + log_size + dataset +  
+    (1 | project)
+   Data: tl
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   -729.0    -665.1     374.5    -749.0      4358 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.5685 -0.4775  0.1558  0.4665  5.7000 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ project  (Intercept) 0.004198 0.06479 
+ Residual             0.045898 0.21424 
+Number of obs: 4368, groups:  project, 1580
+
+Fixed effects:
+                            Estimate Std. Error t value
+(Intercept)                 0.031345   0.029439   1.065
+imbalance                  -0.170304   0.010557 -16.132
+input_above_500TRUE         0.318462   0.018708  17.023
+log_size                   -0.010799   0.004407  -2.450
+datasetdataset2_Java       -0.020912   0.012453  -1.679
+datasetdataset2_CSharp     -0.006082   0.016031  -0.379
+datasetdataset2_JavaScript -0.027714   0.013151  -2.107
+datasetdataset2_TypeScript -0.039475   0.016886  -2.338
+
+Correlation of Fixed Effects:
+            (Intr) imblnc i__500 log_sz dts2_J dt2_CS dt2_JS
+imbalance   -0.313                                          
+in__500TRUE  0.554 -0.165                                   
+log_size    -0.916  0.178 -0.607                            
+dtstdtst2_J -0.297  0.012 -0.028 -0.022                     
+dtstdts2_CS -0.252  0.018 -0.039 -0.003  0.582              
+dtstdts2_JS -0.368  0.093 -0.061  0.051  0.708  0.570       
+dtstdts2_TS -0.283  0.051 -0.038  0.039  0.550  0.442  0.546
+Computing profile confidence intervals ...
+boundary (singular) fit: see help('isSingular')
+
+=== merge_nested: main model with merge nested in project === 
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: difference ~ imbalance + input_above_500 + log_size + dataset +  
+    (1 | project/merge)
+   Data: t
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   -763.9    -693.6     393.0    -785.9      4402 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-4.5738 -0.4683  0.1442  0.4370  4.7386 
+
+Random effects:
+ Groups        Name        Variance Std.Dev.
+ merge:project (Intercept) 0.00891  0.09439 
+ project       (Intercept) 0.00000  0.00000 
+ Residual                  0.04151  0.20374 
+Number of obs: 4413, groups:  merge:project, 2486; project, 1590
+
+Fixed effects:
+                            Estimate Std. Error t value
+(Intercept)                 0.085294   0.027806   3.067
+imbalance                  -0.165688   0.010634 -15.582
+input_above_500TRUE         0.308682   0.018617  16.580
+log_size                   -0.020306   0.004158  -4.884
+datasetdataset2_Java       -0.020784   0.011911  -1.745
+datasetdataset2_CSharp     -0.011579   0.015442  -0.750
+datasetdataset2_JavaScript -0.029424   0.012608  -2.334
+datasetdataset2_TypeScript -0.035845   0.016056  -2.232
+
+Correlation of Fixed Effects:
+            (Intr) imblnc i__500 log_sz dts2_J dt2_CS dt2_JS
+imbalance   -0.333                                          
+in__500TRUE  0.599 -0.165                                   
+log_size    -0.916  0.192 -0.658                            
+dtstdtst2_J -0.285  0.000 -0.027 -0.031                     
+dtstdts2_CS -0.239  0.016 -0.043 -0.008  0.567              
+dtstdts2_JS -0.344  0.085 -0.060  0.035  0.692  0.544       
+dtstdts2_TS -0.278  0.048 -0.038  0.039  0.541  0.425  0.525
+optimizer (nloptwrap) convergence code: 0 (OK)
+boundary (singular) fit: see help('isSingular')
+
+Computing profile confidence intervals ...
+boundary (singular) fit: see help('isSingular')
+
+=== coefficients of the two predictors === 
+                        model                term    estimate     ci_low
+main.1                   main           imbalance -0.17036638 -0.1910050
+main.2                   main input_above_500TRUE  0.30705261  0.2704838
+logistic.1           logistic           imbalance -0.08027498 -0.3818490
+logistic.2           logistic input_above_500TRUE  2.55958007  2.1014805
+within_limits.1 within_limits           imbalance -0.17030436 -0.1910026
+within_limits.2 within_limits input_above_500TRUE  0.31846199  0.2817773
+merge_nested.1   merge_nested           imbalance -0.16568804 -0.1865538
+merge_nested.2   merge_nested input_above_500TRUE  0.30868164  0.2721834
+                   ci_high        p_lrt       p_holm expected_sign sign_matches
+main.1          -0.1497246 3.825943e-57 3.825943e-57            -1         TRUE
+main.2           0.3436184 4.303485e-59 8.606969e-59             1         TRUE
+logistic.1       0.2192491 6.008574e-01 6.008574e-01            -1         TRUE
+logistic.2       3.0321384 7.582213e-30 1.516443e-29             1         TRUE
+within_limits.1 -0.1496024 9.039095e-57 9.039095e-57            -1         TRUE
+within_limits.2  0.3551438 6.722594e-63 1.344519e-62             1         TRUE
+merge_nested.1  -0.1448130 5.315936e-53 5.315936e-53            -1         TRUE
+merge_nested.2   0.3451802 6.084201e-60 1.216840e-59             1         TRUE
+
+=== fit === 
+                      model    n projects singular warnings project_sd
+main                   main 4413     1590    FALSE          0.06407508
+logistic           logistic 3490     1405    FALSE          0.99826810
+within_limits within_limits 4368     1580    FALSE          0.06478928
+merge_nested   merge_nested 4413     1590     TRUE          0.00000000
+              r2_marginal r2_conditional auc_fixed auc_conditional
+main            0.1154806      0.1876909        NA              NA
+logistic               NA             NA 0.6234476       0.8890267
+within_limits   0.1257023      0.1989624        NA              NA
+merge_nested    0.1139124      0.2704871        NA              NA
+
+=== cells of the routing rule (main model) === 
+            input_above_500 balanced    n   predicted          se      ci_low
+FALSE.FALSE           FALSE    FALSE 3053 -0.13571502 0.004272025 -0.14408804
+TRUE.FALSE             TRUE    FALSE  182  0.08286143 0.013775091  0.05586275
+FALSE.TRUE            FALSE     TRUE 1065 -0.06354256 0.005379282 -0.07408576
+TRUE.TRUE              TRUE     TRUE  113  0.16670009 0.014628276  0.13802919
+                ci_high    observed sbcr_wins_share ties
+FALSE.FALSE -0.12734200 -0.13843476       0.1774062  601
+TRUE.FALSE   0.10986011  0.06620694       0.5524862    1
+FALSE.TRUE  -0.05299936 -0.05885386       0.1599462  321
+TRUE.TRUE    0.19537098  0.20189067       0.6548673    0
+            sbcr_better_ci_above_zero
+FALSE.FALSE                     FALSE
+TRUE.FALSE                       TRUE
+FALSE.TRUE                      FALSE
+TRUE.TRUE                        TRUE
+
+some cell with SBCR better and its interval above zero: TRUE 
+
+=== session === 
+Warning: Your system is mis-configured: ‘/var/db/timezone/localtime’ is not a symlink
+Warning: ‘/var/db/timezone/localtime’ is not identical to any known timezone file
+R version 4.4.3 (2025-02-28)
+Platform: x86_64-conda-linux-gnu
+Running under: Ubuntu 24.04.5 LTS
+
+Matrix products: default
+BLAS/LAPACK: /opt/conda/envs/winner-model/lib/libopenblasp-r0.3.34.so;  LAPACK version 3.12.0
+
+locale:
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+
+time zone: NA
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] lme4_2.0-6   Matrix_1.7-5
+
+loaded via a namespace (and not attached):
+ [1] minqa_1.2.8      MASS_7.3-66      compiler_4.4.3   reformulas_0.4.4
+ [5] tools_4.4.3      Rcpp_1.1.2       splines_4.4.3    nlme_3.1-170    
+ [9] grid_4.4.3       nloptr_2.2.1     rbibutils_2.4.1  boot_1.3-32     
+[13] Rdpack_2.6.6     lattice_0.23-1  
+
+exit 0, 93 s

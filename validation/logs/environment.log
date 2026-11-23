@@ -1,0 +1,99 @@
+== image: docker build --no-cache environments, 2026-11-23
+sbcr-analysis: packages as in sbcr-analysis.lock.yml
+winner-model: packages as in winner-model.lock.yml
+mergegen-train: packages as in mergegen-train.lock.yml
+sbcr-analysis: matplotlib 3.10.0 pandas 3.0.5
+winner-model: R 4.4.3 lme4 2.0.6 
+mergegen-train: transformers 4.19.2
+git version 2.43.0
+
+== tests
+analysis/rq1_rq3/test_rq3_gaps.py: exit 0
+    Ran 14 tests in 0.450s
+    
+    OK
+analysis/rq4/test_join_scale.py: exit 0
+    Ran 16 tests in 0.085s
+    
+    OK
+analysis/rq4/test_sbcr_candidate_origin.py: exit 0
+    Ran 28 tests in 0.008s
+    
+    OK (skipped=1)
+analysis/rq4/agreement/test_kappa_report.py: exit 0
+    Ran 23 tests in 0.125s
+    
+    OK
+analysis/rq4/annotator/test_run_annotator.py: exit 0
+    Ran 31 tests in 27.298s
+    
+    OK
+
+== --help
+analysis/chronological/chronological_effects.py [sbcr-analysis]: exit 0, usage: chronological_effects.py [-h] --root ROOT --ref REF --dates DATES
+analysis/chronological/chronological_references.py [sbcr-analysis]: exit 0, usage: chronological_references.py [-h] --root ROOT
+analysis/chronological/temporal_structure.py [sbcr-analysis]: exit 0, usage: temporal_structure.py [-h] --root ROOT --dates DATES --data-root
+analysis/datasets/cap_share.py [sbcr-analysis]: exit 0, usage: cap_share.py [-h] --splits SPLITS [--arm ARM] [--cap CAP] [--out OUT]
+analysis/datasets/decoding_effect.py [sbcr-analysis]: exit 0, usage: decoding_effect.py [-h] {decode,measure} ...
+analysis/datasets/largest_test_group.py [sbcr-analysis]: exit 0, usage: largest_test_group.py [-h] --splits SPLITS [--arms ARMS] --out OUT
+analysis/datasets/partition_sizes.py [sbcr-analysis]: exit 0, usage: partition_sizes.py [-h] --root ROOT [--arm ARM]
+analysis/datasets/population_candidates.py [sbcr-analysis]: exit 0, usage: population_candidates.py [-h] --root ROOT [--arms ARMS] [--seeds SEEDS]
+analysis/datasets/population_tokens.py [mergegen-train]: exit 0, usage: population_tokens.py [-h] --root ROOT [--arms ARMS] [--out OUT]
+analysis/datasets/resolution_categories.py [sbcr-analysis]: exit 0, usage: resolution_categories.py [-h] --data-root DATA_ROOT
+analysis/datasets/shared_commits.py [sbcr-analysis]: exit 0, usage: shared_commits.py [-h] --data-root DATA_ROOT --root ROOT [--arm ARM]
+analysis/datasets/tabulate_population.py [sbcr-analysis]: exit 0, usage: tabulate_population.py [-h] --root ROOT [--arm ARM] [--seed SEED]
+analysis/figures/paper_figures.py [sbcr-analysis]: exit 0, usage: paper_figures.py [-h] --root ROOT --scale SCALE --out OUT [--png PNG]
+analysis/rq1_rq3/compare_approaches.py [sbcr-analysis]: exit 0, usage: compare_approaches.py [-h] --root ROOT [--out OUT] [--seeds SEEDS]
+analysis/rq1_rq3/faster_slower_counts.py [sbcr-analysis]: exit 0, usage: faster_slower_counts.py [-h] [--dataset DATASET] table
+analysis/rq1_rq3/leakage_effect.py [sbcr-analysis]: exit 0, usage: leakage_effect.py [-h] --root ROOT
+analysis/rq1_rq3/partition_spread.py [sbcr-analysis]: exit 0, usage: partition_spread.py [-h] --partition N=ROOT --out OUT
+analysis/rq1_rq3/project_disjoint_comparison.py [sbcr-analysis]: exit 0, usage: project_disjoint_comparison.py [-h] --root ROOT [--mg-root MG_ROOT]
+analysis/rq1_rq3/rq3_gaps.py [sbcr-analysis]: exit 0, usage: rq3_gaps.py [-h] --root ROOT --sbcr-seeds SBCR_SEEDS --out OUT
+analysis/rq1_rq3/seed_spread.py [sbcr-analysis]: exit 0, usage: seed_spread.py [-h] --root ROOT
+analysis/rq1_rq3/times_per_language.py [sbcr-analysis]: exit 0, usage: times_per_language.py [-h] --root ROOT [--arm ARM] [--seed SEED]
+analysis/rq4/agreement/kappa_report.py [sbcr-analysis]: exit 0, usage: kappa_report.py [-h] --draw DRAW --scheme SCHEME --sheet SHEET
+analysis/rq4/annotator/run_annotator.py [sbcr-analysis]: exit 0, usage: run_annotator.py [-h] [--instructions INSTRUCTIONS] --draw DRAW --cases
+analysis/rq4/annotator/stand_in_api.py [sbcr-analysis]: exit 0, usage: stand_in_api.py [-h] --port PORT --log LOG [--fail FAIL]
+analysis/rq4/band_code_checks.py [sbcr-analysis]: exit 0, usage: band_code_checks.py [-h] --joined JOINED --tokens TOKENS --out OUT
+analysis/rq4/build_packages.py [sbcr-analysis]: exit 0, usage: build_packages.py [-h] --root ROOT --sealed SEALED --draw DRAW
+analysis/rq4/build_scale.py [sbcr-analysis]: exit 0, usage: build_scale.py [-h] --root ROOT --data-root DATA_ROOT --out OUT
+analysis/rq4/draw_sample.py [sbcr-analysis]: exit 0, usage: draw_sample.py [-h] --root ROOT --out OUT --sealed SEALED
+analysis/rq4/join_scale.py [sbcr-analysis]: exit 0, usage: join_scale.py [-h] --sealed SEALED --draw DRAW --scheme SCHEME
+analysis/rq4/packages.py [sbcr-analysis]: exit 0, 
+analysis/rq4/sbcr_candidate_origin.py [sbcr-analysis]: exit 0, usage: sbcr_candidate_origin.py [-h] --root ROOT [--joined JOINED] --out OUT
+analysis/similarity/mergegen_similarity.py [sbcr-analysis]: exit 0, usage: mergegen_similarity.py [-h] --root ROOT
+analysis/similarity/sbcr_scores.py [sbcr-analysis]: exit 0, 
+analysis/similarity/sbcr_similarity.py [sbcr-analysis]: exit 0, usage: sbcr_similarity.py [-h] --root ROOT
+analysis/winner/bootstrap_main.R [winner-model]: exit 1, Error: usage: bootstrap_main.R <folder with conflicts.csv> [resamples] [--two] [--out=<folder>]
+analysis/winner/build_table.py [sbcr-analysis]: exit 0, usage: build_table.py [-h] --root ROOT --out OUT --metadata METADATA --package
+analysis/winner/fit_models.R [winner-model]: exit 1, Error: usage: fit_models.R <folder with conflicts.csv> [--two] [--out=<folder>]
+analysis/winner/ties_by_imbalance.py [sbcr-analysis]: exit 0, usage: ties_by_imbalance.py [-h] folder
+mergegen/dataset.py [mergegen-train]: exit 1, Traceback (most recent call last):
+mergegen/dataset_parallel.py [mergegen-train]: exit 1, Traceback (most recent call last):
+mergegen/environment/verify_env.py [mergegen-train]: exit 0, usage: verify_env.py [-h] --backbone BACKBONE --checkpoint CHECKPOINT
+mergegen/jit_inference.py [mergegen-train]: exit 0, usage: jit_inference.py [-h] --root ROOT --arm ARM [--test-of TEST_OF]
+mergegen/mergegen_inference.py [mergegen-train]: exit 0, usage: mergegen_inference.py [-h] [--model MODEL]
+mergegen/run_mergegen.py [mergegen-train]: exit 1, Traceback (most recent call last):
+mergegen/run_total_dataset.py [mergegen-train]: exit 1, Traceback (most recent call last):
+mergegen/training/apply_config.py [mergegen-train]: exit 0, usage: apply_config.py [-h] --dir DIR (--show | --check NAME | --apply NAME)
+mergegen/training/configs.py [mergegen-train]: exit 0, 
+pipeline/sbcr_queue.py [sbcr-analysis]: exit 0, usage: sbcr_queue.py [-h] [--roots ROOTS] [--slots SLOTS]
+preparation/chronological_split.py [sbcr-analysis]: exit 0, usage: chronological_split.py [-h] --data-root DATA_ROOT --dates DATES --out
+preparation/combination.py [sbcr-analysis]: exit 0, 
+preparation/commit_dates.py [sbcr-analysis]: exit 0, usage: commit_dates.py [-h] --data-root DATA_ROOT --out OUT [--sample SAMPLE]
+preparation/dataset1/dataset1_sbes2022_filters.py [sbcr-analysis]: exit 0, usage: dataset1_sbes2022_filters.py [-h] --sbes SBES --source SOURCE --package
+preparation/dataset1/dataset1_size_limit.py [sbcr-analysis]: exit 0, usage: dataset1_size_limit.py [-h] --source SOURCE --used USED
+preparation/dataset1/dataset1_trace.py [sbcr-analysis]: exit 0, usage: dataset1_trace.py [-h] --source SOURCE --package PACKAGE --out OUT
+preparation/dataset1/extract_combination_subsets.py [sbcr-analysis]: exit 0, usage: extract_combination_subsets.py [-h] --data-root DATA_ROOT
+preparation/dataset1/find_base.py [sbcr-analysis]: exit 0, usage: find_base.py [-h] --input INPUT --output OUTPUT
+preparation/dataset1/transform_sbes2022_dataset.py [sbcr-analysis]: exit 0, usage: transform_sbes2022_dataset.py [-h] --input INPUT --output OUTPUT
+preparation/make_splits.py [sbcr-analysis]: exit 0, usage: make_splits.py [-h] --data-root DATA_ROOT --out OUT [--seed SEED]
+preparation/prepare_data.py [sbcr-analysis]: exit 0, usage: prepare_data.py [-h] [--data-root DATA_ROOT] --root ROOT [--code CODE]
+preparation/prepare_sbcr.py [sbcr-analysis]: exit 0, usage: prepare_sbcr.py [-h] [--root ROOT] [--check] [--data-root DATA_ROOT]
+preparation/survey.py [sbcr-analysis]: exit 0, usage: survey.py [-h] --data-root DATA_ROOT --out OUT
+preparation/truncated_references.py [mergegen-train]: exit 0, usage: truncated_references.py [-h] --root ROOT [--validate]
+sbcr/resume_evaluations.py [sbcr-analysis]: exit 0, usage: resume_evaluations.py [-h] --root ROOT [--slots SLOTS] [--list-only]
+sbcr/sbcr_evaluate.py [sbcr-analysis]: exit 0, Evaluates SBCR with one configuration on the test conflicts of a dataset.
+sbcr/sbcr_tuning.py [sbcr-analysis]: exit 0, Tunes SBCR: runs every configuration of the grid on a sample of the training conflicts.
+sbcr/select_configuration.py [sbcr-analysis]: exit 0, usage: select_configuration.py [-h] --root ROOT [--arm ARM]
+validation/manifest.py [sbcr-analysis]: exit 0, usage: manifest.py [-h] {write,check} ...

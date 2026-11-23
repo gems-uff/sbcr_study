@@ -1,0 +1,52 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/similarity/mergegen_similarity.py --root /w/chronological
+
+dataset1_mg <- dataset1_mg: 553 conflicts, 0.0 min
+dataset1_mg <- dataset2_Java_mg: 553 conflicts, 0.0 min
+dataset1_p1__test_mg <- dataset1_p1: 553 conflicts, 0.0 min
+dataset1_p1__test_mg <- dataset2_Java_p1: 553 conflicts, 0.0 min
+dataset1_p2__test_mg <- dataset1_p2: 553 conflicts, 0.0 min
+dataset1_p2__test_mg <- dataset2_Java_p2: 553 conflicts, 0.0 min
+dataset1_p3__test_mg <- dataset1_p3: 553 conflicts, 0.0 min
+dataset1_p3__test_mg <- dataset2_Java_p3: 553 conflicts, 0.0 min
+dataset2_CSharp_mg <- dataset2_CSharp_mg: 1619 conflicts, 0.1 min
+dataset2_CSharp_p1__test_mg <- dataset2_CSharp_p1: 1619 conflicts, 0.1 min
+dataset2_CSharp_p2__test_mg <- dataset2_CSharp_p2: 1619 conflicts, 0.1 min
+dataset2_CSharp_p3__test_mg <- dataset2_CSharp_p3: 1619 conflicts, 0.1 min
+  dataset2_JavaScript_mg: 2000/3775
+dataset2_JavaScript_mg <- dataset2_JavaScript_mg: 3775 conflicts, 0.3 min
+  dataset2_JavaScript_p1__test_mg: 2000/3775
+dataset2_JavaScript_p1__test_mg <- dataset2_JavaScript_p1: 3775 conflicts, 0.3 min
+  dataset2_JavaScript_p2__test_mg: 2000/3775
+dataset2_JavaScript_p2__test_mg <- dataset2_JavaScript_p2: 3775 conflicts, 0.4 min
+  dataset2_JavaScript_p3__test_mg: 2000/3775
+dataset2_JavaScript_p3__test_mg <- dataset2_JavaScript_p3: 3775 conflicts, 0.4 min
+  dataset2_Java_mg: 2000/5026
+  dataset2_Java_mg: 4000/5026
+dataset2_Java_mg <- dataset1_mg: 5026 conflicts, 0.5 min
+  dataset2_Java_mg: 2000/5026
+  dataset2_Java_mg: 4000/5026
+dataset2_Java_mg <- dataset2_Java_mg: 5026 conflicts, 0.5 min
+  dataset2_Java_p1__test_mg: 2000/5026
+  dataset2_Java_p1__test_mg: 4000/5026
+dataset2_Java_p1__test_mg <- dataset1_p1: 5026 conflicts, 0.4 min
+  dataset2_Java_p1__test_mg: 2000/5026
+  dataset2_Java_p1__test_mg: 4000/5026
+dataset2_Java_p1__test_mg <- dataset2_Java_p1: 5026 conflicts, 0.6 min
+  dataset2_Java_p2__test_mg: 2000/5026
+  dataset2_Java_p2__test_mg: 4000/5026
+dataset2_Java_p2__test_mg <- dataset1_p2: 5026 conflicts, 0.4 min
+  dataset2_Java_p2__test_mg: 2000/5026
+  dataset2_Java_p2__test_mg: 4000/5026
+dataset2_Java_p2__test_mg <- dataset2_Java_p2: 5026 conflicts, 0.5 min
+  dataset2_Java_p3__test_mg: 2000/5026
+  dataset2_Java_p3__test_mg: 4000/5026
+dataset2_Java_p3__test_mg <- dataset1_p3: 5026 conflicts, 0.5 min
+  dataset2_Java_p3__test_mg: 2000/5026
+  dataset2_Java_p3__test_mg: 4000/5026
+dataset2_Java_p3__test_mg <- dataset2_Java_p3: 5026 conflicts, 0.5 min
+dataset2_TypeScript_mg <- dataset2_TypeScript_mg: 996 conflicts, 0.1 min
+dataset2_TypeScript_p1__test_mg <- dataset2_TypeScript_p1: 996 conflicts, 0.1 min
+dataset2_TypeScript_p2__test_mg <- dataset2_TypeScript_p2: 996 conflicts, 0.1 min
+dataset2_TypeScript_p3__test_mg <- dataset2_TypeScript_p3: 996 conflicts, 0.1 min
+
+exit 0, 362 s

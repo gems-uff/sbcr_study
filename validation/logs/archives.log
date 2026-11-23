@@ -1,0 +1,20 @@
+Zips against SHA256SUMS
+  ok  datasets.zip 69ead6c3d0bcac468496d5d57d46ff69fe5093c1d76fe6fd9894da11f524efbe
+  ok  models.zip 8559f7658c48b8e59c143e4f9d05218aab650277dff8373998f8470b1253e4e2
+  ok  results.zip 89bf7222562f9f6cfde30bb0b56f3ed72ae997bc36c37cf923b191ea6a7a4156
+  ok  rq4.zip 77adde2a95ca6e71f16976aed6d499e746e6394ff53bc1a733d321648e78d80f
+
+Extraction
+  datasets.zip: 271 entries
+  models.zip: 6 entries
+  results.zip: 392473 entries
+  rq4.zip: 10285 entries
+
+Files against the manifests
+  manifests/datasets.sha256: 270 files, 0 with another hash, 0 missing
+  manifests/models.sha256: 5 files, 0 with another hash, 0 missing
+  manifests/results.sha256: 392472 files, 0 with another hash, 0 missing
+  manifests/rq4.sha256: 10284 files, 0 with another hash, 0 missing
+  0 files in no manifest
+
+archives verified

@@ -1,0 +1,31 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq4/build_scale.py --root /w/partition-1 --data-root /w/datasets/source --sample-draw /w/rq4/sample --out /w/validation-new/scale --sealed /w/validation-new/sealed-scale/sealed_scale.csv
+
+            dataset     band  conflicts  share_of_frame  share_of_test
+           dataset1     sbcr         28           0.051          0.051
+           dataset1 mergegen         78           0.142          0.142
+           dataset1      tie        138           0.251          0.251
+      dataset2_Java     sbcr         68           0.040          0.040
+      dataset2_Java mergegen        274           0.159          0.159
+      dataset2_Java      tie        430           0.250          0.250
+    dataset2_CSharp     sbcr         25           0.046          0.046
+    dataset2_CSharp mergegen         76           0.139          0.139
+    dataset2_CSharp      tie        142           0.261          0.261
+dataset2_JavaScript     sbcr         48           0.040          0.040
+dataset2_JavaScript mergegen        195           0.161          0.161
+dataset2_JavaScript      tie        302           0.250          0.250
+dataset2_TypeScript     sbcr         14           0.036          0.036
+dataset2_TypeScript mergegen         69           0.176          0.176
+dataset2_TypeScript      tie         98           0.250          0.250
+
+conflicts per band: {'sbcr': 183, 'mergegen': 692, 'tie': 1110}; expected: {'sbcr': 183, 'mergegen': 692, 'tie': 1110}
+
+cases: 1985; packaged: 1979; left out, package above 1,000,000 characters: 6
+the candidates of every package match the similarity of the frame
+conflicts in two bands: {'dataset1': 0, 'dataset2_CSharp': 0, 'dataset2_Java': 0, 'dataset2_JavaScript': 0, 'dataset2_TypeScript': 0}
+cases above SBCR's size limit: 9, of them packaged, with an empty SBCR candidate: 3
+cases of the sample draw in the frame: {'sample': 134, 'pilot': 10}; their packages reproduced: 144
+packages list sha256 c65dfe9d956c268931732e4a43b303026560b9430ff48c45defbebd67bfce9c8
+
+written to /w/validation-new/scale; sealed file at /w/validation-new/sealed-scale/sealed_scale.csv (sha256 fce80e34455a...); reveal files in /w/validation-new/sealed-scale/reveal
+
+exit 0, 30 s

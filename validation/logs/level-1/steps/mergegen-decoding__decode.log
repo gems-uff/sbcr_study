@@ -1,0 +1,13 @@
+$ env CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 conda run --no-capture-output -n mergegen-train python /package/analysis/datasets/decoding_effect.py decode --root /w/partition-1 --tokenizer /w/partition-1/mergeGen/codet5-small-local --out /w/mergegen-decoding
+
+dataset1_mg/model_dataset1_mg: 549 candidates, 0 change, 0 with an invalid UTF-8 sequence
+dataset1_mg/model_dataset2_Java_mg: 549 candidates, 0 change, 0 with an invalid UTF-8 sequence
+dataset2_CSharp_mg/model_dataset2_CSharp_mg: 1,637 candidates, 34 change, 0 with an invalid UTF-8 sequence
+dataset2_JavaScript_mg/model_dataset2_JavaScript_mg: 4,673 candidates, 168 change, 8 with an invalid UTF-8 sequence
+dataset2_Java_mg/model_dataset1_mg: 5,764 candidates, 30 change, 1 with an invalid UTF-8 sequence
+dataset2_Java_mg/model_dataset2_Java_mg: 5,764 candidates, 28 change, 0 with an invalid UTF-8 sequence
+dataset2_TypeScript_mg/model_dataset2_TypeScript_mg: 1,151 candidates, 6 change, 0 with an invalid UTF-8 sequence
+
+written to /w/mergegen-decoding/decoded_candidates.json and decode.json
+
+exit 0, 1 s

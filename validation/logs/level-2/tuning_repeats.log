@@ -1,0 +1,14 @@
+Two runs of sbcr_tuning.py on the first 2 conflicts of the draw of Dataset1 (NUM_CHUNKS=2, the 80
+configurations of the grid each), in an environment created from sbcr-analysis.lock.yml outside the image, run at the same time, against each other and
+against the stored tuning. '=' marks a configuration with the same similarity, 'X' one that differs.
+
+run 1 vs run 2  ================================================================================================================================================================
+run 1 vs stored =================================================================================X=====================X================X==X====================================
+run 2 vs stored =================================================================================X=====================X================X==X====================================
+
+Configurations that differ from the stored run:
+ chunk_id  neighbors  stagnation  timeout  similarity  similarity_stored  seconds  seconds_stored
+   938450          1           5       20    1.000000           0.811881 0.004665        0.007527
+   938450          1          10       40    1.000000           0.907631 0.007827        0.011201
+   938450          1          15       10    0.907631           1.000000 0.013022        0.009626
+   938450          1          15       40    1.000000           0.907631 0.007513        0.008721

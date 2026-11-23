@@ -1,0 +1,151 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/compare_approaches.py --root /w/chronological
+
+=== spread across the 1 seeds ===
+one seed only, no spread
+
+=== SBCR vs MergeGen: same conflicts, same metric ===
+
+--- SBCR ---
+arm                      mg
+dataset                    
+dataset1             0.8044
+dataset2_CSharp      0.7792
+dataset2_Java        0.7856
+dataset2_JavaScript  0.7870
+dataset2_TypeScript  0.8108
+
+--- MergeGen ---
+arm                      mg
+dataset                    
+dataset1             0.9185
+dataset2_CSharp      0.8780
+dataset2_Java        0.9243
+dataset2_JavaScript  0.8695
+dataset2_TypeScript  0.8891
+
+--- SBCR − MergeGen ---
+arm                      mg
+dataset                    
+dataset1            -0.1141
+dataset2_CSharp     -0.0989
+dataset2_Java       -0.1387
+dataset2_JavaScript -0.0824
+dataset2_TypeScript -0.0784
+
+--- SBCR wins (share of conflicts) ---
+arm                      mg
+dataset                    
+dataset1             0.1483
+dataset2_CSharp      0.1429
+dataset2_Java        0.1087
+dataset2_JavaScript  0.1891
+dataset2_TypeScript  0.1760
+
+--- tie ---
+arm                      mg
+dataset                    
+dataset1             0.2532
+dataset2_CSharp      0.2619
+dataset2_Java        0.1662
+dataset2_JavaScript  0.2114
+dataset2_TypeScript  0.2755
+
+--- MergeGen wins ---
+arm                      mg
+dataset                    
+dataset1             0.5986
+dataset2_CSharp      0.5952
+dataset2_Java        0.7252
+dataset2_JavaScript  0.5995
+dataset2_TypeScript  0.5485
+
+--- paired rank-biserial (+ favors SBCR) ---
+arm                      mg
+dataset                    
+dataset1            -0.6985
+dataset2_CSharp     -0.6294
+dataset2_Java       -0.7742
+dataset2_JavaScript -0.5089
+dataset2_TypeScript -0.5190
+
+--- SBCR median ---
+arm                      mg
+dataset                    
+dataset1             0.8659
+dataset2_CSharp      0.8539
+dataset2_Java        0.8338
+dataset2_JavaScript  0.8376
+dataset2_TypeScript  0.8861
+
+--- MergeGen median ---
+arm                   mg
+dataset                 
+dataset1             1.0
+dataset2_CSharp      1.0
+dataset2_Java        1.0
+dataset2_JavaScript  1.0
+dataset2_TypeScript  1.0
+
+--- SBCR exact match (share of conflicts) ---
+arm                      mg
+dataset                    
+dataset1             0.2640
+dataset2_CSharp      0.2070
+dataset2_Java        0.1395
+dataset2_JavaScript  0.1866
+dataset2_TypeScript  0.2449
+
+--- MergeGen exact match (share of conflicts) ---
+arm                      mg
+dataset                    
+dataset1             0.6727
+dataset2_CSharp      0.5696
+dataset2_Java        0.7135
+dataset2_JavaScript  0.5672
+dataset2_TypeScript  0.6224
+
+--- p (paired Wilcoxon) ---
+arm                        mg
+dataset                      
+dataset1              9.0e-35
+dataset2_CSharp       6.7e-28
+dataset2_Java        2.2e-142
+dataset2_JavaScript   4.4e-42
+dataset2_TypeScript   3.4e-14
+
+--- rq1_rq2: out-of-limits conflicts scored 0 vs. left out ---
+            dataset arm    n  out_of_limits  difference  difference_excl  change
+    dataset2_CSharp  mg  546              2     -0.0989          -0.0986 -0.0003
+      dataset2_Java  mg 1721              8     -0.1387          -0.1389  0.0002
+dataset2_JavaScript  mg 1206              4     -0.0824          -0.0824  0.0000
+dataset2_TypeScript  mg  392              1     -0.0784          -0.0784  0.0000
+largest change in the mean difference: 0.0003
+
+=== RQ3: trained or tuned on the other dataset ===
+
+--- SBCR (crossed) ---
+arm                mg
+dataset              
+dataset1       0.8074
+dataset2_Java  0.7936
+
+--- MergeGen (crossed) ---
+arm                mg
+dataset              
+dataset1       0.9183
+dataset2_Java  0.9157
+
+--- SBCR − MergeGen ---
+arm                mg
+dataset              
+dataset1      -0.1109
+dataset2_Java -0.1221
+
+--- rq3: out-of-limits conflicts scored 0 vs. left out ---
+      dataset arm    n  out_of_limits  difference  difference_excl  change
+dataset2_Java  mg 1721              8     -0.1221          -0.1223  0.0002
+largest change in the mean difference: 0.0002
+
+written to /w/chronological/comparison.csv
+
+exit 0, 1 s

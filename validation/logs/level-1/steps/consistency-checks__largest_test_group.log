@@ -1,0 +1,33 @@
+$ bash -c conda run --no-capture-output -n sbcr-analysis python /package/analysis/datasets/largest_test_group.py --splits /w/split-comparison/splits --out /w/consistency-checks/largest-test-group/largest_test_group_split-comparison.csv && conda run --no-capture-output -n sbcr-analysis python /package/analysis/datasets/largest_test_group.py --splits /w/partition-1/splits --arms pd --out /w/consistency-checks/largest-test-group/largest_test_group_partition-1_pd.csv
+
+arm     unit                    set  chunks  largest_test_group  groups_larger  chunks_in_larger_groups  share_in_larger_groups
+ mg universe dataset1+dataset2_Java   63118                   4           3119                    36726                    58.2
+ mg  dataset               dataset1    5490                   1            863                     2848                    51.9
+ mg  dataset          dataset2_Java   57628                   4           2965                    35102                    60.9
+ mg universe        dataset2_CSharp   16316                   4            683                     9596                    58.8
+ mg  dataset        dataset2_CSharp   16316                   4            683                     9596                    58.8
+ mg universe    dataset2_JavaScript   46877                   4           1689                    28270                    60.3
+ mg  dataset    dataset2_JavaScript   46877                   4           1689                    28270                    60.3
+ mg universe    dataset2_TypeScript   11511                   3            773                     6332                    55.0
+ mg  dataset    dataset2_TypeScript   11511                   3            773                     6332                    55.0
+ pd universe dataset1+dataset2_Java   63118                  38            330                    43525                    69.0
+ pd  dataset               dataset1    5490                  15             73                     3343                    60.9
+ pd  dataset          dataset2_Java   57628                  38            305                    39970                    69.4
+ pd universe        dataset2_CSharp   16316                  22            142                    11433                    70.1
+ pd  dataset        dataset2_CSharp   16316                  22            142                    11433                    70.1
+ pd universe    dataset2_JavaScript   46877                  20            397                    30725                    65.5
+ pd  dataset    dataset2_JavaScript   46877                  20            397                    30725                    65.5
+ pd universe    dataset2_TypeScript   11511                  17            124                     7862                    68.3
+ pd  dataset    dataset2_TypeScript   11511                  17            124                     7862                    68.3
+arm     unit                    set  chunks  largest_test_group  groups_larger  chunks_in_larger_groups  share_in_larger_groups
+ pd universe dataset1+dataset2_Java   63118                  38            330                    43525                    69.0
+ pd  dataset               dataset1    5490                  15             73                     3343                    60.9
+ pd  dataset          dataset2_Java   57628                  38            305                    39970                    69.4
+ pd universe        dataset2_CSharp   16316                  22            142                    11433                    70.1
+ pd  dataset        dataset2_CSharp   16316                  22            142                    11433                    70.1
+ pd universe    dataset2_JavaScript   46877                  20            397                    30725                    65.5
+ pd  dataset    dataset2_JavaScript   46877                  20            397                    30725                    65.5
+ pd universe    dataset2_TypeScript   11511                  17            124                     7862                    68.3
+ pd  dataset    dataset2_TypeScript   11511                  17            124                     7862                    68.3
+
+exit 0, 2 s

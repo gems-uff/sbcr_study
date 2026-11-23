@@ -1,0 +1,77 @@
+$ conda run --no-capture-output -n mergegen-train python /package/analysis/datasets/population_tokens.py --root /w/partition-1 --arms mg
+
+  dataset1/mg: 200/549
+  dataset1/mg: 400/549
+dataset1/mg: 549 test conflicts processed
+  dataset2_Java/mg: 200/5764
+  dataset2_Java/mg: 400/5764
+  dataset2_Java/mg: 600/5764
+  dataset2_Java/mg: 800/5764
+  dataset2_Java/mg: 1000/5764
+  dataset2_Java/mg: 1200/5764
+  dataset2_Java/mg: 1400/5764
+  dataset2_Java/mg: 1600/5764
+  dataset2_Java/mg: 1800/5764
+  dataset2_Java/mg: 2000/5764
+  dataset2_Java/mg: 2200/5764
+  dataset2_Java/mg: 2400/5764
+  dataset2_Java/mg: 2600/5764
+  dataset2_Java/mg: 2800/5764
+  dataset2_Java/mg: 3000/5764
+  dataset2_Java/mg: 3200/5764
+  dataset2_Java/mg: 3400/5764
+  dataset2_Java/mg: 3600/5764
+  dataset2_Java/mg: 3800/5764
+  dataset2_Java/mg: 4000/5764
+  dataset2_Java/mg: 4200/5764
+  dataset2_Java/mg: 4400/5764
+  dataset2_Java/mg: 4600/5764
+  dataset2_Java/mg: 4800/5764
+  dataset2_Java/mg: 5000/5764
+  dataset2_Java/mg: 5200/5764
+  dataset2_Java/mg: 5400/5764
+  dataset2_Java/mg: 5600/5764
+dataset2_Java/mg: 5764 test conflicts processed
+  dataset2_CSharp/mg: 200/1637
+  dataset2_CSharp/mg: 400/1637
+  dataset2_CSharp/mg: 600/1637
+  dataset2_CSharp/mg: 800/1637
+  dataset2_CSharp/mg: 1000/1637
+  dataset2_CSharp/mg: 1200/1637
+  dataset2_CSharp/mg: 1400/1637
+  dataset2_CSharp/mg: 1600/1637
+dataset2_CSharp/mg: 1637 test conflicts processed
+  dataset2_JavaScript/mg: 200/4673
+  dataset2_JavaScript/mg: 400/4673
+  dataset2_JavaScript/mg: 600/4673
+  dataset2_JavaScript/mg: 800/4673
+  dataset2_JavaScript/mg: 1000/4673
+  dataset2_JavaScript/mg: 1200/4673
+  dataset2_JavaScript/mg: 1400/4673
+  dataset2_JavaScript/mg: 1600/4673
+  dataset2_JavaScript/mg: 1800/4673
+  dataset2_JavaScript/mg: 2000/4673
+  dataset2_JavaScript/mg: 2200/4673
+  dataset2_JavaScript/mg: 2400/4673
+  dataset2_JavaScript/mg: 2600/4673
+  dataset2_JavaScript/mg: 2800/4673
+  dataset2_JavaScript/mg: 3000/4673
+  dataset2_JavaScript/mg: 3200/4673
+  dataset2_JavaScript/mg: 3400/4673
+  dataset2_JavaScript/mg: 3600/4673
+  dataset2_JavaScript/mg: 3800/4673
+  dataset2_JavaScript/mg: 4000/4673
+  dataset2_JavaScript/mg: 4200/4673
+  dataset2_JavaScript/mg: 4400/4673
+  dataset2_JavaScript/mg: 4600/4673
+dataset2_JavaScript/mg: 4673 test conflicts processed
+  dataset2_TypeScript/mg: 200/1151
+  dataset2_TypeScript/mg: 400/1151
+  dataset2_TypeScript/mg: 600/1151
+  dataset2_TypeScript/mg: 800/1151
+  dataset2_TypeScript/mg: 1000/1151
+dataset2_TypeScript/mg: 1151 test conflicts processed
+
+written: 13,774 rows in /w/partition-1/population_tokens.csv
+
+exit 0, 151 s

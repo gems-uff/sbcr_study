@@ -1,0 +1,52 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/times_per_language.py --root /w/partition-1
+
+dataset1: SBCR times add up to 0.14 h, wall time of the evaluation 0.15 h
+dataset2_Java: SBCR times add up to 1.34 h, wall time of the evaluation 1.36 h
+dataset2_CSharp: SBCR times add up to 0.86 h, wall time of the evaluation 0.87 h
+dataset2_JavaScript: SBCR times add up to 2.88 h, wall time of the evaluation 2.89 h
+dataset2_TypeScript: SBCR times add up to 0.03 h, wall time of the evaluation 0.03 h
+dataset1: 549 timed conflicts, sum of end-to-end 2.0 min, wall time in jit.log 2.0 min
+dataset2_Java: 5764 timed conflicts, sum of end-to-end 24.3 min, wall time in jit.log 24.3 min
+dataset2_CSharp: 1637 timed conflicts, sum of end-to-end 6.8 min, wall time in jit.log 6.8 min
+dataset2_JavaScript: 4673 timed conflicts, sum of end-to-end 22.3 min, wall time in jit.log 22.3 min
+dataset2_TypeScript: 1151 timed conflicts, sum of end-to-end 4.4 min, wall time in jit.log 4.4 min
+
+## MergeGen, test population (ms per conflict, mean / median)
+
+| dataset | n | preprocessing | generation | decoding | end-to-end | preprocessing share, aggregate | preprocessing share, median |
+|---|---|---|---|---|---|---|---|
+| dataset1 | 549 | 32.0 / 31.4 | 185.5 / 113.5 | 0.1 / 0.1 | 217.6 / 144.7 | 14.7% | 22.0% |
+| dataset2_Java | 5,764 | 39.2 / 37.5 | 213.6 / 110.6 | 0.1 / 0.1 | 252.9 / 149.6 | 15.5% | 25.6% |
+| dataset2_CSharp | 1,637 | 35.3 / 33.5 | 213.8 / 112.8 | 0.1 / 0.1 | 249.2 / 149.2 | 14.2% | 23.2% |
+| dataset2_JavaScript | 4,673 | 44.8 / 38.6 | 240.8 / 125.2 | 0.1 / 0.1 | 285.7 / 165.1 | 15.7% | 23.6% |
+| dataset2_TypeScript | 1,151 | 35.9 / 34.3 | 191.4 / 111.0 | 0.1 / 0.1 | 227.4 / 145.1 | 15.8% | 24.0% |
+
+## MergeGen, combination population (ms per conflict, mean / median)
+
+| dataset | n | preprocessing | generation | decoding | end-to-end | preprocessing share, aggregate | preprocessing share, median |
+|---|---|---|---|---|---|---|---|
+| dataset1 | 549 | 32.0 / 31.4 | 185.5 / 113.5 | 0.1 / 0.1 | 217.6 / 144.7 | 14.7% | 22.0% |
+| dataset2_Java | 1,719 | 39.8 / 37.8 | 247.1 / 139.4 | 0.1 / 0.1 | 287.0 / 179.3 | 13.9% | 21.6% |
+| dataset2_CSharp | 545 | 35.9 / 33.4 | 243.9 / 146.1 | 0.1 / 0.1 | 279.9 / 179.6 | 12.8% | 19.5% |
+| dataset2_JavaScript | 1,208 | 43.3 / 38.8 | 235.4 / 134.5 | 0.1 / 0.1 | 278.9 / 174.5 | 15.5% | 22.4% |
+| dataset2_TypeScript | 392 | 35.5 / 34.1 | 197.0 / 117.3 | 0.1 / 0.1 | 232.5 / 151.4 | 15.3% | 22.6% |
+
+## Both approaches, combination population (seconds per conflict)
+
+| dataset | MergeGen n | MergeGen mean | median | p90 | max | SBCR n | out of limits | SBCR mean | median | p90 | max | SBCR slower | paired rank-biserial | Wilcoxon p |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| dataset1 | 549 | 0.218 | 0.145 | 0.475 | 1.086 | 549 | 0 | 0.948 | 0.156 | 3.000 | 24.7 | 41.0% | +0.19 | 1.6e-04 |
+| dataset2_Java | 1,719 | 0.287 | 0.179 | 0.738 | 1.428 | 1,699 | 20 | 2.848 | 0.582 | 8.657 | 98.7 | 66.5% | +0.69 | 6.4e-135 |
+| dataset2_CSharp | 545 | 0.280 | 0.180 | 0.824 | 1.209 | 538 | 7 | 5.724 | 0.971 | 8.346 | 381.4 | 79.0% | +0.87 | 1.5e-68 |
+| dataset2_JavaScript | 1,208 | 0.279 | 0.174 | 0.658 | 1.637 | 1,190 | 18 | 8.707 | 4.297 | 16.638 | 457.3 | 96.8% | +0.99 | 1.8e-193 |
+| dataset2_TypeScript | 392 | 0.233 | 0.151 | 0.470 | 1.036 | 392 | 0 | 0.276 | 0.023 | 0.169 | 45.2 | 4.3% | -0.86 | 1.2e-49 |
+
+SBCR configuration (neighbors, stagnation iterations, timeout in s), conflicts whose time exceeds the timeout, and share of the paired conflicts in which SBCR is faster:
+  dataset1: (3, 10, 20); 2 of 549 above 20 s; faster in 59.0%
+  dataset2_Java: (5, 10, 30); 36 of 1,699 above 30 s; faster in 33.5%
+  dataset2_CSharp: (7, 5, 40); 22 of 538 above 40 s; faster in 21.0%
+  dataset2_JavaScript: (9, 10, 30); 50 of 1,190 above 30 s; faster in 3.2%
+  dataset2_TypeScript: (1, 20, 40); 1 of 392 above 40 s; faster in 95.7%
+  total above the timeout: 111 of 4,368
+
+exit 0, 1 s

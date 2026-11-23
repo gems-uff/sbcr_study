@@ -1,0 +1,27 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/datasets/partition_sizes.py --root /w/partition-1
+
+| dataset | chunks | duplicates removed | groups | training | validation | test | combination, training | combination, validation | combination, test |
+|---|---|---|---|---|---|---|---|---|---|
+| dataset1 | 5,490 | 779 | 3,505 | 4,392 | 549 | 549 | 4,392 | 549 | 549 |
+| dataset2_Java | 57,628 | 8,114 | 15,160 | 46,101 | 5,763 | 5,764 | 13,739 | 1,717 | 1,719 |
+| dataset2_CSharp | 16,316 | 4,379 | 4,480 | 13,052 | 1,627 | 1,637 | 4,366 | 547 | 545 |
+| dataset2_JavaScript | 46,877 | 4,608 | 12,802 | 37,486 | 4,718 | 4,673 | 9,656 | 1,206 | 1,208 |
+| dataset2_TypeScript | 11,511 | 1,993 | 4,089 | 9,208 | 1,152 | 1,151 | 3,133 | 392 | 392 |
+
+Groups per partition, and chunks the combination filter keeps (Dataset1 enters whole):
+  dataset1: groups 2,733 / 399 / 373; filter keeps 4,387 / 548 / 548
+  dataset2_Java: groups 12,202 / 1,508 / 1,450; filter keeps 13,739 / 1,717 / 1,719
+  dataset2_CSharp: groups 3,482 / 518 / 480; filter keeps 4,366 / 547 / 545
+  dataset2_JavaScript: groups 10,176 / 1,282 / 1,344; filter keeps 9,656 / 1,206 / 1,208
+  dataset2_TypeScript: groups 3,201 / 452 / 436; filter keeps 3,133 / 392 / 392
+
+Dataset1 chunks the combination filter would drop (partition, chunk, strategy):
+   ('train', '1050627', 'V1')
+   ('train', '1055340', 'V2')
+   ('train', '1360034', 'V1')
+   ('train', '840902', 'New code')
+   ('train', '971710', 'V1')
+   ('validation', '1060862', 'V2')
+   ('test', '1147909', 'V2')
+
+exit 0, 5 s

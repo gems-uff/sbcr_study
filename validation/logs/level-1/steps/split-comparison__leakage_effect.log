@@ -1,0 +1,41 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/leakage_effect.py --root /w/split-comparison --out /w/split-comparison
+
+=== leakage ===
+       reference   comparison             dataset   n  sim_other  sim_pd  difference   ci95      p  em_other  em_pd
+           train random vs pd            dataset1  98     0.8824  0.8639      0.0185 0.0275 0.1742    0.5816 0.5408
+           train random vs pd       dataset2_Java 303     0.8736  0.8767     -0.0031 0.0123 0.4071    0.6007 0.5875
+           train random vs pd     dataset2_CSharp 108     0.8641  0.8514      0.0127 0.0259 0.9404    0.6204 0.6019
+           train random vs pd dataset2_JavaScript 236     0.8860  0.8898     -0.0038 0.0090 0.2769    0.4958 0.5169
+           train random vs pd dataset2_TypeScript  69     0.8952  0.8630      0.0322 0.0385 0.1570    0.6377 0.5797
+           train     mg vs pd            dataset1 150     0.9082  0.9015      0.0067 0.0136 0.1580    0.6333 0.6133
+           train     mg vs pd       dataset2_Java 530     0.8376  0.8412     -0.0036 0.0079 0.5379    0.5358 0.5283
+           train     mg vs pd     dataset2_CSharp 147     0.8426  0.8373      0.0052 0.0202 0.3019    0.5442 0.5102
+           train     mg vs pd dataset2_JavaScript 369     0.8774  0.8815     -0.0041 0.0093 0.8603    0.5393 0.5583
+           train     mg vs pd dataset2_TypeScript 117     0.9059  0.9111     -0.0052 0.0111 0.3949    0.5470 0.5812
+train+validation random vs pd            dataset1  44     0.8878  0.9041     -0.0163 0.0320 0.4236    0.5909 0.6364
+train+validation random vs pd       dataset2_Java 151     0.8925  0.8951     -0.0026 0.0158 0.8828    0.6159 0.6093
+train+validation random vs pd     dataset2_CSharp  59     0.8137  0.7946      0.0191 0.0452 0.9032    0.5424 0.4915
+train+validation random vs pd dataset2_JavaScript 118     0.8829  0.8820      0.0009 0.0154 1.0000    0.4746 0.4915
+train+validation random vs pd dataset2_TypeScript  38     0.9069  0.8691      0.0378 0.0617 0.3863    0.6053 0.5526
+train+validation     mg vs pd            dataset1  79     0.9045  0.9027      0.0017 0.0212 0.5829    0.6076 0.6076
+train+validation     mg vs pd       dataset2_Java 280     0.8363  0.8363      0.0001 0.0110 0.2245    0.5393 0.5286
+train+validation     mg vs pd     dataset2_CSharp  79     0.8734  0.8544      0.0189 0.0238 0.1913    0.5570 0.4937
+train+validation     mg vs pd dataset2_JavaScript 193     0.8772  0.8772      0.0001 0.0120 0.9845    0.5130 0.5389
+train+validation     mg vs pd dataset2_TypeScript  60     0.9166  0.9233     -0.0067 0.0119 0.3739    0.5500 0.5833
+
+=== common set ===
+       reference             dataset  n  gap_random  gap_mg  gap_pd  change_pd_minus_random   ci95      p
+           train            dataset1 30     -0.1509 -0.1473 -0.0992                  0.0517 0.0860 0.2343
+           train       dataset2_Java 84     -0.0870 -0.0325 -0.0842                  0.0028 0.0341 0.2146
+           train     dataset2_CSharp 31     -0.1522 -0.1208 -0.1679                 -0.0157 0.1024 0.7677
+           train dataset2_JavaScript 69     -0.0711 -0.0637 -0.0763                 -0.0052 0.0533 0.6741
+           train dataset2_TypeScript 18     -0.1126 -0.0870 -0.0672                  0.0454 0.0738 0.4631
+train+validation            dataset1  9     -0.2385 -0.2709 -0.1742                  0.0643 0.1722 0.4375
+train+validation       dataset2_Java 20     -0.0875 -0.0861 -0.0949                 -0.0074 0.0269 0.6465
+train+validation     dataset2_CSharp  9     -0.1048 -0.1159 -0.2156                 -0.1108 0.2098 0.5625
+train+validation dataset2_JavaScript 17     -0.0431 -0.0225 -0.0863                 -0.0432 0.1107 0.4326
+train+validation dataset2_TypeScript  3     -0.2265 -0.0680 -0.0435                  0.1830 0.3665 1.0000
+
+written to /w/split-comparison/leakage_effect.csv, common_set.csv
+
+exit 0, 2 s

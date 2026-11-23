@@ -1,0 +1,73 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/winner/build_table.py --root /w/partition-1 --out /w/winner-model-two-predictors/decoded --metadata /w/datasets/source --package /submitted --decoded /w/mergegen-decoding/changed_candidates.csv
+
+conflicts: 4413  {'dataset1': 549, 'dataset2_Java': 1719, 'dataset2_CSharp': 545, 'dataset2_JavaScript': 1208, 'dataset2_TypeScript': 392}
+MergeGen candidates decoded: 78 conflicts change
+projects: 1590  merges: 2486  ties: 943  out of SBCR's limits: 45  input above 500 tokens: 295
+
+--- detector against the submitted RQ4 ---
+            dataset  paper_non_english  marked_sbcr_better  marked_mergegen_better  passes
+           dataset1                  1                   1                       0    True
+      dataset2_Java                  1                   2                       0    True
+    dataset2_CSharp                  0                   1                       0    True
+dataset2_JavaScript                  4                   4                       1    True
+dataset2_TypeScript                  1                   2                       0    True
+
+--- letters outside ASCII ---
+            dataset    n  marked  marked_share  share_median_marked  share_p90_marked  share_max
+           dataset1  549       0        0.0000                  NaN               NaN        NaN
+      dataset2_Java 1719      16        0.0093               0.0064            0.0382     0.2308
+    dataset2_CSharp  545       5        0.0092               0.0138            0.3324     0.5171
+dataset2_JavaScript 1208      48        0.0397               0.0256            0.0883     0.2097
+dataset2_TypeScript  392       2        0.0051               0.4346            0.4869     0.5000
+                all 4413      71        0.0161               0.0198            0.1042     0.5171
+
+--- zero denominators ---
+            dataset    n  empty_versions  empty_input  empty_versions_share  empty_input_share
+           dataset1  549               0            0                   0.0                0.0
+      dataset2_Java 1719               0            0                   0.0                0.0
+    dataset2_CSharp  545               0            0                   0.0                0.0
+dataset2_JavaScript 1208               0            0                   0.0                0.0
+dataset2_TypeScript  392               0            0                   0.0                0.0
+fourth sensitivity analysis needed: False
+
+correlation input_above_500 x log_size: 0.672
+     non_english_as                            term   vif
+outside_ascii_share                       imbalance 1.065
+outside_ascii_share                 input_above_500 1.885
+outside_ascii_share                        log_size 1.920
+outside_ascii_share             outside_ascii_share 1.005
+outside_ascii_share                 dataset2_CSharp 1.756
+outside_ascii_share                   dataset2_Java 2.533
+outside_ascii_share             dataset2_JavaScript 2.361
+outside_ascii_share             dataset2_TypeScript 1.570
+  outside_ascii_any                       imbalance 1.066
+  outside_ascii_any                 input_above_500 1.887
+  outside_ascii_any                        log_size 1.928
+  outside_ascii_any               outside_ascii_any 1.039
+  outside_ascii_any                 dataset2_CSharp 1.756
+  outside_ascii_any                   dataset2_Java 2.533
+  outside_ascii_any             dataset2_JavaScript 2.375
+  outside_ascii_any             dataset2_TypeScript 1.569
+                    corr(input_above_500, log_size) 0.672
+
+--- imbalance quantiles ---
+                       q10    q25    q50    q75    q90
+dataset                                               
+dataset1             0.040  0.116  0.343  0.693  1.000
+dataset2_Java        0.029  0.100  0.320  0.698  1.000
+dataset2_CSharp      0.025  0.103  0.279  0.623  1.000
+dataset2_JavaScript  0.014  0.067  0.223  0.471  0.859
+dataset2_TypeScript  0.031  0.095  0.260  0.536  0.960
+all                  0.025  0.091  0.285  0.606  1.000
+
+--- extreme cases of the submitted RQ4 in this test set ---
+            dataset  SBCRBetter  MergegenBetter
+           dataset1           0               0
+      dataset2_Java           0               2
+    dataset2_CSharp           1               0
+dataset2_JavaScript           0               1
+dataset2_TypeScript           1               2
+
+written in /w/winner-model-two-predictors/decoded
+
+exit 0, 4 s

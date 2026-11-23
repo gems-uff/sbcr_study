@@ -1,0 +1,134 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/chronological/chronological_effects.py --root /w/chronological --ref p1=/w/partition-1 --ref p2=/w/partition-2 --ref p3=/w/partition-3 --dates /w/commit-dates/universe/commit_dates.csv --data-root /w/datasets/source --out /w/chronological/effects
+
+
+=== training_on_past.csv ===
+            dataset     tool reference   n  chronological  reference_mean  mean_difference   ci95  shapiro_p     test      p effect_measure  effect_size  p_holm  excludes_zero_holm  p_holm_main_split
+           dataset1 MergeGen        p1 128         0.9298          0.9155           0.0143 0.0172        0.0 Wilcoxon 0.1742  rank-biserial       0.3108  1.0000               False             1.0000
+           dataset1     SBCR        p1 128         0.7935          0.7891           0.0044 0.0214        0.0 Wilcoxon 0.6907  rank-biserial       0.0653  1.0000               False             1.0000
+           dataset1 MergeGen        p2 131         0.9187          0.9120           0.0068 0.0136        0.0 Wilcoxon 0.3548  rank-biserial       0.2253  1.0000               False                NaN
+           dataset1     SBCR        p2 131         0.7827          0.7580           0.0247 0.0222        0.0 Wilcoxon 0.0759  rank-biserial       0.3108  1.0000               False                NaN
+           dataset1 MergeGen        p3 101         0.9227          0.9133           0.0094 0.0130        0.0 Wilcoxon 0.4091  rank-biserial       0.1852  1.0000               False                NaN
+           dataset1     SBCR        p3 101         0.8138          0.8030           0.0107 0.0243        0.0 Wilcoxon 0.2220  rank-biserial       0.1984  1.0000               False                NaN
+      dataset2_Java MergeGen        p1 346         0.9190          0.9121           0.0069 0.0092        0.0 Wilcoxon 0.7612  rank-biserial       0.0434  1.0000               False             1.0000
+      dataset2_Java     SBCR        p1 346         0.8027          0.7997           0.0030 0.0165        0.0 Wilcoxon 0.6144  rank-biserial      -0.0386  1.0000               False             1.0000
+      dataset2_Java MergeGen        p2 502         0.9446          0.9432           0.0014 0.0079        0.0 Wilcoxon 0.9285  rank-biserial       0.0119  1.0000               False                NaN
+      dataset2_Java     SBCR        p2 502         0.8035          0.8170          -0.0135 0.0132        0.0 Wilcoxon 0.0193  rank-biserial      -0.1534  0.5201               False                NaN
+      dataset2_Java MergeGen        p3 440         0.9547          0.9562          -0.0015 0.0046        0.0 Wilcoxon 0.1046  rank-biserial      -0.2429  1.0000               False                NaN
+      dataset2_Java     SBCR        p3 440         0.7875          0.8010          -0.0136 0.0166        0.0 Wilcoxon 0.0342  rank-biserial      -0.1428  0.8541               False                NaN
+    dataset2_CSharp MergeGen        p1 125         0.8527          0.8549          -0.0022 0.0177        0.0 Wilcoxon 0.6041  rank-biserial      -0.0991  1.0000               False             1.0000
+    dataset2_CSharp     SBCR        p1 125         0.7656          0.7421           0.0235 0.0222        0.0 Wilcoxon 0.0784  rank-biserial       0.2550  1.0000               False             0.7052
+    dataset2_CSharp MergeGen        p2 137         0.8369          0.8579          -0.0209 0.0251        0.0 Wilcoxon 0.0587  rank-biserial      -0.3273  1.0000               False                NaN
+    dataset2_CSharp     SBCR        p2 137         0.7387          0.7554          -0.0168 0.0323        0.0 Wilcoxon 0.7524  rank-biserial       0.0403  1.0000               False                NaN
+    dataset2_CSharp MergeGen        p3 116         0.8604          0.8696          -0.0092 0.0180        0.0 Wilcoxon 0.1546  rank-biserial      -0.2615  1.0000               False                NaN
+    dataset2_CSharp     SBCR        p3 116         0.7788          0.7532           0.0256 0.0298        0.0 Wilcoxon 0.0041  rank-biserial       0.3524  0.1146               False                NaN
+dataset2_JavaScript MergeGen        p1 261         0.9045          0.9024           0.0021 0.0132        0.0 Wilcoxon 0.4882  rank-biserial       0.1084  1.0000               False             1.0000
+dataset2_JavaScript     SBCR        p1 261         0.7938          0.8065          -0.0127 0.0130        0.0 Wilcoxon 0.0269  rank-biserial      -0.2562  0.6986               False             0.2687
+dataset2_JavaScript MergeGen        p2 249         0.8934          0.8949          -0.0015 0.0180        0.0 Wilcoxon 0.6389  rank-biserial       0.0734  1.0000               False                NaN
+dataset2_JavaScript     SBCR        p2 249         0.8074          0.7878           0.0197 0.0168        0.0 Wilcoxon 0.0007  rank-biserial       0.3644  0.0190                True                NaN
+dataset2_JavaScript MergeGen        p3 253         0.7626          0.8189          -0.0563 0.0216        0.0 Wilcoxon 0.0000  rank-biserial      -0.6215  0.0000                True                NaN
+dataset2_JavaScript     SBCR        p3 253         0.7813          0.7735           0.0079 0.0189        0.0 Wilcoxon 0.7674  rank-biserial       0.0304  1.0000               False                NaN
+dataset2_TypeScript MergeGen        p1  77         0.8783          0.8682           0.0101 0.0421        0.0 Wilcoxon 0.5922  rank-biserial       0.1304  1.0000               False             1.0000
+dataset2_TypeScript     SBCR        p1  77         0.8095          0.7984           0.0110 0.0295        0.0 Wilcoxon 0.1724  rank-biserial       0.2389  1.0000               False             1.0000
+dataset2_TypeScript MergeGen        p2 105         0.8956          0.9004          -0.0047 0.0110        0.0 Wilcoxon 0.5841  rank-biserial      -0.1304  1.0000               False                NaN
+dataset2_TypeScript     SBCR        p2 105         0.8375          0.8321           0.0054 0.0193        0.0 Wilcoxon 0.4206  rank-biserial       0.1394  1.0000               False                NaN
+dataset2_TypeScript MergeGen        p3  89         0.8568          0.8566           0.0002 0.0216        0.0 Wilcoxon 0.8791  rank-biserial       0.0362  1.0000               False                NaN
+dataset2_TypeScript     SBCR        p3  89         0.7929          0.7909           0.0020 0.0311        0.0 Wilcoxon 0.5860  rank-biserial      -0.1000  1.0000               False                NaN
+
+=== whole_test_sets.csv ===
+            dataset     tool  n_chronological  n_main  shared_conflicts  chronological   main  difference  shapiro_p_chronological  shapiro_p_main         test      p effect_measure  effect_size  p_holm
+           dataset1 MergeGen              553     549                58         0.9185 0.8893      0.0292                      0.0             0.0 Mann-Whitney 0.0075  rank-biserial       0.0800  0.0450
+           dataset1     SBCR              553     549                58         0.8044 0.7883      0.0161                      0.0             0.0 Mann-Whitney 0.2061  rank-biserial       0.0437  0.8245
+      dataset2_Java MergeGen             1721    1719               172         0.9243 0.8707      0.0535                      0.0             0.0 Mann-Whitney 0.0000  rank-biserial       0.1337  0.0000
+      dataset2_Java     SBCR             1721    1719               172         0.7856 0.7614      0.0241                      0.0             0.0 Mann-Whitney 0.1543  rank-biserial       0.0280  0.7716
+    dataset2_CSharp MergeGen              546     545                58         0.8780 0.8536      0.0245                      0.0             0.0 Mann-Whitney 0.6696  rank-biserial       0.0135  1.0000
+    dataset2_CSharp     SBCR              546     545                58         0.7792 0.7730      0.0062                      0.0             0.0 Mann-Whitney 0.7306  rank-biserial      -0.0120  1.0000
+dataset2_JavaScript MergeGen             1206    1208               126         0.8695 0.9031     -0.0336                      0.0             0.0 Mann-Whitney 0.0010  rank-biserial      -0.0685  0.0094
+dataset2_JavaScript     SBCR             1206    1208               126         0.7870 0.8074     -0.0203                      0.0             0.0 Mann-Whitney 0.0015  rank-biserial      -0.0743  0.0121
+dataset2_TypeScript MergeGen              392     392                37         0.8891 0.9019     -0.0128                      0.0             0.0 Mann-Whitney 0.9649  rank-biserial       0.0016  1.0000
+dataset2_TypeScript     SBCR              392     392                37         0.8108 0.7806      0.0301                      0.0             0.0 Mann-Whitney 0.0025  rank-biserial       0.1245  0.0173
+
+=== training_on_past_summary.csv ===
+            dataset     tool  mean_difference  min_difference  max_difference  same_sign  all_excluding_zero
+           dataset1 MergeGen           0.0101          0.0068          0.0143       True               False
+           dataset1     SBCR           0.0133          0.0044          0.0247       True               False
+    dataset2_CSharp MergeGen          -0.0108         -0.0209         -0.0022       True               False
+    dataset2_CSharp     SBCR           0.0108         -0.0168          0.0256      False               False
+      dataset2_Java MergeGen           0.0023         -0.0015          0.0069      False               False
+      dataset2_Java     SBCR          -0.0080         -0.0136          0.0030      False               False
+dataset2_JavaScript MergeGen          -0.0186         -0.0563          0.0021      False               False
+dataset2_JavaScript     SBCR           0.0049         -0.0127          0.0197      False               False
+dataset2_TypeScript MergeGen           0.0018         -0.0047          0.0101      False               False
+dataset2_TypeScript     SBCR           0.0061          0.0020          0.0110       True               False
+
+=== gap_by_condition.csv ===
+            dataset reference     condition   n   sbcr  mergegen  difference  mergegen_wins
+           dataset1        p1 chronological 128 0.7935    0.9298     -0.1363         0.6484
+           dataset1        p1            p1 128 0.7891    0.9155     -0.1264         0.6406
+           dataset1        p2 chronological 131 0.7827    0.9187     -0.1360         0.5878
+           dataset1        p2            p2 131 0.7580    0.9120     -0.1540         0.6031
+           dataset1        p3 chronological 101 0.8138    0.9227     -0.1089         0.6040
+           dataset1        p3            p3 101 0.8030    0.9133     -0.1102         0.6238
+      dataset2_Java        p1 chronological 346 0.8027    0.9190     -0.1164         0.6994
+      dataset2_Java        p1            p1 346 0.7997    0.9121     -0.1124         0.6532
+      dataset2_Java        p2 chronological 502 0.8035    0.9446     -0.1411         0.7191
+      dataset2_Java        p2            p2 502 0.8170    0.9432     -0.1262         0.6753
+      dataset2_Java        p3 chronological 440 0.7875    0.9547     -0.1672         0.7886
+      dataset2_Java        p3            p3 440 0.8010    0.9562     -0.1552         0.7614
+    dataset2_CSharp        p1 chronological 125 0.7656    0.8527     -0.0871         0.6240
+    dataset2_CSharp        p1            p1 125 0.7421    0.8549     -0.1128         0.6560
+    dataset2_CSharp        p2 chronological 137 0.7387    0.8369     -0.0983         0.5839
+    dataset2_CSharp        p2            p2 137 0.7554    0.8579     -0.1024         0.6642
+    dataset2_CSharp        p3 chronological 116 0.7788    0.8604     -0.0815         0.5862
+    dataset2_CSharp        p3            p3 116 0.7532    0.8696     -0.1164         0.7414
+dataset2_JavaScript        p1 chronological 261 0.7938    0.9045     -0.1107         0.6130
+dataset2_JavaScript        p1            p1 261 0.8065    0.9024     -0.0958         0.5900
+dataset2_JavaScript        p2 chronological 249 0.8074    0.8934     -0.0859         0.6185
+dataset2_JavaScript        p2            p2 249 0.7878    0.8949     -0.1072         0.6466
+dataset2_JavaScript        p3 chronological 253 0.7813    0.7626      0.0188         0.4348
+dataset2_JavaScript        p3            p3 253 0.7735    0.8189     -0.0454         0.4941
+dataset2_TypeScript        p1 chronological  77 0.8095    0.8783     -0.0688         0.4416
+dataset2_TypeScript        p1            p1  77 0.7984    0.8682     -0.0698         0.5584
+dataset2_TypeScript        p2 chronological 105 0.8375    0.8956     -0.0581         0.5429
+dataset2_TypeScript        p2            p2 105 0.8321    0.9004     -0.0683         0.5333
+dataset2_TypeScript        p3 chronological  89 0.7929    0.8568     -0.0640         0.5169
+dataset2_TypeScript        p3            p3  89 0.7909    0.8566     -0.0657         0.5281
+
+=== drift.csv ===
+            dataset            tool    n  days_max  spearman_days_similarity      p  p_holm
+           dataset1        MergeGen  553       308                    0.0153 0.7192     1.0
+           dataset1            SBCR  553       308                   -0.0258 0.5452     1.0
+           dataset1 SBCR − MergeGen  553       308                   -0.0498 0.2420     NaN
+      dataset2_Java        MergeGen 1721       413                    0.0211 0.3817     1.0
+      dataset2_Java            SBCR 1721       413                   -0.0074 0.7591     1.0
+      dataset2_Java SBCR − MergeGen 1721       413                   -0.0276 0.2521     NaN
+    dataset2_CSharp        MergeGen  546       457                   -0.0434 0.3117     1.0
+    dataset2_CSharp            SBCR  546       457                    0.0489 0.2541     1.0
+    dataset2_CSharp SBCR − MergeGen  546       457                    0.0997 0.0198     NaN
+dataset2_JavaScript        MergeGen 1206       460                   -0.0370 0.1996     1.0
+dataset2_JavaScript            SBCR 1206       460                   -0.0207 0.4718     1.0
+dataset2_JavaScript SBCR − MergeGen 1206       460                    0.0208 0.4695     NaN
+dataset2_TypeScript        MergeGen  392       247                   -0.0102 0.8411     1.0
+dataset2_TypeScript            SBCR  392       247                    0.0585 0.2478     1.0
+dataset2_TypeScript SBCR − MergeGen  392       247                    0.0528 0.2973     NaN
+
+=== drift_by_third.csv ===
+            dataset  third   n  days_from  days_to  mergegen   sbcr  difference
+           dataset1      1 185          0      100    0.9202 0.8096     -0.1106
+           dataset1      2 184        101      219    0.8988 0.7792     -0.1196
+           dataset1      3 184        219      308    0.9366 0.8244     -0.1122
+      dataset2_Java      1 574          0       86    0.9217 0.7727     -0.1490
+      dataset2_Java      2 573         86      201    0.9151 0.8117     -0.1034
+      dataset2_Java      3 574        201      413    0.9360 0.7723     -0.1637
+    dataset2_CSharp      1 182          0      133    0.8600 0.7484     -0.1116
+    dataset2_CSharp      2 182        133      247    0.9093 0.7969     -0.1123
+    dataset2_CSharp      3 182        248      457    0.8648 0.7922     -0.0726
+dataset2_JavaScript      1 402          0      134    0.8892 0.7826     -0.1066
+dataset2_JavaScript      2 402        135      285    0.9046 0.8090     -0.0956
+dataset2_JavaScript      3 402        285      460    0.8145 0.7695     -0.0450
+dataset2_TypeScript      1 131          0       44    0.9118 0.8027     -0.1091
+dataset2_TypeScript      2 130         44      104    0.8527 0.7986     -0.0542
+dataset2_TypeScript      3 131        104      247    0.9026 0.8309     -0.0717
+
+written to /w/chronological/effects
+
+exit 0, 33 s
