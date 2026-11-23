@@ -86,9 +86,6 @@ def steps(W, SUB):
     add("partition_spread", sa + [script("analysis/rq1_rq3/partition_spread.py")] + parts + ["--out", f"{W}/partition-spread"],
         ["partition-spread/comparison_per_partition.csv", "partition-spread/partition_spread.csv"],
         "partition-spread/spread.log")
-    add("partition-spread:leakage_effect", sa + [script("analysis/rq1_rq3/leakage_effect.py"), "--root", f"{W}/split-comparison",
-                                                 "--mg-root", f"{W}/partition-1", "--out", f"{W}/partition-spread/common_set"],
-        ["partition-spread/common_set/*.csv"], "partition-spread/common_set.log")
     add("split-comparison:leakage_effect", sa + [script("analysis/rq1_rq3/leakage_effect.py"), "--root", f"{W}/split-comparison",
                                                  "--out", f"{W}/split-comparison"],
         ["split-comparison/leakage_effect.csv", "split-comparison/common_set.csv"], "split-comparison/leakage_effect.log")

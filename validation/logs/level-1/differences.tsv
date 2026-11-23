@@ -10,9 +10,6 @@ split-comparison:sbcr_similarity	split-comparison/sbcr_similarities.csv	same row
 partition-1-sbcr-seeds:compare_approaches	partition-1-sbcr-seeds/logs/consolidate.log	paths	
 partition-1-sbcr-seeds:seed_spread	partition-1-sbcr-seeds/logs/seed_spread.log	paths	
 partition_spread	partition-spread/spread.log	paths	
-partition-spread:leakage_effect	partition-spread/common_set/common_set.csv	content	rows in another order; 38 cells differ, largest numeric difference 0.0574; first: gap_random: -0.06610306260112617 vs -0.059269513710412274; gap_mg: -0.009212249471572915 vs -0.003584052440568317; gap_pd: -0.058376916294519715 vs -0.05167525799541179; change_pd_minus_random: 0.007726146306606473 vs 0.0075942557150004844; ci95: 0.09711028297883742 vs 0.09707890059879273
-partition-spread:leakage_effect	partition-spread/common_set/leakage_effect.csv	content	rows in another order; 81 cells differ, largest numeric difference 0.0131; first: sim_other: 0.8613470154039887 vs 0.8556185693121088; sim_pd: 0.8742621042586641 vs 0.8682550244522064; difference: -0.012915088854675408 vs -0.012636455140097636; ci95: 0.027591392154761557 vs 0.027386399144443397; p: 0.41234652788813886 vs 0.4254511364591589
-partition-spread:leakage_effect	partition-spread/common_set.log	content	archived: train random vs pd dataset1 98 0.8785 0.8602 0.0183 0.0274 0.1829 0.5816 0.5408 | new: train random vs pd dataset1 98 0.8824 0.8639 0.0185 0.0275 0.1742 0.5816 0.5408
 split-comparison:leakage_effect	split-comparison/leakage_effect.log	paths	
 split-comparison:leakage_effect partition-1	split-comparison/partition-1/leakage_effect.log	paths	
 project-disjoint-comparison:split-comparison	project-disjoint-comparison/run-split-comparison.log	paths	

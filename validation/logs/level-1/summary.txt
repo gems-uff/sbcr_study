@@ -17,7 +17,6 @@ partition-1-sbcr-seeds:sbcr_similarity: exit 0, 2 files, 2 equal
 partition-1-sbcr-seeds:compare_approaches: exit 0, 3 files, 2 equal, 1 differs
 partition-1-sbcr-seeds:seed_spread: exit 0, 3 files, 2 equal, 1 differs
 partition_spread: exit 0, 3 files, 2 equal, 1 differs
-partition-spread:leakage_effect: exit 0, 3 files, 3 differs
 split-comparison:leakage_effect: exit 0, 3 files, 2 equal, 1 differs
 split-comparison:leakage_effect partition-1: exit 0, 3 files, 2 equal, 1 differs
 project-disjoint-comparison:split-comparison: exit 0, 2 files, 1 equal, 1 differs

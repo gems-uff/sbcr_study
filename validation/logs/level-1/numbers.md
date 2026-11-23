@@ -32,7 +32,3 @@ The archived fits of `winner-model-two-predictors` ran in a container on another
 ## The RQ4 join and the agreement report
 
 `join_scale.py` and `kappa_report.py` wrote the reports of `rq4/sealed/scale/join/` and `rq4/agreement/block1/` from the archives as published, the coding sheet without the history of the coding included. A rerun gives `joined.csv`, `frequencies.csv`, `block1.csv` and `sample_tools.csv` byte for byte, and reports that differ from the archived ones in the date of the run and, for `join_report`, in the absolute paths of the input folders.
-
-## Known difference
-
-`partition-spread/common_set.log` and `partition-spread/common_set/`: the archived files compare the similarity with whitespace, and `leakage_effect.py` compares it with all whitespace removed. The run gives files byte-identical to `split-comparison/partition-1/common_set.csv` and `leakage_effect.csv`, the same analysis, and differs from `partition-spread/common_set/` by up to 0.057 in the gaps.

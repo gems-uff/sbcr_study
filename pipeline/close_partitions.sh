@@ -8,7 +8,8 @@
 # ROOTS       roots whose similarities and comparison are computed; those of PARTITIONS not here are only read
 # PARTITIONS  the number of each partition, for the spread
 # LEAKAGE_FROM  optional: the root of the three arms; the `mg` rows of the leakage and common-set
-#             analyses are redone with the root of ROOTS that has the common set, into $OUT/common_set
+#             analyses are redone with the root of ROOTS that has the common set, into
+#             $LEAKAGE_FROM/<name of that root> (split-comparison/partition-1 in the archives)
 REPO="${REPO:-$(cd "$(dirname "$0")/.." && pwd)}"
 ROOTS="${ROOTS:?set ROOTS, the roots to process}"
 PARTITIONS="${PARTITIONS:?set PARTITIONS, as 1=<root> 2=<root> 3=<root>}"
@@ -47,8 +48,9 @@ if [ -n "$LEAKAGE_FROM" ]; then
   for ROOT in $ROOTS; do
     [ -f "$ROOT/markers/jit_common.ok" ] || continue
     echo "=== common set with the mg of $ROOT :: $(date -Is) ==="
+    mkdir -p "$LEAKAGE_FROM/$(basename "$ROOT")"
     python "$REPO/analysis/rq1_rq3/leakage_effect.py" --root "$LEAKAGE_FROM" --mg-root "$ROOT" \
-      --out "$OUT/common_set" | tee "$OUT/common_set.log"
+      --out "$LEAKAGE_FROM/$(basename "$ROOT")" | tee "$LEAKAGE_FROM/$(basename "$ROOT")/leakage_effect.log"
   done
 fi
 
