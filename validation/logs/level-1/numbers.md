@@ -29,8 +29,10 @@ The archived fits of `winner-model-two-predictors` ran in a container on another
 
 - `rq4/sealed/sbcr-candidate-origin/report.md`: the line of the run gives the commit of the code, which the archived report leaves out. The counts that follow on the line, and the rest of the report, are equal. `report.json` differs in the same fields (class provenance).
 
-## Pending on the archives
+## The RQ4 join and the agreement report
 
-- `partition-spread/common_set.log` and `partition-spread/common_set/`: the archived files compare the similarity with whitespace, and `leakage_effect.py` compares it with all whitespace removed. The run gives files byte-identical to `split-comparison/partition-1/common_set.csv` and `leakage_effect.csv`, the same analysis, and differs from `partition-spread/common_set/` by up to 0.057 in the gaps.
-- `rq4/sealed/scale/join/`: each labeling record holds the SHA-256 of the description record it read (`description_sha256`), which `join_scale.py` checks, and the description records of the archive changed after the run. With `description_sha256` set to the hash of the archived description record of its case, in the work copy, `join_scale.py` gives `joined.csv`, `frequencies.csv`, `block1.csv` and `sample_tools.csv` byte for byte, and `join_report.md` and `.json` differ in the date, the paths and the hashes of the script and of the coding sheet.
-- `rq4/agreement/block1/`: the report `kappa_report.py` writes from the published coding sheet, which the RQ4 archive takes.
+`join_scale.py` and `kappa_report.py` wrote the reports of `rq4/sealed/scale/join/` and `rq4/agreement/block1/` from the archives as published, the coding sheet without the history of the coding included. A rerun gives `joined.csv`, `frequencies.csv`, `block1.csv` and `sample_tools.csv` byte for byte, and reports that differ from the archived ones in the date of the run and, for `join_report`, in the absolute paths of the input folders.
+
+## Known difference
+
+`partition-spread/common_set.log` and `partition-spread/common_set/`: the archived files compare the similarity with whitespace, and `leakage_effect.py` compares it with all whitespace removed. The run gives files byte-identical to `split-comparison/partition-1/common_set.csv` and `leakage_effect.csv`, the same analysis, and differs from `partition-spread/common_set/` by up to 0.057 in the gaps.

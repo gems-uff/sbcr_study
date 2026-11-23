@@ -59,8 +59,8 @@ winner-model-two-predictors/decoded:ties_by_imbalance: exit 0, 1 files, 1 equal
 rq4:draw_sample: exit 0, 4 files, 2 equal, 2 differs, 1 archived files not written
 rq4:build_packages: exit 0, 161 files, 161 equal, 3 archived files not written
 rq4:build_scale: exit 0, 3962 files, 1981 equal, 2 differs, 1979 not archived, 6 archived files not written
-rq4:kappa_report: exit 0, 2 files, 2 not archived
-rq4:join_scale: exit 0, 6 files, 4 equal, 2 differs
 consistency-checks:band_code_checks: exit 0, 5 files, 4 equal, 1 differs
 rq4:sbcr_candidate_origin: exit 0, 3 files, 1 equal, 2 differs
 figures: exit 0, 3 files, 3 not archived
+rq4:kappa_report: exit 0, 2 files, 2 differs
+rq4:join_scale: exit 0, 6 files, 4 equal, 2 differs

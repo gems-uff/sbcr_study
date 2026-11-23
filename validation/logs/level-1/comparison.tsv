@@ -4417,14 +4417,6 @@ rq4:build_scale	rq4/sealed/scale/join/joined.csv	not written
 rq4:build_scale	rq4/sealed/scale/join/sample_tools.csv	not written	
 rq4:build_scale	rq4/sealed/scale/sealed_scale.csv	not written	
 rq4:build_scale	rq4/sealed/sealed_sample.csv	not written	
-rq4:kappa_report	validation-new/agreement-block1/kappa_report.json	not archived	not in the archives
-rq4:kappa_report	validation-new/agreement-block1/kappa_report.md	not archived	not in the archives
-rq4:join_scale	rq4/sealed/scale/join/block1.csv	not written	
-rq4:join_scale	rq4/sealed/scale/join/frequencies.csv	not written	
-rq4:join_scale	rq4/sealed/scale/join/join_report.json	not written	
-rq4:join_scale	rq4/sealed/scale/join/join_report.md	not written	
-rq4:join_scale	rq4/sealed/scale/join/joined.csv	not written	
-rq4:join_scale	rq4/sealed/scale/join/sample_tools.csv	not written	
 consistency-checks:band_code_checks	consistency-checks/band-codes-against-limits/f5_fn_limits.csv	equal	
 consistency-checks:band_code_checks	consistency-checks/band-codes-against-limits/f5_fn_limits_cases.csv	equal	
 consistency-checks:band_code_checks	consistency-checks/band-codes-against-limits/neither_different_similarities.csv	equal	
@@ -4436,9 +4428,11 @@ rq4:sbcr_candidate_origin	validation-new/sbcr-candidate-origin/report.md	differs
 figures	validation-new/figures/rq1-rq2-time.pdf	not archived	not in the archives
 figures	validation-new/figures/rq4-bands.pdf	not archived	not in the archives
 figures	validation-printed/figures.txt	not archived	not in the archives
+rq4:kappa_report	validation-new/agreement-block1/kappa_report.json	differs	1 keys differ; .generated: '2026-11-23T17:27:46+00:00' vs '2026-11-23T17:04:51+00:00'
+rq4:kappa_report	validation-new/agreement-block1/kappa_report.md	differs	1 lines archived only, 1 new only; -Generated on 2026-11-23T17:04:51+00:00 by `analysis/rq4/agreement/kappa_report.py`. Kappa with a 95% percentile bootstrap interval, 2000 resamples of cases, se | +Generated on 2026-11-23T17:27:46+00:00 by `analysis/rq4/agreement/kappa_report.py`. Kappa with a 95% percentile bootstrap interval, 2000 resamples of cases, se
 rq4:join_scale	validation-new/join/block1.csv	equal	
 rq4:join_scale	validation-new/join/frequencies.csv	equal	
-rq4:join_scale	validation-new/join/join_report.json	differs	6 keys differ; .generated: '2026-11-23T17:04:52+00:00' vs '2026-10-24T15:17:24+00:00'; .inputs.approval: '/w/rq4/annotator/block1-labeling' vs 'rq4/annotator/block1-labeling'; .inputs.description: '/w/rq4/annotator/scale-description' vs 'rq4/annotator/scale-description'; .inputs.labeling: '/w/rq4/annotator/scale-labeling' vs 'rq4/annotator/scale-labeling'; .inputs.script_sha256: '34e788d43d2714be787e46d057edbfe33cce325b303824ebf7753e50d4e65485' vs 'cb4164037f0c31fc4cce21193b17b50662ad4b95c242e67862941e7bf53b09af'; .inputs.sheet_sha256: 'eb01b615794903a38b9573fa78b0b34803a28d05af144de38517b46ecd0c98ab' vs 'b012c510853972d8750c0fb81d536bd7763da196e69cccc089284db1bb28053c'
-rq4:join_scale	validation-new/join/join_report.md	differs	6 lines archived only, 6 new only; -Generated 2026-10-24T15:17:24+00:00 by `analysis/rq4/join_scale.py`. | +Generated 2026-11-23T17:04:52+00:00 by `analysis/rq4/join_scale.py`. | -- description: `rq4/annotator/scale-description` | -- labeling: `rq4/annotator/scale-labeling` | -- script_sha256: `cb4164037f0c31fc4cce21193b17b50662ad4b95c242e67862941e7bf53b09af` | -- sheet_sha256: `b012c510853972d8750c0fb81d536bd7763da196e69cccc089284db1bb28053c` | -- approval: `rq4/annotator/block1-labeling` | +- description: `/w/rq4/annotator/scale-description`
+rq4:join_scale	validation-new/join/join_report.json	differs	4 keys differ; .generated: '2026-11-23T17:27:47+00:00' vs '2026-11-23T17:12:19+00:00'; .inputs.approval: '/w/rq4/annotator/block1-labeling' vs 'rq4/annotator/block1-labeling'; .inputs.description: '/w/rq4/annotator/scale-description' vs 'rq4/annotator/scale-description'; .inputs.labeling: '/w/rq4/annotator/scale-labeling' vs 'rq4/annotator/scale-labeling'
+rq4:join_scale	validation-new/join/join_report.md	differs	4 lines archived only, 4 new only; -Generated 2026-11-23T17:12:19+00:00 by `analysis/rq4/join_scale.py`. | +Generated 2026-11-23T17:27:47+00:00 by `analysis/rq4/join_scale.py`. | -- description: `rq4/annotator/scale-description` | -- labeling: `rq4/annotator/scale-labeling` | +- description: `/w/rq4/annotator/scale-description` | +- labeling: `/w/rq4/annotator/scale-labeling` | -- approval: `rq4/annotator/block1-labeling` | +- approval: `/w/rq4/annotator/block1-labeling`
 rq4:join_scale	validation-new/join/joined.csv	equal	
 rq4:join_scale	validation-new/join/sample_tools.csv	equal	

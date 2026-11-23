@@ -33,7 +33,7 @@ python validation/classify_differences.py --archives <archives> --work <work> --
 |---|---|
 | `logs/environment.log` | The checks of the image (`check_image.sh`), the five tests and `--help` of every script |
 | `logs/archives.log` | `check_archives.py` |
-| `logs/level-1/summary.txt` | One line per step of `run_analysis.py`: exit code and files equal, equal in content, different and not archived |
+| `logs/level-1/summary.txt` | One line per step of `run_analysis.py`: exit code and files equal, equal in content, different and not archived. "Archived files not written" counts files of the folders of a step that a later step writes; every archived file the steps cover was written by one of them |
 | `logs/level-1/comparison.tsv` | Each output: step, path, result and the first differences |
 | `logs/level-1/differences.tsv` | Each different output with its class from `classify_differences.py` |
 | `logs/level-1/steps/` | The command and the output of each step |

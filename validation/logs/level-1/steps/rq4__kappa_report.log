@@ -2,7 +2,7 @@ $ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq4/ag
 
 # Agreement report of the RQ4 coding
 
-Generated on 2026-11-23T17:04:51+00:00 by `analysis/rq4/agreement/kappa_report.py`. Kappa with a 95% percentile bootstrap interval, 2000 resamples of cases, seed 559479682. Annotator: run 1. Threshold of the observed kappa: 0.61. Scheme version block 1, frozen on 2026-10-19, wording of F4, F6 and the cand rules revised on 2026-10-23.
+Generated on 2026-11-23T17:27:46+00:00 by `analysis/rq4/agreement/kappa_report.py`. Kappa with a 95% percentile bootstrap interval, 2000 resamples of cases, seed 559479682. Annotator: run 1. Threshold of the observed kappa: 0.61. Scheme version block 1, frozen on 2026-10-19, wording of F4, F6 and the cand rules revised on 2026-10-23.
 
 | block | dimension | cases | without consensus | consensus vs annotator | raw agreement | worst case | reaches the threshold |
 |---|---|---:|---:|---|---:|---|---|
