@@ -12,7 +12,7 @@
 
 The datasets and results archives are adapted from two datasets under CC BY 4.0:
 
-- **Dataset1**: "Merge conflicts dataset used in SBES 2022 paper", by Heleno de Souza Campos Junior and Gleiph Ghiotto L. de Menezes, FigShare, [10.6084/m9.figshare.26831818.v4](https://doi.org/10.6084/m9.figshare.26831818.v4), CC BY 4.0. The archives carry the 6,269 chunks of its `dataset_processed_base.json` in the format of this study, without the exact duplicates, and their splits.
+- **Dataset1**: "Merge conflicts dataset used in SBES 2022 paper", by Heleno de Souza Campos Junior and Gleiph Ghiotto L. de Menezes, FigShare, [10.6084/m9.figshare.26831818.v4](https://doi.org/10.6084/m9.figshare.26831818.v4), CC BY 4.0. The archives carry 5,490 of the 6,269 chunks of its `dataset_processed_base.json`, in the format of this study, without the 779 exact duplicates, and their splits.
 - **Dataset2**: "Data set for FSE 2022 Submission Program Merge Conflict Resolution via Neural Transformers", Zenodo, [10.5281/zenodo.6366908](https://doi.org/10.5281/zenodo.6366908), CC BY 4.0, the data of Svyatkovskiy et al., "Program Merge Conflict Resolution via Neural Transformers" (ESEC/FSE 2022). The archives carry its conflicts in the format of this study, filtered to those resolved by combination for SBCR, without the exact duplicates, and their splits.
 
 The conflicts of both datasets, and the RQ4 packages built from them, hold fragments of the code of open-source projects, which keep the licenses of those projects. CC BY 4.0 applies to what this study adds: the selection, the splits, the labels and the results.
