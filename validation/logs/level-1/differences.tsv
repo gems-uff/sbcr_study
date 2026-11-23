@@ -55,7 +55,7 @@ rq4:build_scale	validation-new/scale/coding_sheet.csv	date of the run
 rq4:build_scale	validation-new/scale/draw.json	provenance	
 consistency-checks:band_code_checks	consistency-checks/band-codes-against-limits.log	spacing	
 rq4:sbcr_candidate_origin	validation-new/sbcr-candidate-origin/report.json	provenance	
-rq4:sbcr_candidate_origin	validation-new/sbcr-candidate-origin/report.md	content	archived: Run on <time>, root `partition-1`, encoding utf-8. 4368 of 4413 conflicts processed by SBCR. Score check failed in 0 of 4368 non-empty candidates. | new: Run on <time>, commit <hash>, root `partition-1`, encoding utf-8. 4368 of 4413 conflicts processed by SBCR. Score check failed in 0 of 4368 non-empty candidates.
+rq4:sbcr_candidate_origin	validation-new/sbcr-candidate-origin/report.md	paths	
 rq4:kappa_report	validation-new/agreement-block1/kappa_report.json	provenance	
 rq4:kappa_report	validation-new/agreement-block1/kappa_report.md	elapsed times	
 rq4:join_scale	validation-new/join/join_report.json	provenance	

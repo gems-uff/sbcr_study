@@ -342,8 +342,8 @@ def main():
         tables["origin per code, clear MergeGen win band"] = origin_table(mg, "code_cand")
         tables["evaluation function per code, clear MergeGen win band"] = comparison_table(mg, "code_cand")
 
-    commit, dirty = git_state()
-    report = {"date": datetime.now(timezone.utc).isoformat(timespec="seconds"), "commit": commit,
+    _, dirty = git_state()
+    report = {"date": datetime.now(timezone.utc).isoformat(timespec="seconds"),
               "uncommitted_changes": dirty, "root": root, "joined": args.joined, "encoding": args.encoding,
               "conflicts": len(c), "processed": int((~c.sbcr_out_of_limits).sum()),
               "score_check_failed": failed[["dataset", "chunk_id"]].to_dict("records"),
@@ -353,7 +353,7 @@ def main():
     with open(os.path.join(out, "report.json"), "w", encoding="utf-8") as fh:
         json.dump(report, fh, indent=2, default=str)
     md = [f"# Origin of SBCR's candidates and its evaluation function", "",
-          f"Run on {report['date']}, commit {commit}{' with uncommitted changes' if dirty else ''}, root `{root}`, "
+          f"Run on {report['date']}, root `{root}`, "
           f"encoding {args.encoding}. {report['processed']} of {report['conflicts']} conflicts processed by SBCR. "
           f"Score check failed in {len(failed)} of {len(done)} non-empty candidates.", "",
           "Origin columns: " + "; ".join(f"`{k}` {v}" for k, v in ORIGIN_NAMES.items()) + ". "

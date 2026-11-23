@@ -25,10 +25,6 @@ Three scripts print their result in place of writing a file, and the figures are
 
 The archived fits of `winner-model-two-predictors` ran in a container on another computer, and those of `winner-model-three-predictors` on the machine of this validation. The logs of the fits (`fit_models.log`, `fit_models.stdout`, `bootstrap_main.log`) differ in the same digits, in the line of `sessionInfo()` that names the release of Ubuntu (24.04.4 against 24.04.5), and in the order in which R interleaves its messages with its output.
 
-## Other outputs that differ in content
-
-- `rq4/sealed/sbcr-candidate-origin/report.md`: the line of the run gives the commit of the code, which the archived report leaves out. The counts that follow on the line, and the rest of the report, are equal. `report.json` differs in the same fields (class provenance).
-
 ## The RQ4 join and the agreement report
 
 `join_scale.py` and `kappa_report.py` wrote the reports of `rq4/sealed/scale/join/` and `rq4/agreement/block1/` from the archives as published, the coding sheet without the history of the coding included. A rerun gives `joined.csv`, `frequencies.csv`, `block1.csv` and `sample_tools.csv` byte for byte, and reports that differ from the archived ones in the date of the run and, for `join_report`, in the absolute paths of the input folders.
