@@ -39,10 +39,10 @@ From each number, table and figure of the paper to the script of this repository
 | Spread across the three splits; order of the languages; p of 4.4e-15 or less | `analysis/rq1_rq3/partition_spread.py` | `partition-spread/partition_spread.csv`, `spread.log` |
 | MergeGen higher with every SBCR seed | `analysis/rq1_rq3/seed_spread.py` | `partition-1-sbcr-seeds/seed_summary.csv`, `comparison_per_seed.csv` |
 | MergeGen higher on the project-disjoint split | `analysis/rq1_rq3/project_disjoint_comparison.py` | `project-disjoint-comparison/` |
-| Leakage comparison | `analysis/rq1_rq3/leakage_effect.py` | `split-comparison/no-whitespace/` |
+| Leakage comparison | `analysis/rq1_rq3/leakage_effect.py` | `split-comparison/leakage_effect.csv`, `common_set.csv`, and `split-comparison/partition-1/` with the model of `partition-1` |
 | Table of the times of RQ1 and RQ2; conflicts past SBCR's timeout; share of the preprocessing | `analysis/rq1_rq3/times_per_language.py` | `partition-1/times_per_language.csv` |
 | SBCR faster in 324 of 549 Dataset1 conflicts | `analysis/rq1_rq3/faster_slower_counts.py` | `consistency-checks/sbcr-faster-share.log` |
-| Figure of the times of RQ1 and RQ2 | `analysis/figures/paper_figures.py` | `rq1-rq2-time.pdf`, from `partition-1/mergeGen/JIT/*/times.csv` and `partition-1/sbcr/` |
+| Figure of the times of RQ1 and RQ2 | `analysis/figures/paper_figures.py` | `rq1-rq2-time.pdf`, from `partition-1/mergeGen/JIT/*/*/times.csv` and `partition-1/sbcr/` |
 | Table of RQ3; the RQ3 gaps and their direct comparison | `analysis/rq1_rq3/rq3_gaps.py` | `rq3-statistics/rq3_gaps_s3022024.csv`, `rq3_gap_difference_s3022024.csv` |
 | RQ3 with the five SBCR seeds | `analysis/rq1_rq3/seed_spread.py` | `partition-1-sbcr-seeds/seed_summary.csv` |
 | Chronological split and its effects | `analysis/chronological/chronological_effects.py` | `chronological/effects/` |
