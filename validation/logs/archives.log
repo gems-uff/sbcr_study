@@ -1,8 +1,8 @@
 Zips against SHA256SUMS
-  ok  datasets.zip d7a04a9d3a76b6a8883ec814c61470e0d24c8ca2a2b3b32195a64c575024264f
-  ok  models.zip 9c01e2b1a180cdedff7e23c1beb6042a037a54811ccc824e6949aa464627b466
-  ok  results.zip d54e6f60d18e35cdc8de7aa53b7e55f94b5e70290244c5d4a0a68060504a6c7e
-  ok  rq4.zip 1030a4970e13ad492f937fe08a98a7d40943a4af548a90679b7f0a6ebdbd713d
+  ok  datasets.zip 8498ed0d7772d9e0fc24f62f19769cdb51ab22ec5be42cbedd393aa93f60145a
+  ok  models.zip 69bb064e9d1781d6c31764ddf9328c812525ee7b46a8487a8cc6b9df7e410dae
+  ok  results.zip 1e6c85c93da5afa565aabba6114b6cf917a54904b109eed0e262a061bc746903
+  ok  rq4.zip 46c904329a7dece469b1b9aea4f93c9309db9713ec8d735d6784c605c2fa88e6
 
 Extraction
   datasets.zip: 272 entries
