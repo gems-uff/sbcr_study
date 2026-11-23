@@ -4,7 +4,7 @@ The scripts that check the package against its archives, and the logs of the val
 
 | Script | What it does |
 |---|---|
-| `check_archives.py` | Checks the four zips against `SHA256SUMS`, extracts them into one folder and checks every file against the manifest of its archive |
+| `check_archives.py` | Checks the four zips against `SHA256SUMS`, extracts them into one folder and checks every file against the manifest of its archive, and that the license files at the root, outside the manifests, are the same where two zips carry one |
 | `run_analysis.py` | Runs the analysis scripts in order on a copy of the extracted archives, and compares each output with the archived file of the same path: by SHA-256, then by content (CSV cell by cell, JSON key by key, text line by line) |
 | `classify_differences.py` | Sorts the outputs that `run_analysis.py` found different by what explains the difference (Section "Level 1" below) |
 | `compare_sbcr.py` | Compares a rerun of SBCR's tuning or evaluation with the stored run: status, similarity, fitness and candidates |

@@ -5,8 +5,9 @@
 2. Extracts the four zips into `--out`, which must not exist yet. Each zip starts at its own
    folders (`partition-1/`, `rq4/`, ...) and carries `manifests/<archive>.sha256`.
 3. Each extracted file against the manifest of its archive (paths relative to `--out`): every
-   file listed exists and has its hash, and no file is left unlisted. `sha256sum -c` on each
-   manifest, from `--out`, does the same check.
+   file listed exists and has its hash, and no file is left unlisted but the license files at the
+   root (`LICENSE.md` of Datasets, Results and RQ4, the same file in the three, and `LICENSE` and
+   `NOTICE.md` of Models). `sha256sum -c` on each manifest, from `--out`, does the same check.
 
 Inputs: the folder of the zips and `SHA256SUMS` (`--zips`). Output: the extracted folder (`--out`)
 and the report, on the standard output; exit code 1 if a check fails.
@@ -18,6 +19,9 @@ import hashlib
 import os
 import sys
 import zipfile
+
+
+LICENSE_FILES = {"LICENSE.md", "LICENSE", "NOTICE.md"}
 
 
 def sha256(path):
@@ -55,6 +59,10 @@ def main():
             for n in names:
                 if n.startswith("/") or ".." in n.split("/"):
                     sys.exit(f"{name}: unsafe path {n}")
+                target = os.path.join(args.out, n)
+                if os.path.isfile(target) and open(target, "rb").read() != z.read(n):
+                    failed = True
+                    print(f"  {name}: {n} differs from the file of the same name of another zip")
             z.extractall(args.out)
             print(f"  {name}: {len(names)} entries")
 
@@ -85,11 +93,12 @@ def main():
     for d, _, files in os.walk(args.out):
         for f in files:
             rel = os.path.relpath(os.path.join(d, f), args.out)
-            if rel not in listed and not rel.startswith("manifests/"):
+            if rel not in listed and not rel.startswith("manifests/") and rel not in LICENSE_FILES:
                 unlisted.append(rel)
     for rel in unlisted[:20]:
         print(f"  UNLISTED {rel}")
-    print(f"  {len(unlisted)} files in no manifest")
+    print(f"  {len(unlisted)} files in no manifest, besides the license files "
+          f"{', '.join(sorted(f for f in LICENSE_FILES if os.path.exists(os.path.join(args.out, f))))}")
     failed |= bool(unlisted)
 
     print("\narchives " + ("FAILED" if failed else "verified"))
