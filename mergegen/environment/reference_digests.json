@@ -1,5 +1,5 @@
 {
-  "description": "SHA-256 of the outputs of MergeGen over fixtures/smoke_conflicts.json, one per checkpoint of the models archive. verify_env.py compares the outputs of the environment with it.",
+  "description": "SHA-256 of the outputs of MergeGen over fixtures/smoke_conflicts.json, one per checkpoint of the models archive (partition-1/mergeGen/MODELS/<name>/best_model.pt). verify_env.py compares the outputs of the environment with it. Recorded in mergegen-repl, created from its lock, on an RTX 5090, over the backbone Salesforce/codet5-small at revision b1ee9570c289f21b5922b9c768a1ce12957bf968, in the run where validation/mergegen_sample.py gave the stored candidates of 50 test conflicts.",
   "fixture": "fixtures/smoke_conflicts.json",
   "inference_params": {
     "max_conflict_length": 500,
@@ -7,5 +7,11 @@
     "num_beams": 3,
     "do_sample": false
   },
-  "digests": {}
+  "digests": {
+    "dataset1_mg": "ad2bda2f8c8e6d16a0b2c0760c371cdfc38b833618e916a06f9f19d13645974d",
+    "dataset2_Java_mg": "deda51c4fca2598cb152c0205b9eb80687f03c6682acef4490c92ec08ca22100",
+    "dataset2_CSharp_mg": "0b6a2ea6f861d1ebeb57697ca142a10bd10331c60604d077a39006a0d8b4c03e",
+    "dataset2_JavaScript_mg": "1c971ea0c6c083380a660e8a65463a9fc6be7e50832adb77faaccc9e5645f74c",
+    "dataset2_TypeScript_mg": "7aa1fb94228c17ae4edc2222013b07389df55bc490d546595291ba33fbc37779"
+  }
 }
