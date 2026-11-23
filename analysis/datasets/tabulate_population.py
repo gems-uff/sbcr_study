@@ -77,7 +77,7 @@ def main():
     cand = pd.read_csv(f"{root}/population_candidates.csv",
                        dtype={"chunk_id": str, "seed": str, "status": str}, keep_default_na=False)
     cand = cand[(cand.arm == args.arm) & ((cand.approach == "mergegen") | (cand.seed == args.seed))]
-    cand["empty"] = as_bool(cand.empty)
+    cand["empty"] = as_bool(cand["empty"])
     cand["exact_match"] = as_bool(cand.exact_match)
 
     mg = cand[cand.approach == "mergegen"].merge(
