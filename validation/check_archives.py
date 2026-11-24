@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """Checks the downloaded archives and extracts them into one folder.
 
-1. Each zip against `SHA256SUMS`, which lists the SHA-256 of the four zips.
-2. Extracts the four zips into `--out`, which must not exist yet. Each zip starts at its own
+1. Each zip against the `SHA256SUMS` of its folder. The archives are in two FigShare items, each
+   with its own `SHA256SUMS`: Datasets, Results and RQ4 in one, Models in the other.
+2. Extracts the zips of every folder into `--out`, which must not exist yet. Each zip starts at its own
    folders (`partition-1/`, `rq4/`, ...) and carries `manifests/<archive>.sha256`.
 3. Each extracted file against the manifest of its archive (paths relative to `--out`): every
    file listed exists and has its hash, and no file is left unlisted but the license files at the
    root (`LICENSE.md` of Datasets, Results and RQ4, the same file in the three, and `LICENSE` and
    `NOTICE.md` of Models). `sha256sum -c` on each manifest, from `--out`, does the same check.
 
-Inputs: the folder of the zips and `SHA256SUMS` (`--zips`). Output: the extracted folder (`--out`)
-and the report, on the standard output; exit code 1 if a check fails.
+Inputs: one folder per FigShare item, each with its zips and its `SHA256SUMS` (`--zips`). Output:
+the extracted folder (`--out`) and the report, on the standard output; exit code 1 if a check fails.
 
-    python validation/check_archives.py --zips <download folder> --out <archives folder>
+    python validation/check_archives.py --zips <data item folder> <models item folder> --out <archives folder>
 """
 import argparse
 import hashlib
@@ -22,6 +23,7 @@ import zipfile
 
 
 LICENSE_FILES = {"LICENSE.md", "LICENSE", "NOTICE.md"}
+ZIPS = {"datasets.zip", "results.zip", "rq4.zip", "models.zip"}
 
 
 def sha256(path):
@@ -34,27 +36,33 @@ def sha256(path):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    p.add_argument("--zips", required=True, help="folder with the zips and SHA256SUMS")
+    p.add_argument("--zips", required=True, nargs="+", help="one folder per FigShare item, with its zips and SHA256SUMS")
     p.add_argument("--out", required=True, help="folder to extract into (must not exist)")
     args = p.parse_args()
 
     failed = False
-    sums = {}
-    with open(os.path.join(args.zips, "SHA256SUMS")) as fh:
-        for line in fh:
-            h, name = line.split(maxsplit=1)
-            sums[os.path.basename(name.strip())] = h
+    sums, folder = {}, {}
+    for d in args.zips:
+        with open(os.path.join(d, "SHA256SUMS")) as fh:
+            for line in fh:
+                h, name = line.split(maxsplit=1)
+                name = os.path.basename(name.strip())
+                if name in sums:
+                    sys.exit(f"{name} is listed in the SHA256SUMS of two folders")
+                sums[name], folder[name] = h, d
+    if ZIPS - set(sums):
+        sys.exit(f"no SHA256SUMS lists {', '.join(sorted(ZIPS - set(sums)))}: give the folders of both FigShare items")
     print("Zips against SHA256SUMS")
     for name, want in sorted(sums.items()):
-        got = sha256(os.path.join(args.zips, name))
+        got = sha256(os.path.join(folder[name], name))
         ok = got == want
         failed |= not ok
-        print(f"  {'ok ' if ok else 'BAD'} {name} {got}")
+        print(f"  {'ok ' if ok else 'BAD'} {os.path.join(folder[name], name)} {got}")
 
     os.makedirs(args.out)
     print("\nExtraction")
     for name in sorted(sums):
-        with zipfile.ZipFile(os.path.join(args.zips, name)) as z:
+        with zipfile.ZipFile(os.path.join(folder[name], name)) as z:
             names = z.namelist()
             for n in names:
                 if n.startswith("/") or ".." in n.split("/"):
