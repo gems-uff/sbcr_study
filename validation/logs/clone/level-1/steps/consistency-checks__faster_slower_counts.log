@@ -1,0 +1,5 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/faster_slower_counts.py /w/partition-1/times_per_language.csv
+
+paired 549 faster 324 59.0% slower 225 41.0% ties 0
+
+exit 0, 1 s

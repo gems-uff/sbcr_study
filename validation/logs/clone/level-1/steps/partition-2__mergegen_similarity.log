@@ -1,0 +1,17 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/similarity/mergegen_similarity.py --root /w/partition-2
+
+dataset1_mg <- dataset1_mg: 549 conflicts, 0.0 min
+dataset1_mg <- dataset2_Java_mg: 549 conflicts, 0.0 min
+dataset2_CSharp_mg <- dataset2_CSharp_mg: 1632 conflicts, 0.3 min
+  dataset2_JavaScript_mg: 2000/4631
+  dataset2_JavaScript_mg: 4000/4631
+dataset2_JavaScript_mg <- dataset2_JavaScript_mg: 4631 conflicts, 0.7 min
+  dataset2_Java_mg: 2000/5767
+  dataset2_Java_mg: 4000/5767
+dataset2_Java_mg <- dataset1_mg: 5767 conflicts, 0.5 min
+  dataset2_Java_mg: 2000/5767
+  dataset2_Java_mg: 4000/5767
+dataset2_Java_mg <- dataset2_Java_mg: 5767 conflicts, 0.6 min
+dataset2_TypeScript_mg <- dataset2_TypeScript_mg: 1144 conflicts, 0.1 min
+
+exit 0, 140 s

@@ -26,7 +26,7 @@ This repository holds the code and the documentation. The data, the results and 
 | `analysis/figures/` | The two figures of the paper |
 | `docs/` | The RQ4 coding protocol, the two versions of the annotator's instructions, and the prompt of the derivation of the categories |
 | `environments/` | The lock of each conda environment, and the Dockerfile of an image for the analysis ([`environments/README.md`](environments/README.md)) |
-| `validation/` | The manifest tool, and the logs of the validation |
+| `validation/` | The scripts that rerun the analysis on the archives and compare each output with the archived file, and the report and logs of their run ([`validation/README.md`](validation/README.md)) |
 
 Every script takes its paths from arguments or environment variables, and `--help` describes its inputs and outputs, except four files of `mergegen/` derived from the original MergeGen code (`dataset.py`, `dataset_parallel.py`, `run_mergegen.py`, `run_total_dataset.py`), which run from the MergeGen work folder of a root ([`mergegen/README.md`](mergegen/README.md)).
 
@@ -51,11 +51,21 @@ cd archives && for m in manifests/*.sha256; do sha256sum -c --quiet "$m"; done
 
 The transcripts of the authors' discussions of the RQ4 cases are not published. They are in Portuguese and are available on request from the authors, with the scripts that split them by case and removed the passages that named an approach. The derivation prompt and the model's proposals of categories are published.
 
+## Requirements
+
+MergeGen's training and inference need a GPU, and everything else runs on the CPU. The study ran on an Intel Core i9-14900KF with 128 GB of RAM and an NVIDIA RTX 5090 with 32 GB.
+
+The analysis runs in the Docker image of `environments/`, or in the conda environments created from their locks (`conda env create -f environments/<name>.lock.yml`). The scripts that count tokens or decode candidates run in `mergegen-train`, the R models in `winner-model`, and the others in `sbcr-analysis`.
+
+Three inputs are not in the archives:
+
+- the backbone, `Salesforce/codet5-small` of Hugging Face, which the token counts and the decoding read from `partition-1/mergeGen/codet5-small-local`. Revision `b1ee9570c289f21b5922b9c768a1ce12957bf968` has the bytes of the backbone the models were trained on;
+- the checkout of this repository at the tag of the submitted version, which `analysis/winner/build_table.py` reads for the RQ4 lists of that version (`--package`);
+- the folders `data/` and `mergeGen/` of `partition-1-sbcr-seeds`, which are those of `partition-1`: link them before running the scripts on that root.
+
 ## Running it
 
-Hardware of the study: an Intel Core i9-14900KF with 128 GB of RAM and an NVIDIA RTX 5090 with 32 GB. MergeGen's training and inference need a GPU; everything else runs on the CPU.
-
-**The analysis.** Build the image of `environments/` and run the analysis scripts in it, with the code and the extracted archives mounted, for example:
+**The analysis.** Build the image and run the analysis scripts in it, with the code and the extracted archives mounted, for example:
 
 ```bash
 docker build -t sbcr-study-analysis environments
@@ -64,17 +74,11 @@ docker run --rm --network none --user "$(id -u):$(id -g)" -e HOME=/tmp -v "$PWD"
     conda run -n sbcr-analysis python analysis/rq1_rq3/compare_approaches.py --root /data/partition-1 --out /out
 ```
 
-Or create the environments from their locks (`conda env create -f environments/<name>.lock.yml`) and run the scripts directly. The scripts that count tokens or decode candidates run in `mergegen-train`, the R models in `winner-model`, and the others in `sbcr-analysis`. Three inputs are not in the archives:
-
-- the backbone, `Salesforce/codet5-small` of Hugging Face, which the token counts and the decoding read from `partition-1/mergeGen/codet5-small-local`. Revision `b1ee9570c289f21b5922b9c768a1ce12957bf968` has the bytes of the backbone the models were trained on;
-- the checkout of this repository at the tag of the submitted version, which `analysis/winner/build_table.py` reads for the RQ4 lists of that version (`--package`);
-- the folders `data/` and `mergeGen/` of `partition-1-sbcr-seeds`, which are those of `partition-1`: link them before running the scripts on that root.
-
-`validation/run_analysis.py` runs every analysis script on the archives in order, with these inputs, and compares each output with the archived file. [`validation/README.md`](validation/README.md) gives the commands that download the backbone, make the checkout and run the three levels of the validation.
+`validation/run_analysis.py` runs every analysis script on the archives in order, with the three inputs above, and compares each output with the archived file. [`validation/README.md`](validation/README.md) gives the commands that download the backbone, make the checkout and run the validation, and reports what it reran and what it did not.
 
 **SBCR.** `sbcr/sbcr_tuning.py` and `sbcr/sbcr_evaluate.py` run from `<root>/sbcr` on the partitions `preparation/prepare_sbcr.py` writes. The search is bounded by wall-clock time, so its candidates depend on the load of the machine ([`pipeline/README.md`](pipeline/README.md)).
 
-**MergeGen.** `mergegen/environment/setup_env.sh` creates the inference environment and `verify_env.py` runs a checkpoint of the models archive on ten fixed conflicts. `mergegen/jit_inference.py` generates the candidates of a root. Training is documented in `pipeline/` and was not repeated.
+**MergeGen.** `mergegen/environment/setup_env.sh` creates the inference environment and `verify_env.py` runs a checkpoint of the models archive on ten fixed conflicts. `mergegen/jit_inference.py` generates the candidates of a root. Training is documented in `pipeline/`.
 
 **The tests.** Five scripts have tests on synthetic data, with no model call and no data of the archives:
 
@@ -85,20 +89,6 @@ conda run -n sbcr-analysis python analysis/rq4/test_sbcr_candidate_origin.py
 conda run -n sbcr-analysis python analysis/rq4/agreement/test_kappa_report.py
 conda run -n sbcr-analysis python analysis/rq4/annotator/test_run_annotator.py
 ```
-
-## What was validated
-
-The validation ran on 2026-11-23 on the machine of the study, from the four zips as they go to FigShare, with the code of this repository. Its scripts and logs are in [`validation/`](validation/README.md). It has three levels, and none of them covers the preparation of the data from the sources of the datasets (`preparation/`: the trace of Dataset1 from its FigShare item, the combination filter, the splits, the data of each root and the dates of the merge commits from the GitHub API). The archives hold the outputs of the preparation, and the analyses start from them.
-
-**The environment and the archives.** The image of `environments/` was built from its Dockerfile without cache, and `check_image.sh` found the packages of its three environments equal to their locks. The five tests pass in it, and `--help` runs for every script but the four MergeGen files named above. The four zips match `SHA256SUMS`, and each of the 403,030 extracted files matches the manifest of its archive, with no file outside a manifest.
-
-**Level 1, the analysis.** Every analysis script that reads the archives ran in the image, in the order of the study, on a copy of the extracted archives, and each output was compared with the archived file of the same path. The similarities, the comparisons of RQ1 to RQ3 and their spread across splits and seeds, the leakage and project-disjoint comparisons, the population counts, times and partition sizes, the RQ3 statistics, the chronological effects, the resolution categories of Dataset2, the overlap between the datasets, the consistency checks, the decoding of MergeGen's candidates, the RQ4 draw, packages, frame at scale and join, the origin of SBCR's candidates and the two figures give the archived files byte for byte, or differ from them only in what the class of each difference explains: paths, elapsed times, the alignment and order of rows that the English names change, the commit and the hashes of translated inputs that some outputs record, and the date of the run in the coding sheets of the RQ4 draws. The two figures have the bytes of the figures of the paper. The model of the characteristics that predict the winner gives coefficients, fits and bootstrap intervals that differ from the archived ones by at most 1.23e-05, and no value changes at three decimals: the two-predictor model of the archives ran in a container on another computer, and the three-predictor model, run on this machine, is reproduced byte for byte. The agreement report of block 1 in the RQ4 archive is the one `kappa_report.py` writes from the published coding sheet. The outputs that print a result in place of writing a file (`cap_share.py`, `test_overlap.py`, `faster_slower_counts.py`) give the numbers of the paper. `validation/logs/level-1/numbers.md` lists each output that differs in content.
-
-**Level 2, SBCR.** One evaluation and one tuning, in the image, on Dataset1 of `partition-1`. The evaluation of the 549 test conflicts with the configuration of the study (3 neighbors, 10 iterations without improvement, 20 seconds) and seed 3022024 gives the stored candidates byte for byte for the first 132 conflicts, in the order of the run. The 133rd reaches the timeout of 20 seconds, in this run as in the stored one, and from there the search draws other random numbers, since one generator serves all the conflicts: 349 of the 549 candidates are identical, every status is the same, and the mean similarity is 0.7835 against 0.7872 stored. The tuning ran the 80 configurations of the grid on the first 10 conflicts of its draw: 568 of the 800 similarities are identical, and their mean is 0.7516 against 0.7522 stored. All 80 of the first conflict are identical. Two more runs of the tuning on the first two conflicts agree with each other and with the run in the image, and differ from the stored run in 4 of the 80 configurations of the second conflict, runs of under 15 milliseconds that no time limit reaches. We did not find the cause.
-
-**Level 3, MergeGen.** `setup_env.sh` created `mergegen-repl` from its lock and ran `verify_env.py` on the five checkpoints of the models archive: each gives the reference digest of `reference_digests.json`. With the same environment, the five checkpoints regenerate the stored candidates of the first 10 test conflicts of each dataset of `partition-1`, 50 of 50. The times of the inference depend on the machine and were not compared. Training was not repeated.
-
-**Not rerun.** `analysis/chronological/chronological_references.py`, which runs MergeGen's inference and SBCR's evaluation on the chronological split with the models and configurations of the three partitions; `analysis/rq4/annotator/run_annotator.py`, which calls the model, whose prompts `validation/check_prompts.py` checked against every run record of the RQ4 archive (the labeling prompt of v1 against the 50 records of block 1 and the 1,979 at scale, the derivation prompt against its 2 records), and whose tests run against a stand-in for the API; the drivers of `pipeline/`; and SBCR on the other datasets.
 
 ## The submitted version
 

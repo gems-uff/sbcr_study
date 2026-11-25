@@ -1,0 +1,18 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/rq3_gaps.py --root /w/partition-1 --sbcr-seeds 3022024 --out /w/rq3-statistics --check-against-comparison
+
+approach      test_set    n  own_mean  other_mean       gap    ci_low  ci_high  own_closer    tie  other_closer  rank_biserial      p  p_holm  detectable  ci_excludes_zero
+    SBCR      dataset1  549    0.7883      0.7843  0.004053 -0.005983  0.01409      0.1803 0.6029        0.2168       -0.03238 0.6785       1       False             False
+    SBCR dataset2_Java 1719    0.7614      0.7645 -0.003065  -0.01059 0.004457      0.2373 0.5439        0.2187        0.01486 0.7184       1       False             False
+MergeGen      dataset1  549    0.8893      0.8923  -0.00297  -0.01653  0.01059      0.1239 0.6685        0.2077        -0.1905 0.0258  0.1032       False             False
+MergeGen dataset2_Java 1719    0.8707      0.8739 -0.003114  -0.01103 0.004799      0.2135 0.6399        0.1466         0.0741 0.1102  0.3306       False             False
+
+--- SBCR's gap minus MergeGen's gap ---
+     test_set    n  sbcr_gap  mergegen_gap  difference   ci_low  ci_high  sbcr_gap_larger  equal  mergegen_gap_larger  rank_biserial       p  p_holm  detectable  ci_excludes_zero
+     dataset1  549  0.004053      -0.00297    0.007024 -0.01012  0.02417           0.2933 0.4608               0.2459         0.1328 0.04772 0.09543       False             False
+dataset2_Java 1719 -0.003065     -0.003114   4.989e-05 -0.01089  0.01099           0.2996 0.3927               0.3077        -0.0133  0.7097  0.7097       False             False
+
+means match comparison.csv, largest difference 1.11e-16
+
+written to /w/rq3-statistics/rq3_gaps_s3022024.csv, .json and rq3_gap_difference_s3022024.csv
+
+exit 0, 2 s

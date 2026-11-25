@@ -1,0 +1,42 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/similarity/sbcr_similarity.py --root /w/partition-1-sbcr-seeds
+
+dataset1_mg_s20260904: 549 conflicts
+dataset1_mg_s3022024: 549 conflicts
+dataset1_mg_s31337: 549 conflicts
+dataset1_mg_s7412: 549 conflicts
+dataset1_mg_s98765: 549 conflicts
+dataset2_CSharp_mg_s20260904: 538 conflicts
+dataset2_CSharp_mg_s3022024: 538 conflicts
+dataset2_CSharp_mg_s31337: 538 conflicts
+dataset2_CSharp_mg_s7412: 538 conflicts
+dataset2_CSharp_mg_s98765: 538 conflicts
+dataset2_JavaScript_mg_s20260904: 1190 conflicts
+dataset2_JavaScript_mg_s3022024: 1190 conflicts
+dataset2_JavaScript_mg_s31337: 1190 conflicts
+dataset2_JavaScript_mg_s7412: 1190 conflicts
+dataset2_JavaScript_mg_s98765: 1190 conflicts
+dataset2_Java_mg_s20260904: 1699 conflicts
+dataset2_Java_mg_s3022024: 1699 conflicts
+dataset2_Java_mg_s31337: 1699 conflicts
+dataset2_Java_mg_s7412: 1699 conflicts
+dataset2_Java_mg_s98765: 1699 conflicts
+dataset2_TypeScript_mg_s20260904: 392 conflicts
+dataset2_TypeScript_mg_s3022024: 392 conflicts
+dataset2_TypeScript_mg_s31337: 392 conflicts
+dataset2_TypeScript_mg_s7412: 392 conflicts
+dataset2_TypeScript_mg_s98765: 392 conflicts
+rq3_ds1_mg_s20260904: 549 conflicts
+rq3_ds1_mg_s3022024: 549 conflicts
+rq3_ds1_mg_s31337: 549 conflicts
+rq3_ds1_mg_s7412: 549 conflicts
+rq3_ds1_mg_s98765: 549 conflicts
+rq3_java_mg_s20260904: 1699 conflicts
+rq3_java_mg_s3022024: 1699 conflicts
+rq3_java_mg_s31337: 1699 conflicts
+rq3_java_mg_s7412: 1699 conflicts
+rq3_java_mg_s98765: 1699 conflicts
+
+written: 33,080 rows
+mean difference to the original column: +0.0004
+
+exit 0, 150 s

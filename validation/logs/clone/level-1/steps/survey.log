@@ -1,0 +1,152 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/preparation/survey.py --data-root /w/datasets/source --out /w/dataset-overlap
+
+loading dataset1...
+{
+  "dataset": "dataset1",
+  "rows": 6269,
+  "unique_chunk_ids": 6269,
+  "dup_exact_content": 753,
+  "dup_exact_normalized": 779,
+  "dup_same_input": 790,
+  "merges": 3959,
+  "merges_per_file": 5592,
+  "projects": 816,
+  "fork_components": 776,
+  "test_total": 628,
+  "evaluated_in_test": 628,
+  "evaluated_with_exact_twin_in_train": 121,
+  "evaluated_with_same_input_in_train": 125,
+  "evaluated_with_merge_in_train": 305,
+  "evaluated_with_merge_file_in_train": 107,
+  "evaluated_with_project_in_train": 585,
+  "evaluated_with_fork_component_in_train": 586,
+  "evaluated_with_exact_twin_in_train_pct": 19.3,
+  "evaluated_with_same_input_in_train_pct": 19.9,
+  "evaluated_with_merge_in_train_pct": 48.6,
+  "evaluated_with_merge_file_in_train_pct": 17.0,
+  "evaluated_with_project_in_train_pct": 93.2,
+  "evaluated_with_fork_component_in_train_pct": 93.3
+}
+loading dataset2_Java...
+{
+  "dataset": "dataset2_Java",
+  "rows": 65742,
+  "unique_chunk_ids": 65742,
+  "dup_exact_content": 6684,
+  "dup_exact_normalized": 7243,
+  "dup_same_input": 7362,
+  "merges": 15681,
+  "merges_per_file": 22677,
+  "projects": 2957,
+  "fork_components": 2877,
+  "test_total": 6575,
+  "evaluated_in_test": 1991,
+  "evaluated_with_exact_twin_in_train": 223,
+  "evaluated_with_same_input_in_train": 228,
+  "evaluated_with_merge_in_train": 1636,
+  "evaluated_with_merge_file_in_train": 1384,
+  "evaluated_with_project_in_train": 1948,
+  "evaluated_with_fork_component_in_train": 1949,
+  "evaluated_with_exact_twin_in_train_pct": 11.2,
+  "evaluated_with_same_input_in_train_pct": 11.5,
+  "evaluated_with_merge_in_train_pct": 82.2,
+  "evaluated_with_merge_file_in_train_pct": 69.5,
+  "evaluated_with_project_in_train_pct": 97.8,
+  "evaluated_with_fork_component_in_train_pct": 97.9
+}
+loading dataset2_CSharp...
+{
+  "dataset": "dataset2_CSharp",
+  "rows": 20695,
+  "unique_chunk_ids": 20695,
+  "dup_exact_content": 4216,
+  "dup_exact_normalized": 4379,
+  "dup_same_input": 4420,
+  "merges": 4558,
+  "merges_per_file": 6005,
+  "projects": 1280,
+  "fork_components": 1247,
+  "test_total": 2070,
+  "evaluated_in_test": 624,
+  "evaluated_with_exact_twin_in_train": 137,
+  "evaluated_with_same_input_in_train": 137,
+  "evaluated_with_merge_in_train": 492,
+  "evaluated_with_merge_file_in_train": 448,
+  "evaluated_with_project_in_train": 598,
+  "evaluated_with_fork_component_in_train": 598,
+  "evaluated_with_exact_twin_in_train_pct": 22.0,
+  "evaluated_with_same_input_in_train_pct": 22.0,
+  "evaluated_with_merge_in_train_pct": 78.8,
+  "evaluated_with_merge_file_in_train_pct": 71.8,
+  "evaluated_with_project_in_train_pct": 95.8,
+  "evaluated_with_fork_component_in_train_pct": 95.8
+}
+loading dataset2_JavaScript...
+{
+  "dataset": "dataset2_JavaScript",
+  "rows": 51485,
+  "unique_chunk_ids": 51485,
+  "dup_exact_content": 4252,
+  "dup_exact_normalized": 4608,
+  "dup_same_input": 4669,
+  "merges": 13097,
+  "merges_per_file": 15051,
+  "projects": 4545,
+  "fork_components": 4414,
+  "test_total": 5149,
+  "evaluated_in_test": 1307,
+  "evaluated_with_exact_twin_in_train": 176,
+  "evaluated_with_same_input_in_train": 178,
+  "evaluated_with_merge_in_train": 895,
+  "evaluated_with_merge_file_in_train": 820,
+  "evaluated_with_project_in_train": 1200,
+  "evaluated_with_fork_component_in_train": 1201,
+  "evaluated_with_exact_twin_in_train_pct": 13.5,
+  "evaluated_with_same_input_in_train_pct": 13.6,
+  "evaluated_with_merge_in_train_pct": 68.5,
+  "evaluated_with_merge_file_in_train_pct": 62.7,
+  "evaluated_with_project_in_train_pct": 91.8,
+  "evaluated_with_fork_component_in_train_pct": 91.9
+}
+loading dataset2_TypeScript...
+{
+  "dataset": "dataset2_TypeScript",
+  "rows": 13504,
+  "unique_chunk_ids": 13504,
+  "dup_exact_content": 1924,
+  "dup_exact_normalized": 1993,
+  "dup_same_input": 2017,
+  "merges": 4144,
+  "merges_per_file": 5051,
+  "projects": 1083,
+  "fork_components": 1066,
+  "test_total": 1351,
+  "evaluated_in_test": 507,
+  "evaluated_with_exact_twin_in_train": 96,
+  "evaluated_with_same_input_in_train": 96,
+  "evaluated_with_merge_in_train": 395,
+  "evaluated_with_merge_file_in_train": 355,
+  "evaluated_with_project_in_train": 488,
+  "evaluated_with_fork_component_in_train": 488,
+  "evaluated_with_exact_twin_in_train_pct": 18.9,
+  "evaluated_with_same_input_in_train_pct": 18.9,
+  "evaluated_with_merge_in_train_pct": 77.9,
+  "evaluated_with_merge_file_in_train_pct": 70.0,
+  "evaluated_with_project_in_train_pct": 96.3,
+  "evaluated_with_fork_component_in_train_pct": 96.3
+}
+
+=== overlap Dataset1 x Dataset2_Java ===
+{
+  "projects_dataset1": 816,
+  "projects_dataset2_Java": 2957,
+  "projects_in_common": 282,
+  "commits_in_common": 806,
+  "files_in_common": 810,
+  "identical_conflicts": 871,
+  "identical_inputs": 875
+}
+
+written to /w/dataset-overlap/overlap_per_dataset.csv
+
+exit 0, 8 s

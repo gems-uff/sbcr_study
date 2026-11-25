@@ -1,0 +1,150 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/compare_approaches.py --root /w/partition-1
+
+=== spread across the 1 seeds ===
+one seed only, no spread
+
+=== SBCR vs MergeGen: same conflicts, same metric ===
+
+--- SBCR ---
+arm                      mg
+dataset                    
+dataset1             0.7883
+dataset2_CSharp      0.7730
+dataset2_Java        0.7614
+dataset2_JavaScript  0.8074
+dataset2_TypeScript  0.7806
+
+--- MergeGen ---
+arm                      mg
+dataset                    
+dataset1             0.8893
+dataset2_CSharp      0.8536
+dataset2_Java        0.8707
+dataset2_JavaScript  0.9031
+dataset2_TypeScript  0.9019
+
+--- SBCR − MergeGen ---
+arm                      mg
+dataset                    
+dataset1            -0.1010
+dataset2_CSharp     -0.0806
+dataset2_Java       -0.1093
+dataset2_JavaScript -0.0957
+dataset2_TypeScript -0.1213
+
+--- SBCR wins (share of conflicts) ---
+arm                      mg
+dataset                    
+dataset1             0.2040
+dataset2_CSharp      0.1817
+dataset2_Java        0.1576
+dataset2_JavaScript  0.1573
+dataset2_TypeScript  0.1429
+
+--- tie ---
+arm                      mg
+dataset                    
+dataset1             0.2277
+dataset2_CSharp      0.2606
+dataset2_Java        0.2065
+dataset2_JavaScript  0.1970
+dataset2_TypeScript  0.1607
+
+--- MergeGen wins ---
+arm                      mg
+dataset                    
+dataset1             0.5683
+dataset2_CSharp      0.5578
+dataset2_Java        0.6358
+dataset2_JavaScript  0.6457
+dataset2_TypeScript  0.6964
+
+--- paired rank-biserial (+ favors SBCR) ---
+arm                      mg
+dataset                    
+dataset1            -0.5259
+dataset2_CSharp     -0.5221
+dataset2_Java       -0.6172
+dataset2_JavaScript -0.6457
+dataset2_TypeScript -0.6933
+
+--- SBCR median ---
+arm                      mg
+dataset                    
+dataset1             0.8468
+dataset2_CSharp      0.8734
+dataset2_Java        0.8243
+dataset2_JavaScript  0.8796
+dataset2_TypeScript  0.8329
+
+--- MergeGen median ---
+arm                   mg
+dataset                 
+dataset1             1.0
+dataset2_CSharp      1.0
+dataset2_Java        1.0
+dataset2_JavaScript  1.0
+dataset2_TypeScript  1.0
+
+--- SBCR exact match (share of conflicts) ---
+arm                      mg
+dataset                    
+dataset1             0.2240
+dataset2_CSharp      0.2294
+dataset2_Java        0.1547
+dataset2_JavaScript  0.2036
+dataset2_TypeScript  0.1378
+
+--- MergeGen exact match (share of conflicts) ---
+arm                      mg
+dataset                    
+dataset1             0.6047
+dataset2_CSharp      0.5706
+dataset2_Java        0.5893
+dataset2_JavaScript  0.6192
+dataset2_TypeScript  0.6122
+
+--- p (paired Wilcoxon) ---
+arm                       mg
+dataset                     
+dataset1             6.4e-21
+dataset2_CSharp      1.1e-19
+dataset2_Java        8.9e-87
+dataset2_JavaScript  5.7e-68
+dataset2_TypeScript  1.2e-27
+
+--- rq1_rq2: out-of-limits conflicts scored 0 vs. left out ---
+            dataset arm    n  out_of_limits  difference  difference_excl  change
+    dataset2_CSharp  mg  545              7     -0.0806          -0.0806  0.0001
+      dataset2_Java  mg 1719             20     -0.1093          -0.1093 -0.0001
+dataset2_JavaScript  mg 1208             18     -0.0957          -0.0956 -0.0002
+largest change in the mean difference: 0.0002
+
+=== RQ3: trained or tuned on the other dataset ===
+
+--- SBCR (crossed) ---
+arm                mg
+dataset              
+dataset1       0.7843
+dataset2_Java  0.7645
+
+--- MergeGen (crossed) ---
+arm                mg
+dataset              
+dataset1       0.8923
+dataset2_Java  0.8739
+
+--- SBCR − MergeGen ---
+arm                mg
+dataset              
+dataset1      -0.1080
+dataset2_Java -0.1094
+
+--- rq3: out-of-limits conflicts scored 0 vs. left out ---
+      dataset arm    n  out_of_limits  difference  difference_excl  change
+dataset2_Java  mg 1719             20     -0.1094          -0.1095  0.0001
+largest change in the mean difference: 0.0001
+
+written to /w/partition-1/comparison.csv
+
+exit 0, 2 s

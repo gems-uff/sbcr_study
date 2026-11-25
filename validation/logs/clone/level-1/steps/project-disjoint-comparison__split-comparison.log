@@ -1,0 +1,27 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/project_disjoint_comparison.py --root /w/split-comparison --out /w/project-disjoint-comparison/run-split-comparison
+
+   rule        reference             dataset  n  sbcr_out_of_limits  gap_random  gap_mg  gap_pd  change_pd_minus_random  ci95_pd_minus_random  p_pd_minus_random  change_pd_minus_mg  ci95_pd_minus_mg  p_pd_minus_mg
+   zero            train            dataset1 30                   0     -0.1509 -0.1473 -0.0992                  0.0517                0.0860             0.2343              0.0481            0.0702         0.2273
+   zero            train       dataset2_Java 86                   2     -0.0859 -0.0327 -0.0832                  0.0027                0.0333             0.1845             -0.0505            0.0385         0.0833
+   zero            train     dataset2_CSharp 32                   1     -0.1499 -0.1194 -0.1651                 -0.0152                0.0991             0.7578             -0.0456            0.0749         0.2360
+   zero            train dataset2_JavaScript 70                   1     -0.0704 -0.0631 -0.0755                 -0.0051                0.0525             0.6741             -0.0125            0.0404         0.4658
+   zero            train dataset2_TypeScript 18                   0     -0.1126 -0.0870 -0.0672                  0.0454                0.0738             0.4631              0.0199            0.0551         0.2489
+   zero train+validation            dataset1  9                   0     -0.2385 -0.2709 -0.1742                  0.0643                0.1722             0.4375              0.0967            0.1259         0.2500
+   zero train+validation       dataset2_Java 20                   0     -0.0875 -0.0861 -0.0949                 -0.0074                0.0269             0.6465             -0.0088            0.0352         0.9528
+   zero train+validation     dataset2_CSharp 10                   1     -0.1020 -0.1120 -0.2017                 -0.0997                0.1889             0.5781             -0.0897            0.1692         0.4688
+   zero train+validation dataset2_JavaScript 17                   0     -0.0431 -0.0225 -0.0863                 -0.0432                0.1107             0.4326             -0.0639            0.0936         0.1549
+   zero train+validation dataset2_TypeScript  3                   0     -0.2265 -0.0680 -0.0435                  0.1830                0.3665             1.0000              0.0245            0.0454         0.5000
+exclude            train            dataset1 30                   0     -0.1509 -0.1473 -0.0992                  0.0517                0.0860             0.2343              0.0481            0.0702         0.2273
+exclude            train       dataset2_Java 84                   0     -0.0870 -0.0325 -0.0842                  0.0028                0.0341             0.2146             -0.0517            0.0394         0.0717
+exclude            train     dataset2_CSharp 31                   0     -0.1522 -0.1208 -0.1679                 -0.0157                0.1024             0.7677             -0.0471            0.0772         0.2305
+exclude            train dataset2_JavaScript 69                   0     -0.0711 -0.0637 -0.0763                 -0.0052                0.0533             0.6741             -0.0126            0.0410         0.4658
+exclude            train dataset2_TypeScript 18                   0     -0.1126 -0.0870 -0.0672                  0.0454                0.0738             0.4631              0.0199            0.0551         0.2489
+exclude train+validation            dataset1  9                   0     -0.2385 -0.2709 -0.1742                  0.0643                0.1722             0.4375              0.0967            0.1259         0.2500
+exclude train+validation       dataset2_Java 20                   0     -0.0875 -0.0861 -0.0949                 -0.0074                0.0269             0.6465             -0.0088            0.0352         0.9528
+exclude train+validation     dataset2_CSharp  9                   0     -0.1048 -0.1159 -0.2156                 -0.1108                0.2098             0.5625             -0.0997            0.1879         0.4375
+exclude train+validation dataset2_JavaScript 17                   0     -0.0431 -0.0225 -0.0863                 -0.0432                0.1107             0.4326             -0.0639            0.0936         0.1549
+exclude train+validation dataset2_TypeScript  3                   0     -0.2265 -0.0680 -0.0435                  0.1830                0.3665             1.0000              0.0245            0.0454         0.5000
+
+written to /w/project-disjoint-comparison/run-split-comparison/common_set_current_rules.csv
+
+exit 0, 3 s

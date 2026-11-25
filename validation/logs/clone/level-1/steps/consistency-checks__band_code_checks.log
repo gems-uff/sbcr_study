@@ -1,0 +1,15 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq4/band_code_checks.py --joined /w/rq4/sealed/scale/join/joined.csv --tokens /w/partition-1/population_tokens.csv --out /w/consistency-checks/band-codes-against-limits
+
+=== 1. F5 and FN in the clear SBCR win band, against MergeGen's limits ===
+code  conflicts  missing_in_tokens  input_above_500  resolution_above_200  candidate_mergegen_truncated  any_of_the_three  mergegen_candidate_empty
+  F5         71                  0               68                    68                            59                69                         0
+  FN         19                  0                2                     0                             0                 2                        19
+
+=== 2. near tie, annotator reads neither as further, similarities differ ===
+(columns: tool with the lower similarity)
+further_measured  mergegen  sbcr  total
+code_cand                              
+FU                       9     7     16
+total                    9     7     16
+
+exit 0, 1 s

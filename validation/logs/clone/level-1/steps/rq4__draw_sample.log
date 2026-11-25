@@ -1,0 +1,27 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq4/draw_sample.py --root /w/partition-1 --out /w/validation-new/sample --sealed /w/validation-new/sealed/sealed_sample.csv
+
+            dataset     band  conflicts  share_of_frame  share_of_test
+           dataset1     sbcr         37           0.067          0.067
+           dataset1 mergegen         76           0.138          0.138
+           dataset1      tie        138           0.251          0.251
+      dataset2_Java     sbcr         86           0.050          0.050
+      dataset2_Java mergegen        268           0.156          0.156
+      dataset2_Java      tie        430           0.250          0.250
+    dataset2_CSharp     sbcr         31           0.057          0.057
+    dataset2_CSharp mergegen         74           0.136          0.136
+    dataset2_CSharp      tie        137           0.251          0.251
+dataset2_JavaScript     sbcr         59           0.049          0.049
+dataset2_JavaScript mergegen        192           0.159          0.159
+dataset2_JavaScript      tie        302           0.250          0.250
+dataset2_TypeScript     sbcr         19           0.048          0.048
+dataset2_TypeScript mergegen         67           0.171          0.171
+dataset2_TypeScript      tie         98           0.250          0.250
+
+sample: 150 cases, blocks {1: 50, 2: 50, 3: 50}
+pilot: 10 cases
+cases above SBCR's size limit (no SBCR candidate): 0
+conflicts in two bands: {'dataset1': 0, 'dataset2_CSharp': 0, 'dataset2_Java': 0, 'dataset2_JavaScript': 0, 'dataset2_TypeScript': 0}
+
+written to /w/validation-new/sample; sealed file at /w/validation-new/sealed/sealed_sample.csv (sha256 92a4fa20e17d...)
+
+exit 0, 2 s

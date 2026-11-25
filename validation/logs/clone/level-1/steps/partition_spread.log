@@ -1,0 +1,26 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq1_rq3/partition_spread.py --partition 1=/w/partition-1 --partition 2=/w/partition-2 --partition 3=/w/partition-3 --out /w/partition-spread
+
+=== SBCR − MergeGen difference per partition (SBCR with seed 3022024) ===
+partition                          1       2       3
+analysis dataset                                    
+rq1_rq2  dataset1            -0.1010 -0.0920 -0.1110
+         dataset2_CSharp     -0.0806 -0.0958 -0.1111
+         dataset2_Java       -0.1093 -0.1132 -0.1189
+         dataset2_JavaScript -0.0957 -0.1109 -0.0737
+         dataset2_TypeScript -0.1213 -0.0737 -0.1043
+rq3      dataset1            -0.1080 -0.0999 -0.1179
+         dataset2_Java       -0.1094 -0.1000 -0.1141
+
+=== spread across partitions ===
+analysis             dataset  difference_mean  difference_sd  difference_min  difference_max  difference_amplitude  p_max
+ rq1_rq2            dataset1          -0.1013         0.0095         -0.1110         -0.0920                0.0190    0.0
+ rq1_rq2     dataset2_CSharp          -0.0958         0.0152         -0.1111         -0.0806                0.0305    0.0
+ rq1_rq2       dataset2_Java          -0.1138         0.0048         -0.1189         -0.1093                0.0096    0.0
+ rq1_rq2 dataset2_JavaScript          -0.0934         0.0187         -0.1109         -0.0737                0.0372    0.0
+ rq1_rq2 dataset2_TypeScript          -0.0998         0.0241         -0.1213         -0.0737                0.0476    0.0
+     rq3            dataset1          -0.1086         0.0090         -0.1179         -0.0999                0.0180    0.0
+     rq3       dataset2_Java          -0.1079         0.0072         -0.1141         -0.1000                0.0141    0.0
+
+written to /w/partition-spread
+
+exit 0, 2 s

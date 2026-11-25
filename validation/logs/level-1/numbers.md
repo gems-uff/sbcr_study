@@ -23,7 +23,7 @@ Three scripts print their result in place of writing a file, and the figures are
 | `winner-model-two-predictors/decoded/two` | 1.23e-05 | 2.06e-06 | 0 | 0 | none |
 | `winner-model-two-predictors/decoded/three` | 4.88e-06 | 1.96e-07 | 0 | not written | none |
 
-The archived fits of `winner-model-two-predictors` ran in a container on another computer, and those of `winner-model-three-predictors` on the machine of this validation. The logs of the fits (`fit_models.log`, `fit_models.stdout`, `bootstrap_main.log`) differ in the same digits, in the line of `sessionInfo()` that names the release of Ubuntu (24.04.4 against 24.04.5), and in the order in which R interleaves its messages with its output.
+The archived fits of `winner-model-two-predictors` ran in a container on another computer, and those of `winner-model-three-predictors` on the machine of this validation. The logs of the fits (`fit_models.log`, `fit_models.stdout`, `bootstrap_main.log`) differ from the archived ones in several ways. Those of `winner-model-two-predictors` print the same digits that differ in its CSV files. The fits with three predictors print a table whose columns are aligned otherwise, and the files `fit_models.stdout` interleave R's messages with its output in another order. The three logs of `winner-model-three-predictors` differ in no number, and all three differ in what `sessionInfo()` reports of the system, the release of Ubuntu (24.04.4 against 24.04.5), the path of BLAS, the locale and the time zone, since the archived fits ran on this machine outside the image, and its `fit_models.stdout` has two warnings of R on the time zone of the image.
 
 ## The RQ4 join and the agreement report
 

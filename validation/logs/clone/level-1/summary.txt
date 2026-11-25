@@ -1,0 +1,65 @@
+partition-1:mergegen_similarity: exit 0, 15 files, 14 equal, 1 differs
+partition-1:sbcr_similarity: exit 0, 2 files, 2 equal
+partition-1:compare_approaches: exit 0, 3 files, 2 equal, 1 differs
+partition-2:mergegen_similarity: exit 0, 8 files, 7 equal, 1 differs
+partition-2:sbcr_similarity: exit 0, 2 files, 2 equal
+partition-2:compare_approaches: exit 0, 3 files, 2 equal, 1 differs
+partition-3:mergegen_similarity: exit 0, 8 files, 7 equal, 1 differs
+partition-3:sbcr_similarity: exit 0, 2 files, 2 equal
+partition-3:compare_approaches: exit 0, 3 files, 2 equal, 1 differs
+chronological:mergegen_similarity: exit 0, 29 files, 28 equal, 1 differs
+chronological:sbcr_similarity: exit 0, 2 files, 2 equal
+chronological:compare_approaches: exit 0, 3 files, 2 equal, 1 differs
+split-comparison:mergegen_similarity: exit 0, 35 files, 35 equal
+split-comparison:sbcr_similarity: exit 0, 1 files, 1 same content
+split-comparison:compare_approaches: exit 0, 2 files, 2 not archived
+partition-1-sbcr-seeds:sbcr_similarity: exit 0, 2 files, 2 equal
+partition-1-sbcr-seeds:compare_approaches: exit 0, 3 files, 2 equal, 1 differs
+partition-1-sbcr-seeds:seed_spread: exit 0, 3 files, 2 equal, 1 differs
+partition_spread: exit 0, 3 files, 2 equal, 1 differs
+split-comparison:leakage_effect: exit 0, 3 files, 2 equal, 1 differs
+split-comparison:leakage_effect partition-1: exit 0, 3 files, 2 equal, 1 differs
+project-disjoint-comparison:split-comparison: exit 0, 2 files, 1 equal, 1 differs
+project-disjoint-comparison:partition-1: exit 0, 2 files, 1 equal, 1 differs
+project-disjoint-comparison:whole test, seed 3022024: exit 0, 3 files, 2 same content, 1 differs
+project-disjoint-comparison:whole test, five seeds: exit 0, 3 files, 2 same content, 1 differs
+partition-1:population_tokens: exit 0, 1 files, 1 equal
+partition-1:population_candidates: exit 0, 2 files, 2 equal
+partition-1:tabulate_population: exit 0, 2 files, 1 equal, 1 same content
+partition-1:times_per_language: exit 0, 2 files, 1 equal, 1 same content
+partition-1:partition_sizes: exit 0, 2 files, 1 equal, 1 same content
+rq3_gaps: exit 0, 4 files, 2 equal, 2 differs
+chronological:chronological_effects: exit 0, 9 files, 7 equal, 2 differs
+commit-dates:temporal_structure: exit 0, 7 files, 5 equal, 2 differs
+resolution_categories: exit 0, 1 files, 1 equal
+survey: exit 0, 3 files, 2 equal, 1 differs
+partition-1:cap_share: exit 0, 1 files, 1 not archived
+partition-2:cap_share: exit 0, 1 files, 1 not archived
+partition-3:cap_share: exit 0, 1 files, 1 not archived
+test_overlap: exit 0, 1 files, 1 not archived
+consistency-checks:shared_commits: exit 0, 3 files, 3 equal
+consistency-checks:largest_test_group: exit 0, 3 files, 3 equal
+consistency-checks:faster_slower_counts: exit 0, 1 files, 1 equal
+mergegen-decoding:decode: exit 0, 3 files, 1 equal, 2 differs
+mergegen-decoding:measure: exit 0, 12 files, 10 equal, 2 differs
+winner-model-three-predictors:build_table: exit 0, 9 files, 8 equal, 1 differs, 6 archived files not written
+winner-model-three-predictors:fit_models: exit 0, 5 files, 3 equal, 2 differs
+winner-model-three-predictors:bootstrap_main: exit 0, 3 files, 2 equal, 1 differs
+winner-model-three-predictors:ties_by_imbalance: exit 0, 1 files, 1 equal
+winner-model-two-predictors/stored:build_table: exit 0, 9 files, 7 equal, 1 same content, 1 differs
+winner-model-two-predictors/stored/three:fit_models: exit 0, 5 files, 1 equal, 4 differs
+winner-model-two-predictors/stored/two:fit_models: exit 0, 5 files, 1 equal, 4 differs
+winner-model-two-predictors/stored/two:bootstrap_main: exit 0, 3 files, 3 equal
+winner-model-two-predictors/decoded:build_table: exit 0, 9 files, 7 equal, 1 same content, 1 differs, 1 archived files not written
+winner-model-two-predictors/decoded/two:fit_models: exit 0, 5 files, 1 equal, 4 differs
+winner-model-two-predictors/decoded/three:fit_models: exit 0, 5 files, 1 equal, 4 differs
+winner-model-two-predictors/decoded/two:bootstrap_main: exit 0, 3 files, 3 equal
+winner-model-two-predictors/decoded:ties_by_imbalance: exit 0, 1 files, 1 equal
+rq4:draw_sample: exit 0, 4 files, 2 equal, 2 differs, 1 archived files not written
+rq4:build_packages: exit 0, 161 files, 161 equal, 3 archived files not written
+rq4:build_scale: exit 0, 3962 files, 1981 equal, 2 differs, 1979 not archived, 6 archived files not written
+rq4:kappa_report: exit 0, 2 files, 2 differs
+rq4:join_scale: exit 0, 6 files, 4 equal, 2 differs
+consistency-checks:band_code_checks: exit 0, 5 files, 4 equal, 1 differs
+rq4:sbcr_candidate_origin: exit 0, 3 files, 1 equal, 2 differs
+figures: exit 0, 3 files, 3 not archived

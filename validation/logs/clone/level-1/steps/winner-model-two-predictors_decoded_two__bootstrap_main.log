@@ -1,0 +1,29 @@
+$ conda run --no-capture-output -n winner-model Rscript /package/analysis/winner/bootstrap_main.R /w/winner-model-two-predictors/decoded --two --out=/w/winner-model-two-predictors/decoded/two
+
+conflicts: 4413   projects: 1590   resamples: 2000   seed: 881238410 
+resample 200 of 2000 
+resample 400 of 2000 
+resample 600 of 2000 
+resample 800 of 2000 
+resample 1000 of 2000 
+resample 1200 of 2000 
+resample 1400 of 2000 
+resample 1600 of 2000 
+resample 1800 of 2000 
+resample 2000 of 2000 
+
+=== bootstrap by project, main model === 
+                 term   estimate  boot_mean    boot_sd   boot_low  boot_high
+1           imbalance -0.1685126 -0.1680163 0.01447221 -0.1972320 -0.1400433
+2 input_above_500TRUE  0.3044351  0.3042304 0.02586931  0.2554307  0.3566747
+  profile_low profile_high resamples missing singular      seed
+1  -0.1890566   -0.1479658      2000       0        0 881238410
+2   0.2680298    0.3408377      2000       0        0 881238410
+
+resamples with a warning or message: 0 
+
+=== session === 
+Warning: Your system is mis-configured: ‘/var/db/timezone/localtime’ is not a symlink
+Warning: ‘/var/db/timezone/localtime’ is not identical to any known timezone file
+
+exit 0, 45 s

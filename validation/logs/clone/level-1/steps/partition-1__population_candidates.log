@@ -1,0 +1,11 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/datasets/population_candidates.py --root /w/partition-1 --arms mg --seeds 3022024
+
+dataset1/mg: mergegen n=549, sbcr n=549
+dataset2_Java/mg: mergegen n=5764, sbcr n=1719
+dataset2_CSharp/mg: mergegen n=1637, sbcr n=545
+dataset2_JavaScript/mg: mergegen n=4673, sbcr n=1208
+dataset2_TypeScript/mg: mergegen n=1151, sbcr n=392
+
+written: 18,187 rows in /w/partition-1/population_candidates.csv, sizes in /w/partition-1/population_sizes.csv
+
+exit 0, 3 s

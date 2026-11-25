@@ -1,0 +1,10 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq4/sbcr_candidate_origin.py --root /w/partition-1 --joined /w/rq4/sealed/scale/join/joined.csv --out /w/validation-new/sbcr-candidate-origin
+
+dataset1: 549 conflicts, 1 s
+dataset2_Java: 1719 conflicts, 36 s
+dataset2_CSharp: 545 conflicts, 51 s
+dataset2_JavaScript: 1208 conflicts, 73 s
+dataset2_TypeScript: 392 conflicts, 76 s
+wrote /w/validation-new/sbcr-candidate-origin: score check failed in 0 of 4368
+
+exit 0, 78 s

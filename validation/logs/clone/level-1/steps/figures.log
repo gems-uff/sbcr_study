@@ -1,0 +1,31 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/figures/paper_figures.py --root /w/partition-1 --scale /w/rq4/scale --out /w/validation-new/figures
+
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+'created' timestamp seems very low; regarding as unix timestamp
+'modified' timestamp seems very low; regarding as unix timestamp
+dataset1: SBCR times add up to 0.14 h, wall time of the evaluation 0.15 h
+dataset1: SBCR n 549, median 0.156 s; MergeGen n 549, median 0.145 s
+dataset2_Java: SBCR times add up to 1.34 h, wall time of the evaluation 1.36 h
+dataset2_Java: SBCR n 1699, median 0.582 s; MergeGen n 1719, median 0.179 s
+dataset2_CSharp: SBCR times add up to 0.86 h, wall time of the evaluation 0.87 h
+dataset2_CSharp: SBCR n 538, median 0.971 s; MergeGen n 545, median 0.180 s
+dataset2_JavaScript: SBCR times add up to 2.88 h, wall time of the evaluation 2.89 h
+dataset2_JavaScript: SBCR n 1190, median 4.297 s; MergeGen n 1208, median 0.174 s
+dataset2_TypeScript: SBCR times add up to 0.03 h, wall time of the evaluation 0.03 h
+dataset2_TypeScript: SBCR n 392, median 0.023 s; MergeGen n 392, median 0.151 s
+dataset1: 549 conflicts, sbcr 28, mergegen 78, tie 138, limits q3_positive 0.3087, q3_negative_abs 0.3845, q1_abs 0.0060
+dataset2_Java: 1719 conflicts, sbcr 68, mergegen 274, tie 430, limits q3_positive 0.3150, q3_negative_abs 0.3469, q1_abs 0.0116
+dataset2_CSharp: 545 conflicts, sbcr 25, mergegen 76, tie 142, limits q3_positive 0.3512, q3_negative_abs 0.3117, q1_abs 0.0000
+dataset2_JavaScript: 1208 conflicts, sbcr 48, mergegen 195, tie 302, limits q3_positive 0.2245, q3_negative_abs 0.2803, q1_abs 0.0091
+dataset2_TypeScript: 392 conflicts, sbcr 14, mergegen 69, tie 98, limits q3_positive 0.2913, q3_negative_abs 0.3021, q1_abs 0.0171
+
+exit 0, 3 s

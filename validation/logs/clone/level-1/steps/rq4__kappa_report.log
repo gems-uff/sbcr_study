@@ -1,0 +1,67 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/rq4/agreement/kappa_report.py --draw /w/rq4/sample --scheme /package/analysis/rq4/scheme/coding-scheme.json --sheet /w/rq4/coding/coding_sheet.csv --annotator /w/rq4/annotator/block1-labeling --blocks 1 --out /w/validation-new/agreement-block1
+
+# Agreement report of the RQ4 coding
+
+Generated on 2026-11-25T14:02:21+00:00 by `analysis/rq4/agreement/kappa_report.py`. Kappa with a 95% percentile bootstrap interval, 2000 resamples of cases, seed 559479682. Annotator: run 1. Threshold of the observed kappa: 0.61. Scheme version block 1, frozen on 2026-10-19, wording of F4, F6 and the cand rules revised on 2026-10-23.
+
+| block | dimension | cases | without consensus | consensus vs annotator | raw agreement | worst case | reaches the threshold |
+|---|---|---:|---:|---|---:|---|---|
+| 1 | Merge characteristic | 50 | 0 | 0.966 (0.888 to 1.000) | 0.980 | 0.966 (0.888 to 1.000) | yes |
+| 1 | Candidate characteristic | 50 | 0 | 0.788 (0.660 to 0.902) | 0.820 | 0.788 (0.660 to 0.902) | yes |
+
+## Block 1
+
+Annotator approved by this block: the observed kappa must reach 0.61 in every dimension.
+
+Annotator: model claude-fable-5-1, effort high, instructions v1, SHA-256 2436e37c6872960b6c91fd7a8de978b46ea6450482c0c74a7e377c6e7f9a7e22, scheme SHA-256 38f1ae6b1bcd8774c7545149c0f7b3868b3748bf6e778d9e3bb304f7030863a6.
+
+### Merge characteristic
+
+50 cases with consensus, 0 without.
+
+| measure | cases | agreements | raw agreement | kappa (95% CI) |
+|---|---:|---:|---:|---|
+| consensus vs annotator | 50 | 49 | 0.980 | 0.966 (0.888 to 1.000) |
+| worst case | 50 | 49 | 0.980 | 0.966 (0.888 to 1.000) |
+
+Per category, over the 50 cases with consensus:
+
+| category | authors | annotator | both |
+|---|---:|---:|---:|
+| C4 Large conflict | 7 (14%) | 7 (14%) | 7 |
+| C3 Resolution departs from the union | 5 (10%) | 5 (10%) | 5 |
+| C2 Overlapping edits | 9 (18%) | 8 (16%) | 8 |
+| C1 Adjacent independent edits | 29 (58%) | 30 (60%) | 29 |
+| CR Other merge (residual) | 0 (0%) | 0 (0%) | 0 |
+
+- Cases with an empty candidate and no empty version: 0, 0 with consensus, agreement on 0 of them.
+- Cases with identical candidates: 11, 11 with consensus, agreement on 11 of them.
+
+### Candidate characteristic
+
+50 cases with consensus, 0 without.
+
+| measure | cases | agreements | raw agreement | kappa (95% CI) |
+|---|---:|---:|---:|---|
+| consensus vs annotator | 50 | 41 | 0.820 | 0.788 (0.660 to 0.902) |
+| worst case | 50 | 41 | 0.820 | 0.788 (0.660 to 0.902) |
+
+Per category, over the 50 cases with consensus:
+
+| category | authors | annotator | both |
+|---|---:|---:|---:|
+| FN No candidate (predefined) | 0 (0%) | 0 (0%) | 0 |
+| FD No difference between the candidates (predefined) | 11 (22%) | 11 (22%) | 11 |
+| FU Neither candidate clearly further from the resolution (predefined) | 6 (12%) | 0 (0%) | 0 |
+| F1 Misses one version's change | 11 (22%) | 14 (28%) | 10 |
+| F2 Misses both versions' changes | 5 (10%) | 5 (10%) | 5 |
+| F3 Misses parts of the combination | 3 (6%) | 4 (8%) | 2 |
+| F4 Adds a change the resolution discarded | 4 (8%) | 5 (10%) | 4 |
+| F5 Cut off before the end | 6 (12%) | 6 (12%) | 6 |
+| F6 Distorted combination | 2 (4%) | 3 (6%) | 2 |
+| FR Other difference from the resolution (residual) | 2 (4%) | 2 (4%) | 1 |
+
+- Cases with an empty candidate and no empty version: 0, 0 with consensus, agreement on 0 of them.
+- Cases with identical candidates: 11, 11 with consensus, agreement on 11 of them.
+
+exit 0, 1 s

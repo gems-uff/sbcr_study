@@ -1,0 +1,284 @@
+$ conda run --no-capture-output -n sbcr-analysis python /package/analysis/datasets/shared_commits.py --data-root /w/datasets/source --root 1=/w/partition-1 --root 2=/w/partition-2 --root 3=/w/partition-3 --out /w/consistency-checks/shared-merge-commits
+
+root             test_of         training_of       test_set  test_chunks  chunks_with_hash_in_training  merge_commits
+   1            dataset1       dataset2_Java     whole test          549                            25             15
+   1            dataset1       dataset2_Java evaluated test          549                            25             15
+   1       dataset2_Java            dataset1     whole test         5764                            67             13
+   1       dataset2_Java            dataset1 evaluated test         1719                             9              6
+   1            dataset1            dataset1     whole test          549                             0              0
+   1            dataset1            dataset1 evaluated test          549                             0              0
+   1       dataset2_Java       dataset2_Java     whole test         5764                           200             28
+   1       dataset2_Java       dataset2_Java evaluated test         1719                            49             19
+   1     dataset2_CSharp     dataset2_CSharp     whole test         1637                            85              7
+   1     dataset2_CSharp     dataset2_CSharp evaluated test          545                            47              5
+   1 dataset2_JavaScript dataset2_JavaScript     whole test         4673                            49             17
+   1 dataset2_JavaScript dataset2_JavaScript evaluated test         1208                            17             11
+   1 dataset2_TypeScript dataset2_TypeScript     whole test         1151                            16              4
+   1 dataset2_TypeScript dataset2_TypeScript evaluated test          392                            10              4
+   2            dataset1       dataset2_Java     whole test          549                            18              8
+   2            dataset1       dataset2_Java evaluated test          549                            18              8
+   2       dataset2_Java            dataset1     whole test         5767                           178             17
+   2       dataset2_Java            dataset1 evaluated test         1718                            25              8
+   2            dataset1            dataset1     whole test          549                             7              2
+   2            dataset1            dataset1 evaluated test          549                             7              2
+   2       dataset2_Java       dataset2_Java     whole test         5767                           282             28
+   2       dataset2_Java       dataset2_Java evaluated test         1718                            40             18
+   2     dataset2_CSharp     dataset2_CSharp     whole test         1632                            24              6
+   2     dataset2_CSharp     dataset2_CSharp evaluated test          547                             7              3
+   2 dataset2_JavaScript dataset2_JavaScript     whole test         4631                            39             17
+   2 dataset2_JavaScript dataset2_JavaScript evaluated test         1207                            13             11
+   2 dataset2_TypeScript dataset2_TypeScript     whole test         1144                            10              5
+   2 dataset2_TypeScript dataset2_TypeScript evaluated test          392                             5              4
+   3            dataset1       dataset2_Java     whole test          548                            21             10
+   3            dataset1       dataset2_Java evaluated test          548                            21             10
+   3       dataset2_Java            dataset1     whole test         5762                            50              6
+   3       dataset2_Java            dataset1 evaluated test         1717                            10              5
+   3            dataset1            dataset1     whole test          548                             1              1
+   3            dataset1            dataset1 evaluated test          548                             1              1
+   3       dataset2_Java       dataset2_Java     whole test         5762                            88             19
+   3       dataset2_Java       dataset2_Java evaluated test         1717                            26             13
+   3     dataset2_CSharp     dataset2_CSharp     whole test         1632                            54              7
+   3     dataset2_CSharp     dataset2_CSharp evaluated test          547                             5              4
+   3 dataset2_JavaScript dataset2_JavaScript     whole test         4665                            24             10
+   3 dataset2_JavaScript dataset2_JavaScript evaluated test         1199                             8              3
+   3 dataset2_TypeScript dataset2_TypeScript     whole test         1154                            15              2
+   3 dataset2_TypeScript dataset2_TypeScript evaluated test          392                             3              2
+
+=== pairs of project names ===
+                                  commit                                      project_test                            project_training root             test_of         training_of  evaluated
+ecf3b2d7648d0d1708f611820babe24f45b1f640                                    kohsuke/hudson                           jenkinsci/jenkins    1            dataset1       dataset2_Java       True
+67832037dbba03f34873878d3f8080ded2ec1017            android/platform_packages_apps_browser  aosp-mirror/platform_packages_apps_browser    1            dataset1       dataset2_Java       True
+1a46628daaea0a0a55649bb557976e2c9ef63733                             elastic/elasticsearch                        strapdata/elassandra    1            dataset1       dataset2_Java       True
+61596c7f46a9934b813185a597e818b0c98abf38                             ekoontz/hadoop-common                        apache/hadoop-common    1            dataset1       dataset2_Java       True
+27d8509f0e95e598d725bc713da07d5b433631c6                             elastic/elasticsearch                        strapdata/elassandra    1            dataset1       dataset2_Java       True
+9d2852f0ab76f42f267feed3328c215e51b6c088                             elastic/elasticsearch                        strapdata/elassandra    1            dataset1       dataset2_Java       True
+94766fe941edd75a81ee48a809b8b61530f3a1e4                                    jri/deepamehta                    dmx-systems/dmx-platform    1            dataset1       dataset2_Java       True
+9e9ee5d52d15ea7cdda6de176a1cbc75abae19b7        cyanogenmod/android_packages_apps_calendar                    etar-group/etar-calendar    1            dataset1       dataset2_Java       True
+e41ffbc555658819bc40c0abadf90081a8c0a71b                                    eclipse/vert.x                        eclipse-vertx/vert.x    1            dataset1       dataset2_Java       True
+131f172190c095e3b9dd761ad49df3947cc0e358                               sintef-9012/thingml                            telluiot/thingml    1            dataset1       dataset2_Java       True
+fba0e2af1d04fe95f82a60ed2acbb69d5be920d2                                    thialfihar/apg                 open-keychain/open-keychain    1            dataset1       dataset2_Java       True
+c9459b8dfc72b8819ee966121725feb92ae2be03                                 sbrossie/killbill                           killbill/killbill    1            dataset1       dataset2_Java       True
+6bc19dfcd8462f01c42ffd60c2a874b9f82eb24e                                 sbrossie/killbill                           killbill/killbill    1            dataset1       dataset2_Java       True
+51caab1609b7057e25ee2f5e20f00d7d321188d9                        excilys/androidannotations       androidannotations/androidannotations    1            dataset1       dataset2_Java       True
+5bccf619ab2d5d9f2bda5a440651ae39b636c5d5                               thinkaurelius/titan                        thinkaurelius/faunus    1            dataset1       dataset2_Java       True
+1228a9fe55582f99afff2c356408008b069c704b                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java            dataset1       True
+f2577669df995b270fbbad3908266a5a1a38d0d0                       geometer/fbreader-android-2            boussouira/android-arabic-reader    1       dataset2_Java            dataset1       True
+275232dae58bb24e3360a779ada9d24601a99bcf        cyanogenmod/android_packages_apps_calendar     android/platform_packages_apps_calendar    1       dataset2_Java            dataset1      False
+13e3c0c6057ebe299095884a0ce993c403d74134                                   apache/fineract                               openmf/mifosx    1       dataset2_Java            dataset1      False
+3744fb9dc0ed3f4ccf6503d49a33d287986e64d7                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java            dataset1      False
+67f338507dc5b41c880066276367d9e4023e9f53                                 jenkinsci/jenkins                              kohsuke/hudson    1       dataset2_Java            dataset1      False
+73f7df510e45d36e9892dfbbf219a66df2d7322e                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java            dataset1       True
+4b634139c982f269ada389409d8e3c5e756b8c4d             androidannotations/androidannotations                  excilys/androidannotations    1       dataset2_Java            dataset1      False
+8e8143dfa5876f7be160e5a3662230afbd1ce03d                                   kiegroup/guvnor                           droolsjbpm/guvnor    1       dataset2_Java            dataset1      False
+8cca24887060d5cb8d275db09674a554ba6fa122                               unidata/netcdf-java                             unidata/thredds    1       dataset2_Java            dataset1      False
+4fcfb8abd0bc9d864dd423dd66639d8e7386b9cd                          dmx-systems/dmx-platform                              jri/deepamehta    1       dataset2_Java            dataset1       True
+d68b8101e1551576122c0e8d4b47d6a9c5475190                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java            dataset1       True
+367d60ae33caed81bf72f3f629671d9699fe4e9d             androidannotations/androidannotations                  excilys/androidannotations    1       dataset2_Java            dataset1       True
+e5e5b3638c4e7bd3eb2182f6bf1274a9d14ef1f2                                  owncloud/android                           nextcloud/android    1       dataset2_Java       dataset2_Java       True
+fba0e2af1d04fe95f82a60ed2acbb69d5be920d2                                    thialfihar/apg                 open-keychain/open-keychain    1       dataset2_Java       dataset2_Java       True
+2946d8dd69cf8d30a3fc2447ac931675989e8eff                                 nextcloud/android                            owncloud/android    1       dataset2_Java       dataset2_Java       True
+27d8509f0e95e598d725bc713da07d5b433631c6                             elastic/elasticsearch                        strapdata/elassandra    1       dataset2_Java       dataset2_Java       True
+d3417fb02291f26964d77767020ef345d18c148f                             elastic/elasticsearch                        strapdata/elassandra    1       dataset2_Java       dataset2_Java       True
+1228a9fe55582f99afff2c356408008b069c704b                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java       dataset2_Java       True
+fd4ca1a6e47549819ed094f54715b2cfb5165e5c                                     knowm/xchange                 bitrich-info/xchange-stream    1       dataset2_Java       dataset2_Java       True
+11a669c5703642c61c0c8ea4ba8caa8d9c6decb1                               freeplane/freeplane                    beelgroup/docear-desktop    1       dataset2_Java       dataset2_Java       True
+2e42ee077bbe20efdb1499700e6746fd7b4d2c31                                 yahooarchive/omid                         apache/phoenix-omid    1       dataset2_Java       dataset2_Java       True
+71607ae3bd04a1ac63feb9f952cd62f354ecd144                              williewillus/botania                              vazkii/botania    1       dataset2_Java       dataset2_Java       True
+efdb2461d3070679a378dba18e3a0bec32ae659f                              gerrit-review/gerrit                     gerritcodereview/gerrit    1       dataset2_Java       dataset2_Java      False
+bf390a935e8dfcb09a12dcf387c838fb7029ae1c                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java       dataset2_Java       True
+abdbfffdffe745c57c4fb44f3aa4dddbd84cfd02 open-telemetry/opentelemetry-java-instrumentation                       datadog/dd-trace-java    1       dataset2_Java       dataset2_Java       True
+93155d828384a9853a2f830c9eb717d9a645637e                                  vaadin/framework                                 vaadin/flow    1       dataset2_Java       dataset2_Java       True
+c623948363c569a2481f9b016354799174c63a5c                                       web3j/web3j               platonnetwork/client-sdk-java    1       dataset2_Java       dataset2_Java       True
+275232dae58bb24e3360a779ada9d24601a99bcf        cyanogenmod/android_packages_apps_calendar aosp-mirror/platform_packages_apps_calendar    1       dataset2_Java       dataset2_Java      False
+13e3c0c6057ebe299095884a0ce993c403d74134                                   apache/fineract                               openmf/mifosx    1       dataset2_Java       dataset2_Java      False
+dbb549ba2a702f8d6e8f65c597e01d9a26074121                              williewillus/botania                              vazkii/botania    1       dataset2_Java       dataset2_Java       True
+e745ea2cfd0582246b367e2dff2ebd9e5e98b3ac                           gerritcodereview/gerrit                        gerrit-review/gerrit    1       dataset2_Java       dataset2_Java       True
+73f7df510e45d36e9892dfbbf219a66df2d7322e                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java       dataset2_Java       True
+0198ddae55691eb6037cbaafeb7c7901b9dfbec6                              gerrit-review/gerrit                     gerritcodereview/gerrit    1       dataset2_Java       dataset2_Java      False
+fbc3d970c565e16898eb019d7aef716521a40f10                                  owncloud/android                           nextcloud/android    1       dataset2_Java       dataset2_Java      False
+d7eb375d2433a328b9715ae141e93e21b3aca277                             elastic/elasticsearch                        strapdata/elassandra    1       dataset2_Java       dataset2_Java      False
+8cca24887060d5cb8d275db09674a554ba6fa122                               unidata/netcdf-java                             unidata/thredds    1       dataset2_Java       dataset2_Java      False
+27d4994affd5ceaf16785465fd7b89ebec1cb95a                              strapdata/elassandra                       elastic/elasticsearch    1       dataset2_Java       dataset2_Java      False
+e1f4955286f73a6ca4525fc27b11fd02106f7f08                                       skylot/jadx                         pkilller/super-jadx    1       dataset2_Java       dataset2_Java       True
+5b4ca41eb347bf9db933ace3f8ed8fdca985305d                                     openmf/mifosx                             apache/fineract    1       dataset2_Java       dataset2_Java      False
+506d5272af40ea151a24227491172670f0269bdb                          beelgroup/docear-desktop                         freeplane/freeplane    1       dataset2_Java       dataset2_Java       True
+eabc06666ae4824c0a58e3c533b6e741da8f9dc1                                    azure/autorest                    azure/azure-sdk-for-java    1     dataset2_CSharp     dataset2_CSharp       True
+4fde9ca07d34c18aa9929ef57450d3fecf3036b9                                      aspnet/razor                   dotnet/aspnetcore-tooling    1     dataset2_CSharp     dataset2_CSharp       True
+2cdc0537fac2ca59363d68095651a74db070d6b7                         tunnelvisionlabs/antlr4cs                                antlr/antlr4    1     dataset2_CSharp     dataset2_CSharp       True
+a13557d71da68f2cefbc0fc469a8948794811f70                       flow-launcher/flow.launcher                         microsoft/powertoys    1     dataset2_CSharp     dataset2_CSharp      False
+66b4b094f97020adf7ac127a72929f7201c81d95                                     sonarr/sonarr                             readarr/readarr    1     dataset2_CSharp     dataset2_CSharp       True
+c9ed077aef6d0a5cff043507e85641693e3ab6fc               microsoft/windowsprotocoltestsuites                    zecops/cve-2020-1206-poc    1     dataset2_CSharp     dataset2_CSharp      False
+a3e63c11aa7cacc3e5933b1df3f1ee25930d40f3           dotnet-architecture/eshoponcontainersai       dotnet-architecture/eshoponcontainers    1     dataset2_CSharp     dataset2_CSharp       True
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                             ant-design/pro-blocks                   jetlinks/jetlinks-ui-antd    1 dataset2_JavaScript dataset2_JavaScript       True
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                             ant-design/pro-blocks            ant-design/ant-design-pro-layout    1 dataset2_JavaScript dataset2_JavaScript       True
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                             ant-design/pro-blocks                        alitajs/umi-antd-pro    1 dataset2_JavaScript dataset2_JavaScript       True
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                             ant-design/pro-blocks        ant-design/v2.preview.pro.ant.design    1 dataset2_JavaScript dataset2_JavaScript       True
+b519be822cbf5912a1b3baea048ed692b604bedc                               webrtchacks/adapter                              webrtc/testrtc    1 dataset2_JavaScript dataset2_JavaScript       True
+0882a7506394e07ae6564ccf3db401b8fb7f7071                   nodejs/node-convergence-archive                        alibaba/alios-nodejs    1 dataset2_JavaScript dataset2_JavaScript      False
+e908b77946a61c99bf6ede6ba79da1eb88d2ca79                                    nurpax/petmate                              nantaphop/redd    1 dataset2_JavaScript dataset2_JavaScript       True
+180aacd470b424aa088a76a95c4b30e13d0f6820                               sirensolutions/kibi                              elastic/kibana    1 dataset2_JavaScript dataset2_JavaScript       True
+16bae56807dcd908c963bb9b5f350991cb626af8                            nodejs/node-chakracore                          mozilla/spidernode    1 dataset2_JavaScript dataset2_JavaScript       True
+e104eb8918f6bdf3c0e0fa89bb533886a2aa0459                             metasfresh/metasfresh metasfresh/metasfresh-webui-frontend-legacy    1 dataset2_JavaScript dataset2_JavaScript      False
+ef61ef2ce885635862bb242612dd821cb3a65b6b                      metamask/metamask-snaps-beta                 metamask/metamask-extension    1 dataset2_JavaScript dataset2_JavaScript       True
+c527a00a6252c9e5e667448edb76d59001a9135a                                         lpatmo/cb                       lesswrong2/lesswrong2    1 dataset2_JavaScript dataset2_JavaScript       True
+c527a00a6252c9e5e667448edb76d59001a9135a                                         lpatmo/cb                              samim23/gitxiv    1 dataset2_JavaScript dataset2_JavaScript       True
+546c344b3da719bd2553599d3e6fd1e3541fe6c4                               sdarnell/meteor-win                               meteor/meteor    1 dataset2_JavaScript dataset2_JavaScript       True
+4b0208905a2a441b9d170751a032104e1fc9da34                                  yoast/javascript                           yoast/yoastseo.js    1 dataset2_JavaScript dataset2_JavaScript       True
+f040929bd87937eeefcac87c8937d57a68466b3b                                llk/scratch-blocks                       microsoft/pxt-blockly    1 dataset2_JavaScript dataset2_JavaScript      False
+f040929bd87937eeefcac87c8937d57a68466b3b                                llk/scratch-blocks                      harukamm/ocaml-blockly    1 dataset2_JavaScript dataset2_JavaScript      False
+a22f18094a64ff9359923c4a91ffbf81769d35f3                                   meetfranz/franz                              getferdi/ferdi    1 dataset2_JavaScript dataset2_JavaScript      False
+ff8bf40694c48acfd187a07c3a21346266b02e62                                    samim23/gitxiv                             vulcanjs/vulcan    1 dataset2_JavaScript dataset2_JavaScript       True
+624a20efdd79ccd284375ddeeedb3d978760a224                             microsoft/pxt-blockly                          llk/scratch-blocks    1 dataset2_JavaScript dataset2_JavaScript       True
+6f367a5a6b4fb8918405f233293dc3f4840b4a3d                      metamask/metamask-snaps-beta                 metamask/metamask-extension    1 dataset2_JavaScript dataset2_JavaScript      False
+3d3c46f8dc9cc6c115c374fa3d2ab2f17b35110d                                 ui-router/angular                        angular-ui/ui-router    1 dataset2_JavaScript dataset2_JavaScript      False
+0bd753f8a12c1ad56d0fcb3da2274a0804e7f547                                   kode/kodestudio                            microsoft/vscode    1 dataset2_TypeScript dataset2_TypeScript       True
+557745c860bd97a5b076587758f1d4fc1cabf0e0                                  microsoft/vscode                             kode/kodestudio    1 dataset2_TypeScript dataset2_TypeScript       True
+b1f313424d6d0753466637d254f7dbf44c2d763b                                  microsoft/vscode                             kode/kodestudio    1 dataset2_TypeScript dataset2_TypeScript       True
+d6edc142fd53604f7af52befda6408edd0d632cc                                   typeorm/typeorm                       iwinston/typeorm-plus    1 dataset2_TypeScript dataset2_TypeScript       True
+b1f313424d6d0753466637d254f7dbf44c2d763b                             headmelted/codebuilds                             kode/kodestudio    1 dataset2_TypeScript dataset2_TypeScript       True
+d5bf3792a5f8909c5a0b6299935ad0f15b0abc20                                       alexo/wro4j                                 wro4j/wro4j    2            dataset1       dataset2_Java       True
+9f08d48d340783fc8096b52d3c8f3631c2e21312                             elastic/elasticsearch                        strapdata/elassandra    2            dataset1       dataset2_Java       True
+57a88859643477db5ae62a3a64d936a8ef5679b7                             elastic/elasticsearch                        strapdata/elassandra    2            dataset1       dataset2_Java       True
+6f8aee80c6b19517a1c17f570168cbb264566e85                                   jgf/wala-mirror                                   wala/wala    2            dataset1       dataset2_Java       True
+6dce7c88d847f8578bf4b980fb9c4ee1ea1c280b                                    thialfihar/apg                 open-keychain/open-keychain    2            dataset1       dataset2_Java       True
+81005a10dd84a769f8d761353df111b0cd87b78d             camsys/onebusaway-application-modules   onebusaway/onebusaway-application-modules    2            dataset1       dataset2_Java       True
+bc9ea50af357c8623eba0101b2e509ef8d36458f                                 sbrossie/killbill                           killbill/killbill    2            dataset1       dataset2_Java       True
+4b634139c982f269ada389409d8e3c5e756b8c4d                        excilys/androidannotations       androidannotations/androidannotations    2            dataset1       dataset2_Java       True
+848ce6009772023cc9394abd631de266d2085d63                                 apache/cloudstack        cloudstack-extras/cloudstack-archive    2       dataset2_Java            dataset1       True
+8aa399844756c5cec35d082641517f2814ec3c51                                   impetus/kundera                  impetus-opensource/kundera    2       dataset2_Java            dataset1      False
+dfac30ff7b4bbcec0b18294620462c90502c9d4d                             janusgraph/janusgraph                         thinkaurelius/titan    2       dataset2_Java            dataset1      False
+4bb5b4100d0687f29d758ce5a329c831c563ebe5                              strapdata/elassandra                       elastic/elasticsearch    2       dataset2_Java            dataset1       True
+2566edfd8cdc0f51eeb97341d9b3812bfc2f7e34                         savagelabs/savagefactions                       massivecraft/factions    2       dataset2_Java            dataset1       True
+6a7295cd1ff99f1f7658108bf10b3b1f4e40d639                          dmx-systems/dmx-platform                              jri/deepamehta    2       dataset2_Java            dataset1       True
+9e1bde4b003f0e621978d2ada399540716b224d3                              enginehub/worldguard                            sk89q/worldguard    2       dataset2_Java            dataset1       True
+131f172190c095e3b9dd761ad49df3947cc0e358                                  telluiot/thingml                         sintef-9012/thingml    2       dataset2_Java            dataset1       True
+94766fe941edd75a81ee48a809b8b61530f3a1e4                          dmx-systems/dmx-platform                              jri/deepamehta    2       dataset2_Java            dataset1       True
+61f56b8bf7235046ad6d395aa8f83995299292f7             androidannotations/androidannotations                  excilys/androidannotations    2       dataset2_Java            dataset1      False
+801c66eb4784a7bf28a6d79cc5141227f49d3d4f                                      fabioz/pydev                                aptana/pydev    2       dataset2_Java            dataset1      False
+ef9cfd509370840db6c474552cb95c7540f4868a                               apache/phoenix-omid                                  yahoo/omid    2       dataset2_Java            dataset1      False
+8e8143dfa5876f7be160e5a3662230afbd1ce03d                                   kiegroup/guvnor                           droolsjbpm/guvnor    2       dataset2_Java            dataset1      False
+e9b5e5b6fcc23916b9979fecccc6596bf7e939df                                apache/hadoop-hdfs                       ekoontz/hadoop-common    2       dataset2_Java            dataset1       True
+1a46628daaea0a0a55649bb557976e2c9ef63733                              strapdata/elassandra                       elastic/elasticsearch    2       dataset2_Java            dataset1      False
+51caab1609b7057e25ee2f5e20f00d7d321188d9             androidannotations/androidannotations                  excilys/androidannotations    2       dataset2_Java            dataset1      False
+e1d07214dfe12f893aa4052e08dbc3025f5cb67d                       open-keychain/open-keychain                              thialfihar/apg    2       dataset2_Java            dataset1      False
+5de92cca6f79caa6ba48fe38a062099d63e5ae06           android/platform_packages_apps_settings                 aokp/packages_apps_settings    2            dataset1            dataset1       True
+6f8aee80c6b19517a1c17f570168cbb264566e85                                   jgf/wala-mirror                                   wala/wala    2            dataset1            dataset1       True
+848ce6009772023cc9394abd631de266d2085d63                                 apache/cloudstack        cloudstack-extras/cloudstack-archive    2       dataset2_Java       dataset2_Java       True
+dfac30ff7b4bbcec0b18294620462c90502c9d4d                             janusgraph/janusgraph                         thinkaurelius/titan    2       dataset2_Java       dataset2_Java      False
+c3ca5b5a4fda44999f215a3559921a4781f310f8                                 nextcloud/android                            owncloud/android    2       dataset2_Java       dataset2_Java       True
+4bb5b4100d0687f29d758ce5a329c831c563ebe5                              strapdata/elassandra                       elastic/elasticsearch    2       dataset2_Java       dataset2_Java       True
+25fd9e26c4fb042d6f6dea14efcd239577bdbbc4                             elastic/elasticsearch                        strapdata/elassandra    2       dataset2_Java       dataset2_Java       True
+c0cd947214a110ebfbceb34468d2b20cf297f63c                          azure/azure-sdk-for-java                              azure/autorest    2       dataset2_Java       dataset2_Java      False
+dbb549ba2a702f8d6e8f65c597e01d9a26074121                                    vazkii/botania                        williewillus/botania    2       dataset2_Java       dataset2_Java       True
+d5bf3792a5f8909c5a0b6299935ad0f15b0abc20                                       alexo/wro4j                                 wro4j/wro4j    2       dataset2_Java       dataset2_Java      False
+c623948363c569a2481f9b016354799174c63a5c                     platonnetwork/client-sdk-java                                 web3j/web3j    2       dataset2_Java       dataset2_Java       True
+2a87fe8c41338e746c6959d992edfeb9cb00bcc1                               amirzaidi/launcher3          klinker-apps/android-blur-launcher    2       dataset2_Java       dataset2_Java       True
+45a99add6570a2db45856a332b3578a90b2907d6                                     torodb/server                             torodb/stampede    2       dataset2_Java       dataset2_Java      False
+e10cbc54c606563b2d06f083bca17119ca585127                                    thialfihar/apg                 open-keychain/open-keychain    2       dataset2_Java       dataset2_Java       True
+56fa6ba50796c3843f8ee640c6b01391cd2866fd                           gerritcodereview/gerrit                        gerrit-review/gerrit    2       dataset2_Java       dataset2_Java      False
+14d8de0600058af1f7172ec96cd7d926b106e520                         dronekit/dronekit-android                          droidplanner/tower    2       dataset2_Java       dataset2_Java       True
+d896886973660785aac45275ddb110c1a6babc57                             elastic/elasticsearch                        strapdata/elassandra    2       dataset2_Java       dataset2_Java       True
+64411f536349d7fb0218d015c5c26f5ed7e574e5                          beelgroup/docear-desktop                         freeplane/freeplane    2       dataset2_Java       dataset2_Java       True
+f043f63eaaec923047d161712947c1e7d4106de2              cloudstack-extras/cloudstack-archive                           apache/cloudstack    2       dataset2_Java       dataset2_Java      False
+e745ea2cfd0582246b367e2dff2ebd9e5e98b3ac                           gerritcodereview/gerrit                        gerrit-review/gerrit    2       dataset2_Java       dataset2_Java       True
+9f08d48d340783fc8096b52d3c8f3631c2e21312                             elastic/elasticsearch                        strapdata/elassandra    2       dataset2_Java       dataset2_Java      False
+57a88859643477db5ae62a3a64d936a8ef5679b7                             elastic/elasticsearch                        strapdata/elassandra    2       dataset2_Java       dataset2_Java      False
+d0765d07619e644679fe426580229608eaabeeb3                             elastic/elasticsearch                        strapdata/elassandra    2       dataset2_Java       dataset2_Java       True
+d3417fb02291f26964d77767020ef345d18c148f                              strapdata/elassandra                       elastic/elasticsearch    2       dataset2_Java       dataset2_Java       True
+143a2207199496bf3c006e9f095fbbc6d2f045a5                                 airsonic/airsonic         airsonic-advanced/airsonic-advanced    2       dataset2_Java       dataset2_Java       True
+6dce7c88d847f8578bf4b980fb9c4ee1ea1c280b                                    thialfihar/apg                 open-keychain/open-keychain    2       dataset2_Java       dataset2_Java       True
+ad5b7fd73b9b2a9a6379f9fb92555910fabe2ee3                              williewillus/botania                              vazkii/botania    2       dataset2_Java       dataset2_Java       True
+66364ce4321df5411c72f53269e4d9cc318cd140                                 activiti/activiti                    flowable/flowable-engine    2       dataset2_Java       dataset2_Java       True
+6adffa6b7b3f957403aa21cae5a7c843bf342786                             elastic/elasticsearch                        strapdata/elassandra    2       dataset2_Java       dataset2_Java      False
+e1d07214dfe12f893aa4052e08dbc3025f5cb67d                       open-keychain/open-keychain                              thialfihar/apg    2       dataset2_Java       dataset2_Java      False
+2cdc0537fac2ca59363d68095651a74db070d6b7                                      antlr/antlr4                   tunnelvisionlabs/antlr4cs    2     dataset2_CSharp     dataset2_CSharp       True
+eded777735d90e76da1d92227f1341ff2b46662a                            github-for-unity/unity            unity-technologies/git-for-unity    2     dataset2_CSharp     dataset2_CSharp       True
+9a351761d685f2db00743d9af5c0f7a3c4a96916                         tunnelvisionlabs/antlr4cs                                antlr/antlr4    2     dataset2_CSharp     dataset2_CSharp       True
+d49adf8130c6a573471b836b1402ca729e76e85e                                       cjlaaa/mir2                               suprcode/mir2    2     dataset2_CSharp     dataset2_CSharp      False
+66b4b094f97020adf7ac127a72929f7201c81d95                                   readarr/readarr                               sonarr/sonarr    2     dataset2_CSharp     dataset2_CSharp      False
+c9ed077aef6d0a5cff043507e85641693e3ab6fc                          zecops/cve-2020-1206-poc         microsoft/windowsprotocoltestsuites    2     dataset2_CSharp     dataset2_CSharp      False
+75427d70ce4458e2060a5cb925a24e02ffc45364                                   strikeout/mylar                               meteor/meteor    2 dataset2_JavaScript dataset2_JavaScript       True
+302a807018b5f039057096d557de69c963c7c7a9                             liskarchive/lisk-nano                         liskhq/lisk-desktop    2 dataset2_JavaScript dataset2_JavaScript      False
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                  ant-design/ant-design-pro-layout                   jetlinks/jetlinks-ui-antd    2 dataset2_JavaScript dataset2_JavaScript      False
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                  ant-design/ant-design-pro-layout                       ant-design/pro-blocks    2 dataset2_JavaScript dataset2_JavaScript      False
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                  ant-design/ant-design-pro-layout                        alitajs/umi-antd-pro    2 dataset2_JavaScript dataset2_JavaScript      False
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                  ant-design/ant-design-pro-layout        ant-design/v2.preview.pro.ant.design    2 dataset2_JavaScript dataset2_JavaScript      False
+57c818e9b6015e699511a1fcb3df180280712d75                                 yoast/yoastseo.js                            yoast/javascript    2 dataset2_JavaScript dataset2_JavaScript       True
+e908b77946a61c99bf6ede6ba79da1eb88d2ca79                                    nurpax/petmate                              nantaphop/redd    2 dataset2_JavaScript dataset2_JavaScript       True
+29cc2f8ab9628d21cc32962666879c71be4e69d1                      metamask/metamask-snaps-beta                 metamask/metamask-extension    2 dataset2_JavaScript dataset2_JavaScript       True
+16bae56807dcd908c963bb9b5f350991cb626af8                            nodejs/node-chakracore                          mozilla/spidernode    2 dataset2_JavaScript dataset2_JavaScript       True
+7a1e0554dbf04b9c690e7a02da1faaa0d008a3df                                    elastic/kibana                         sirensolutions/kibi    2 dataset2_JavaScript dataset2_JavaScript       True
+ab3e46a929544804c025685a60e13b23e1914a1c                            formidablelabs/victory                formidablelabs/victory-chart    2 dataset2_JavaScript dataset2_JavaScript       True
+6ad8b6f0fbea4f768a67d5f2cdfa819c009044d2                           nordic-institute/x-road                               ria-ee/x-road    2 dataset2_JavaScript dataset2_JavaScript      False
+ee4002c323e4394eb22ba420a870d343378d2a5e                               sirensolutions/kibi                              elastic/kibana    2 dataset2_JavaScript dataset2_JavaScript      False
+a5c29a387c2ec0889c4652d706d1f0b64253ed47                           logicalclocks/hopsworks                           dc-sics/hopsworks    2 dataset2_JavaScript dataset2_JavaScript       True
+b2ff777cceb50d39abe9d2d553799f4340061d5d                       segmentio/analytics.js-core                      segmentio/analytics.js    2 dataset2_JavaScript dataset2_JavaScript      False
+f040929bd87937eeefcac87c8937d57a68466b3b                            harukamm/ocaml-blockly                          llk/scratch-blocks    2 dataset2_JavaScript dataset2_JavaScript      False
+ff8bf40694c48acfd187a07c3a21346266b02e62                                   vulcanjs/vulcan                              samim23/gitxiv    2 dataset2_JavaScript dataset2_JavaScript       True
+f5d6f4b28204a2fca5e7f5754004a00af059d984                                      l20n/l20n.js                     projectfluent/fluent.js    2 dataset2_JavaScript dataset2_JavaScript       True
+097e5c4251fcfeee33f755c0f4174d3a6fa3bd0f                             microsoft/pxt-blockly                              google/blockly    2 dataset2_JavaScript dataset2_JavaScript       True
+d6edc142fd53604f7af52befda6408edd0d632cc                             iwinston/typeorm-plus                             typeorm/typeorm    2 dataset2_TypeScript dataset2_TypeScript      False
+0bd753f8a12c1ad56d0fcb3da2274a0804e7f547                                  microsoft/vscode                             kode/kodestudio    2 dataset2_TypeScript dataset2_TypeScript       True
+557745c860bd97a5b076587758f1d4fc1cabf0e0                                  microsoft/vscode                             kode/kodestudio    2 dataset2_TypeScript dataset2_TypeScript       True
+344b86fb6e89885653de5d63a5c9ba2d3cf82bf9                             microsoft/remotebuild                              microsoft/taco    2 dataset2_TypeScript dataset2_TypeScript       True
+ac8ccd9a3b08f529571205c0627fd0d778088718                               microsoft/vscode-go                            golang/vscode-go    2 dataset2_TypeScript dataset2_TypeScript       True
+7558a6a3840d41f7e5f928e78d02e3ce9590a815                                    kohsuke/hudson                           jenkinsci/jenkins    3            dataset1       dataset2_Java       True
+211231d12b2d5e998421ab7a332f955800d5b601                                    kohsuke/hudson                           jenkinsci/jenkins    3            dataset1       dataset2_Java       True
+2d51bcf4c1c06cc803907a8041922cce90739833                android/platform_packages_apps_mms      aosp-mirror/platform_packages_apps_mms    3            dataset1       dataset2_Java       True
+80bbb4a385cb88800837fbe2d9a5367dcbfaaaf9                             elastic/elasticsearch                        strapdata/elassandra    3            dataset1       dataset2_Java       True
+3518bf8522e8f8c71bd16d17f11f48ea3d121ba9                                   droolsjbpm/jbpm                               kiegroup/jbpm    3            dataset1       dataset2_Java       True
+81fcaa801c8c75787fababfa21f22eaa09961b12                                    qi4j/qi4j-core                  apache/attic-polygene-java    3            dataset1       dataset2_Java       True
+e1d07214dfe12f893aa4052e08dbc3025f5cb67d                                    thialfihar/apg                 open-keychain/open-keychain    3            dataset1       dataset2_Java       True
+fe0983f316cb85e1bfcd66f4493167d7ee0fc0c4                                 sbrossie/killbill                           killbill/killbill    3            dataset1       dataset2_Java       True
+f2af43618502c40fe07ac9734a3d7ccf11823ca3                        excilys/androidannotations       androidannotations/androidannotations    3            dataset1       dataset2_Java       True
+b08f65ed1f15382ba5cb6fb181abf57d157479bc                               codehaus/groovy-git                               apache/groovy    3            dataset1       dataset2_Java       True
+d5bf3792a5f8909c5a0b6299935ad0f15b0abc20                                       wro4j/wro4j                                 alexo/wro4j    3       dataset2_Java            dataset1       True
+634cd78baa6bdf101aedb47cc871f207fdca3361                                 apache/cloudstack        cloudstack-extras/cloudstack-archive    3       dataset2_Java            dataset1      False
+bc9ea50af357c8623eba0101b2e509ef8d36458f                                 killbill/killbill                           sbrossie/killbill    3       dataset2_Java            dataset1       True
+f26aeabb17d38ed39a0711afcf51694cc69c8d51        aosp-mirror/platform_packages_apps_browser      android/platform_packages_apps_browser    3       dataset2_Java            dataset1       True
+e8ee43f77fb1b725d9d2b01f9b500805e0a18a72                                  telluiot/thingml                         sintef-9012/thingml    3       dataset2_Java            dataset1       True
+81005a10dd84a769f8d761353df111b0cd87b78d         onebusaway/onebusaway-application-modules       camsys/onebusaway-application-modules    3       dataset2_Java            dataset1       True
+2d51bcf4c1c06cc803907a8041922cce90739833                android/platform_packages_apps_mms                  erikwt/parandroidmessaging    3            dataset1            dataset1       True
+e1d07214dfe12f893aa4052e08dbc3025f5cb67d                                    thialfihar/apg                 open-keychain/open-keychain    3       dataset2_Java       dataset2_Java       True
+8196cf01e375ee5a14dcc3b6b20c37ab55679e85                             elastic/elasticsearch                        strapdata/elassandra    3       dataset2_Java       dataset2_Java       True
+cef30956e972e4d31187448b960798572b0ac05f              cloudstack-extras/cloudstack-archive                           apache/cloudstack    3       dataset2_Java       dataset2_Java      False
+80bbb4a385cb88800837fbe2d9a5367dcbfaaaf9                             elastic/elasticsearch                        strapdata/elassandra    3       dataset2_Java       dataset2_Java      False
+411a45c694006a80b591da2c4b0347928fa3721a                             janusgraph/janusgraph                         thinkaurelius/titan    3       dataset2_Java       dataset2_Java       True
+5b335da5647c1cb8c6cdbe06fe4cccd9938d8d29                               freeplane/freeplane                    beelgroup/docear-desktop    3       dataset2_Java       dataset2_Java       True
+5bee23c114aed422cfaa75995009821c5619b7f8                           gerritcodereview/gerrit                        gerrit-review/gerrit    3       dataset2_Java       dataset2_Java       True
+70f33b4829462df32965aa0a35d4e7ee8a14e396                                     dkanada/gelli                adrienpoupa/vinylmusicplayer    3       dataset2_Java       dataset2_Java      False
+d5bf3792a5f8909c5a0b6299935ad0f15b0abc20                                       wro4j/wro4j                                 alexo/wro4j    3       dataset2_Java       dataset2_Java       True
+e10cbc54c606563b2d06f083bca17119ca585127                                    thialfihar/apg                 open-keychain/open-keychain    3       dataset2_Java       dataset2_Java       True
+5b51e0232e0a39926f3de0dfb07544ee1353ce9b                                   webanno/webanno                 inception-project/inception    3       dataset2_Java       dataset2_Java      False
+93155d828384a9853a2f830c9eb717d9a645637e                                  vaadin/framework                                 vaadin/flow    3       dataset2_Java       dataset2_Java       True
+756ec2fcc480871e0535d8c9fc4ca1af6c9bd519                           apache/guacamole-client                  glyptodon/guacamole-client    3       dataset2_Java       dataset2_Java       True
+64411f536349d7fb0218d015c5c26f5ed7e574e5                          beelgroup/docear-desktop                         freeplane/freeplane    3       dataset2_Java       dataset2_Java       True
+ff09cca7cd723b0c9cfab3f857c7cb1f284e7a06                                     scifio/scifio                              ome/bioformats    3       dataset2_Java       dataset2_Java       True
+a60b8948ba1d836a6eac7cff095519e618939ed8                              strapdata/elassandra                       elastic/elasticsearch    3       dataset2_Java       dataset2_Java       True
+f73c6a2c220a36e9ffc0f15c4fa9dec50ca2507d                                   torodb/stampede                               torodb/server    3       dataset2_Java       dataset2_Java      False
+9954c4e249bd863511ba3c6a8ad94220abbc0d06                           gerritcodereview/gerrit                        gerrit-review/gerrit    3       dataset2_Java       dataset2_Java      False
+fed8109b17fd2b41de17ceef92f37e39dc1ffc53                               gregtechce/gregtech                    blood-asp/gt5-unofficial    3       dataset2_Java       dataset2_Java       True
+94ad1d162d9057c0ae9f0e34ca040a33016a10e5                         tunnelvisionlabs/antlr4cs                                antlr/antlr4    3     dataset2_CSharp     dataset2_CSharp      False
+5047dd369458d750fe5a18dd4f4fbe3e789789fc                              recognos/metrics.net                         etishor/metrics.net    3     dataset2_CSharp     dataset2_CSharp       True
+9a351761d685f2db00743d9af5c0f7a3c4a96916                                      antlr/antlr4                   tunnelvisionlabs/antlr4cs    3     dataset2_CSharp     dataset2_CSharp       True
+d49adf8130c6a573471b836b1402ca729e76e85e                                       cjlaaa/mir2                               suprcode/mir2    3     dataset2_CSharp     dataset2_CSharp      False
+9cd3002afed93177bed58d8d48fd2e862cc15b5b                                     suprcode/mir2                                 cjlaaa/mir2    3     dataset2_CSharp     dataset2_CSharp      False
+b594b68af152605790b02a913f3a222b20ea9569                            cocos2dxna/cocos2d-xna                             mono/cocossharp    3     dataset2_CSharp     dataset2_CSharp       True
+a3e63c11aa7cacc3e5933b1df3f1ee25930d40f3           dotnet-architecture/eshoponcontainersai       dotnet-architecture/eshoponcontainers    3     dataset2_CSharp     dataset2_CSharp       True
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                  ant-design/ant-design-pro-layout                   jetlinks/jetlinks-ui-antd    3 dataset2_JavaScript dataset2_JavaScript      False
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                  ant-design/ant-design-pro-layout                       ant-design/pro-blocks    3 dataset2_JavaScript dataset2_JavaScript      False
+e3a733098db96fa3b47d8e06afae59b78aeda7ff                  ant-design/ant-design-pro-layout                        alitajs/umi-antd-pro    3 dataset2_JavaScript dataset2_JavaScript      False
+180aacd470b424aa088a76a95c4b30e13d0f6820                                    elastic/kibana                         sirensolutions/kibi    3 dataset2_JavaScript dataset2_JavaScript      False
+96d789d2cffa91da9d65be0de75d2e864d309305                      metamask/metamask-snaps-beta                 metamask/metamask-extension    3 dataset2_JavaScript dataset2_JavaScript      False
+e104eb8918f6bdf3c0e0fa89bb533886a2aa0459                             metasfresh/metasfresh metasfresh/metasfresh-webui-frontend-legacy    3 dataset2_JavaScript dataset2_JavaScript      False
+ef61ef2ce885635862bb242612dd821cb3a65b6b                      metamask/metamask-snaps-beta                 metamask/metamask-extension    3 dataset2_JavaScript dataset2_JavaScript       True
+7c2001102311d8e35f01d39ede9d5ac00e635006                      metamask/metamask-snaps-beta                 metamask/metamask-extension    3 dataset2_JavaScript dataset2_JavaScript      False
+b519be822cbf5912a1b3baea048ed692b604bedc                                    webrtc/testrtc                         webrtchacks/adapter    3 dataset2_JavaScript dataset2_JavaScript       True
+3d3c46f8dc9cc6c115c374fa3d2ab2f17b35110d                                 ui-router/angular                        angular-ui/ui-router    3 dataset2_JavaScript dataset2_JavaScript      False
+b2ff777cceb50d39abe9d2d553799f4340061d5d                            segmentio/analytics.js                 segmentio/analytics.js-core    3 dataset2_JavaScript dataset2_JavaScript       True
+c403349a9137c5b2abc860e625d13fe086372503                           projectfluent/fluent.js                                l20n/l20n.js    3 dataset2_JavaScript dataset2_JavaScript      False
+fdadf24030ee99b3cac314ef9b8f3314ccbbe3ec                                   denolib/typeorm                       iwinston/typeorm-plus    3 dataset2_TypeScript dataset2_TypeScript       True
+56de217db701799bafaad68e248c4aed7a0e37b5                             headmelted/codebuilds                            spiffcode/ghedit    3 dataset2_TypeScript dataset2_TypeScript       True
+56de217db701799bafaad68e248c4aed7a0e37b5                                   kode/kodestudio                            spiffcode/ghedit    3 dataset2_TypeScript dataset2_TypeScript       True
+
+exit 0, 3 s
