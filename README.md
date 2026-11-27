@@ -5,7 +5,7 @@ The paper compares two approaches to resolving merge conflicts on the same confl
 - **RQ1**: how close each approach comes to the developer's resolution, and how long it takes, on the Java datasets;
 - **RQ2**: whether the difference varies across languages;
 - **RQ3**: how each approach performs when trained or tuned on the other Java dataset;
-- **RQ4**: in which conflicts each approach falls short, by a qualitative coding of the conflicts in which one approach wins clearly or neither does, and a model of the characteristics that predict the winner.
+- **RQ4**: in which conflicts each approach falls short, by a qualitative coding of the conflicts in which one approach wins clearly or neither does, and mixed-effects models of the characteristics associated with which approach comes closer to the resolution.
 
 This repository holds the code and the documentation. The data, the results and the trained models are in four archives (below). [`CLAIMS.md`](CLAIMS.md) maps each number, table and figure of the paper to the script that produces it and the file it is read from.
 
@@ -22,9 +22,9 @@ This repository holds the code and the documentation. The data, the results and 
 | `analysis/datasets/` | Population counts, partition sizes, shared merges, the resolution categories of Dataset2, the decoding of MergeGen's candidates |
 | `analysis/chronological/` | The chronological split against the random ones |
 | `analysis/rq4/` | The draw of the RQ4 sample, the packages, the coding at scale with the automatic annotator, the agreement report, the join of the labels with band and tool, and two checks of the results |
-| `analysis/winner/` | The model of the characteristics that predict the winner (Python and R) |
+| `analysis/winner/` | The mixed-effects models of the characteristics associated with the winner (Python and R) |
 | `analysis/figures/` | The two figures of the paper |
-| `docs/` | The RQ4 coding protocol, the two versions of the annotator's instructions, and the prompt of the derivation of the categories |
+| `docs/` | The RQ4 coding protocol, the two versions of the annotator's instructions, the prompt of the derivation of the categories, and tables that complement the paper ([`docs/supplementary-tables.md`](docs/supplementary-tables.md)) |
 | `environments/` | The lock of each conda environment, and the Dockerfile of an image for the analysis ([`environments/README.md`](environments/README.md)) |
 | `validation/` | The scripts that rerun the analysis on the archives and compare each output with the archived file, and the report and logs of their run ([`validation/README.md`](validation/README.md)) |
 
