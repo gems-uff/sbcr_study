@@ -92,7 +92,7 @@ conda run -n sbcr-analysis python analysis/rq4/annotator/test_run_annotator.py
 
 ## The submitted version
 
-The version of this repository that went with the submitted paper is the tag `submitted-version`. Its full results are on FigShare, as cited in the paper.
+The version of this repository that went with the submitted paper is the tag `submitted-version`.
 
 ## Licenses and citation
 
